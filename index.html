@@ -92,9 +92,8 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 
 /* Cards & Studio Grid */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.design-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all 0.2s}.design-card:hover{border-color:rgba(255,255,255,0.2);transform:translateY(-2px)}
-.thumb{height:160px;background:#0a0e17;display:flex;align-items:center;justify-content:center;color:white;font-size:20px;font-weight:800}
-.thumb.l1{background:#111622}.thumb.l2{background:#1e2430;color:var(--accent)}.thumb.l3{background:#0d111a}
+.design-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all 0.2s;cursor:pointer}.design-card:hover{border-color:rgba(255,255,255,0.2);transform:translateY(-2px)}
+.thumb{height:160px;background:#0a0e17;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;font-weight:800;padding:12px;text-align:center;overflow:hidden}
 .design-card .meta{padding:14px}.design-card b{font-size:13px;color:var(--white)}.muted{font-size:11px;color:var(--text-muted)}
 
 /* Prompt Box */
@@ -348,11 +347,7 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
   </aside>
   <main class="main">
     <div class="toprow"><div><div class="badge">Luna Café Workspace</div><h2>Welcome back</h2></div><button class="btn accent" onclick="show('create')">+ New Design</button></div>
-    <div class="cards">
-      <div class="design-card"><div class="thumb l1">20% OFF</div><div class="meta"><b>Cold Drinks Promotion</b><div class="muted">Instagram Post · Today</div></div></div>
-      <div class="design-card"><div class="thumb l2">NEW MENU</div><div class="meta"><b>Summer Menu</b><div class="muted">Story · Yesterday</div></div></div>
-      <div class="design-card"><div class="thumb l3">LUNA</div><div class="meta"><b>Brand Announcement</b><div class="muted">Post · 3 days ago</div></div></div>
-    </div>
+    <div class="cards" id="savedProjectsGrid"></div>
   </main>
 </div>
 </section>
@@ -462,7 +457,7 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
     <div class="toprow">
       <div><div class="badge">Canvas Editor</div><h2>Cold Drinks Promotion</h2></div>
       <div style="display:flex;gap:8px">
-        <button class="btn" onclick="toast(lang==='ar'?'تم الحفظ في المشاريع':'Saved to Projects')">Save</button>
+        <button class="btn" onclick="saveProject()">Save</button>
         <button class="btn accent" onclick="downloadPNG()">↓ Download PNG</button>
       </div>
     </div>
@@ -523,10 +518,16 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 
 <script>
 const AR={
-"Features":"المزايا","Templates":"القوالب","Pricing":"الأسعار","About":"عن التطبيق","Log in":"تسجيل الدخول","Get Started →":"ابدأ الآن →","Your business.":"مشروعك.","Your brand.":"علامتك التجارية.","Your creative AI.":"ذكاؤك الإبداعي.","✨ Start 7-Day Free Trial →":"✨ ابدأ التجربة المجانية (7 أيام) →","Start Free Trial":"ابدأ التجربة المجانية","Welcome to CREATIVE AI":"مرحبًا بك في CREATIVE AI","Continue with Google":"المتابعة باستخدام Google","Continue with Email":"المتابعة بالبريد الإلكتروني","Already have an account? Log in":"لديك حساب بالفعل؟ سجّل الدخول","What type of business do you run?":"ما نوع نشاطك التجاري؟","Business Name":"اسم النشاط التجاري","Continue →":"متابعة →","Your Brand Identity":"هوية علامتك التجارية","Create Content →":"إنشاء محتوى →","Save Brand Guidelines":"حفظ هوية العلامة","Welcome back":"سعيدون بعودتك","+ New Design":"+ تصميم جديد","Cold Drinks Promotion":"عرض المشروبات الباردة","Instagram Post · Today":"منشور Instagram · اليوم","Summer Menu":"قائمة الصيف","Story · Yesterday":"ستوري · أمس","Brand Announcement":"إعلان العلامة التجارية","Post · 3 days ago":"منشور · منذ 3 أيام","Home":"الرئيسية","Create":"إنشاء","Projects":"المشاريع","AI Assistant":"المساعد الإبداعي","What are we creating today?":"ماذا نُنشئ اليوم؟","Promotion":"عرض ترويجي","New Product":"منتج جديد","Instagram Post":"منشور Instagram","Story":"ستوري","Menu":"قائمة طعام","✦ Generate Concepts →":"✦ توليد التصاميم بالذكاء الاصطناعي →","Content":"نوع المحتوى","Format":"التنسيق","Offer":"العرض","Product":"المنتج","Duration":"المدة","Minimal":"بسيط","Premium":"فاخر","Bold":"جريء","Open in Editor →":"فتح في المحرر ←","Save":"حفظ","↓ Download PNG":"↓ تحميل PNG","Text":"النص","Colors":"الألوان","Background":"الخلفية","Size":"الحجم","Font Size":"حجم الخط","Text Color":"لون النص","Background Color":"لون الخلفية","✦ Refine Text with AI":"✦ تحسين النص بالذكاء الاصطناعي","Brand Name":"اسم العلامة التجارية","No credit card required. Cancel anytime.":"تجربة مجانية لمدة 7 أيام · لا تتطلب بطاقة ائتمان.","Lang":"اللغة"
+"Features":"المزايا","Templates":"القوالب","Pricing":"الأسعار","About":"عن التطبيق","Log in":"تسجيل الدخول","Get Started →":"ابدأ الآن →","Your business.":"مشروعك.","Your brand.":"علامتك التجارية.","Your creative AI.":"ذكاؤك الإبداعي.","✨ Start 7-Day Free Trial →":"✨ ابدأ التجربة المجانية (7 أيام) →","Start Free Trial":"ابدأ التجربة المجانية","Welcome to CREATIVE AI":"مرحبًا بك في CREATIVE AI","Continue with Google":"المتابعة باستخدام Google","Continue with Email":"المتابعة بالبريد الإلكتروني","Already have an account? Log in":"لديك حساب بالفعل؟ سجّل الدخول","What type of business do you run?":"ما نوع نشاطك التجاري؟","Business Name":"اسم النشاط التجاري","Continue →":"متابعة →","Your Brand Identity":"هوية علامتك التجارية","Create Content →":"إنشاء محتوى →","Save Brand Guidelines":"حفظ هوية العلامة","Welcome back":"سعيدون بعودتك","+ New Design":"+ تصميم جديد","Home":"الرئيسية","Create":"إنشاء","Projects":"المشاريع","AI Assistant":"المساعد الإبداعي","What are we creating today?":"ماذا نُنشئ اليوم؟","Promotion":"عرض ترويجي","New Product":"منتج جديد","Instagram Post":"منشور Instagram","Story":"ستوري","Menu":"قائمة طعام","✦ Generate Concepts →":"✦ توليد التصاميم بالذكاء الاصطناعي →","Content":"نوع المحتوى","Format":"التنسيق","Offer":"العرض","Product":"المنتج","Duration":"المدة","Minimal":"بسيط","Premium":"فاخر","Bold":"جريء","Open in Editor →":"فتح في المحرر ←","Save":"حفظ","↓ Download PNG":"↓ تحميل PNG","Text":"النص","Colors":"الألوان","Background":"الخلفية","Size":"الحجم","Font Size":"حجم الخط","Text Color":"لون النص","Background Color":"لون الخلفية","✦ Refine Text with AI":"✦ تحسين النص بالذكاء الاصطناعي","Brand Name":"اسم العلامة التجارية","No credit card required. Cancel anytime.":"تجربة مجانية لمدة 7 أيام · لا تتطلب بطاقة ائتمان.","Lang":"اللغة"
 };
 
 let lang='en';
+
+// Default mock projects if empty
+const defaultProjects = [
+  { id: 1, brand: "LUNA CAFÉ", heading: "20% OFF", subtext: "Cold Drinks Promotion", footer: "May 1 — May 3", fontSize: "32", textColor: "#ffffff", bgColor: "#111622", date: "Today" },
+  { id: 2, brand: "LUNA CAFÉ", heading: "NEW MENU", subtext: "Summer Drink Lineup", footer: "Available Now", fontSize: "28", textColor: "#c2f83b", bgColor: "#1e2430", date: "Yesterday" }
+];
 
 function translateStatic(){
   document.querySelectorAll('body *').forEach(el=>{
@@ -554,12 +555,14 @@ function translateStatic(){
 function toggleLanguage(){
   lang=lang==='en'?'ar':'en';
   translateStatic();
+  renderSavedProjects();
 }
 
 function show(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
+  if(id==='dashboard') renderSavedProjects();
   setTimeout(translateStatic,0);
 }
 
@@ -644,6 +647,66 @@ function updateCanvas(){
   posterCanvas.style.color = textColor;
 }
 
+/* LocalStorage Project Saving & Loading */
+function saveProject(){
+  const project = {
+    id: Date.now(),
+    brand: document.getElementById('inputBrand').value,
+    heading: document.getElementById('inputHeading').value,
+    subtext: document.getElementById('inputSubtext').value,
+    footer: document.getElementById('inputFooter').value,
+    fontSize: document.getElementById('inputFontSize').value,
+    textColor: document.getElementById('inputTextColor').value,
+    bgColor: document.getElementById('inputBgColor').value,
+    date: new Date().toLocaleDateString(lang==='ar'?'ar-EG':'en-US',{month:'short',day:'numeric'})
+  };
+
+  let saved = JSON.parse(localStorage.getItem('ai_creative_projects') || '[]');
+  saved.unshift(project);
+  localStorage.setItem('ai_creative_projects', JSON.stringify(saved));
+  toast(lang==='ar'?'تم حفظ التصميم في المشاريع! 💾':'Saved to Projects! 💾');
+}
+
+function renderSavedProjects(){
+  const grid = document.getElementById('savedProjectsGrid');
+  if(!grid) return;
+
+  let saved = JSON.parse(localStorage.getItem('ai_creative_projects') || 'null');
+  if(!saved || saved.length === 0){
+    saved = defaultProjects;
+  }
+
+  grid.innerHTML = saved.map(p => `
+    <div class="design-card" onclick="loadProject(${p.id})">
+      <div class="thumb" style="background:${p.bgColor}; color:${p.textColor}; font-size:${Math.min(parseInt(p.fontSize), 24)}px;">
+        ${p.heading || 'Design'}
+      </div>
+      <div class="meta">
+        <b>${p.brand || 'Untitled'}</b>
+        <div class="muted">${p.subtext || 'Custom Design'} · ${p.date}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function loadProject(id){
+  let saved = JSON.parse(localStorage.getItem('ai_creative_projects') || 'null') || defaultProjects;
+  const project = saved.find(p => p.id === id);
+  if(!project) return;
+
+  document.getElementById('inputBrand').value = project.brand;
+  document.getElementById('inputHeading').value = project.heading;
+  document.getElementById('inputSubtext').value = project.subtext;
+  document.getElementById('inputFooter').value = project.footer;
+  document.getElementById('inputFontSize').value = project.fontSize;
+  document.getElementById('inputTextColor').value = project.textColor;
+  document.getElementById('inputBgColor').value = project.bgColor;
+
+  updateCanvas();
+  show('editor');
+  toast(lang==='ar'?'تم تحميل التصميم ✨':'Design loaded ✨');
+}
+
 function downloadPNG(){
   const poster = document.getElementById('posterCanvas');
   toast(lang==='ar'?'جاري جلب وتنسيق الصورة...':'Generating PNG image...');
@@ -671,7 +734,10 @@ function toast(msg){
   setTimeout(()=>t.style.display='none',2200);
 }
 
-window.addEventListener('DOMContentLoaded',()=>translateStatic());
+window.addEventListener('DOMContentLoaded',()=>{
+  translateStatic();
+  renderSavedProjects();
+});
 </script>
 </body>
 </html>
