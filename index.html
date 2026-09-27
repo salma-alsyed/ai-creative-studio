@@ -3,148 +3,153 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CREATIVE AI — AI Creative Studio</title>
+<title>CREATIVE AI — Next-Gen AI Studio for Business</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
 
 :root {
-  --black: #0f0f0f;
-  --charcoal: #1e1e1e;
-  --ivory: #faf9f6;
-  --stone: #e8e5de;
-  --lime: #c2ec38;
-  --lime-hover: #b3dc2f;
+  --bg-dark: #07090e;
+  --bg-card: #111520;
+  --bg-card-hover: #181f2e;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(194, 248, 59, 0.4);
+  --accent: #c2f83b;
+  --accent-glow: rgba(194, 248, 59, 0.15);
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
   --white: #ffffff;
-  --border: #e2ded5;
-  --text-muted: #666460;
 }
 
 *{box-sizing:border-box}
-body{margin:0;background:var(--ivory);color:var(--black);font-family:Manrope,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg-dark);color:var(--text-main);font-family:'Plus Jakarta Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 button,input,textarea,select{font:inherit}button{cursor:pointer}
-.screen{min-height:100vh;display:none}.screen.active{display:block}
+.screen{min-height:100vh;display:none;position:relative}.screen.active{display:block}
 
-/* Header & Nav */
-.nav{height:64px;padding:0 6vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(250,249,246,0.85);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100}
-.logo{font-size:16px;font-weight:800;letter-spacing:1.5px}
-.navlinks{display:flex;gap:24px;font-size:13px;font-weight:600;color:var(--text-muted)}
-.navlinks span{cursor:pointer;transition:color 0.2s}.navlinks span:hover{color:var(--black)}
-.nav-actions{display:flex;gap:8px;align-items:center}
+/* Glow Background Effects */
+.ambient-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:350px;background:radial-gradient(circle, rgba(194,248,59,0.08) 0%, rgba(0,0,0,0) 70%);pointer-events:none;z-index:0}
 
-.btn{border:1px solid var(--border);background:white;border-radius:999px;padding:9px 16px;font-size:13px;font-weight:700;transition:all 0.2s ease;display:inline-flex;align-items:center;gap:6px;box-shadow:0 1px 2px rgba(0,0,0,0.03)}
-.btn:hover{background:#f3efe6}
-.btn.dark{background:var(--black);color:white;border-color:var(--black)}.btn.dark:hover{background:#2a2a2a}
-.btn.lime{background:var(--lime);border-color:var(--lime);color:var(--black)}.btn.lime:hover{background:var(--lime-hover)}
+/* Modern Glass Header */
+.nav{height:60px;padding:0 6vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(7, 9, 14, 0.75);backdrop-filter:blur(16px);position:sticky;top:0;z-index:100}
+.logo{font-size:15px;font-weight:800;letter-spacing:2px;color:var(--white);display:flex;align-items:center;gap:8px}
+.logo-badge{width:8px;height:8px;background:var(--accent);border-radius:50%;box-shadow:0 0 10px var(--accent)}
+.navlinks{display:flex;gap:28px;font-size:13px;font-weight:600;color:var(--text-muted)}
+.navlinks span{cursor:pointer;transition:color 0.2s}.navlinks span:hover{color:var(--white)}
+.nav-actions{display:flex;gap:10px;align-items:center}
 
-.lang-toggle{border:1px solid var(--border);background:white;border-radius:999px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;transition:background 0.2s ease}
-.lang-toggle:hover{background:#f0ebd9}
+.btn{border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text-main);border-radius:99px;padding:8px 16px;font-size:12px;font-weight:700;transition:all 0.2s ease;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2)}
+.btn.dark{background:var(--white);color:var(--bg-dark);border-color:var(--white)}.btn.dark:hover{background:#e2e8f0}
+.btn.accent{background:var(--accent);border-color:var(--accent);color:var(--bg-dark);box-shadow:0 0 20px var(--accent-glow)}.btn.accent:hover{background:#b1e62a}
+
+.lang-toggle{border:1px solid var(--border);background:rgba(255,255,255,0.03);color:var(--text-main);border-radius:99px;padding:6px 12px;font-size:11px;font-weight:700;cursor:pointer;transition:all 0.2s ease}
+.lang-toggle:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2)}
 
 /* Hero Section */
-.hero{max-width:1120px;margin:auto;padding:50px 5vw;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.eyebrow{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;color:var(--text-muted)}
-h1{font-size:clamp(32px,4vw,52px);line-height:1.08;margin:0 0 16px;letter-spacing:-1.5px;font-weight:800}
-.hero p{font-size:15px;line-height:1.6;color:var(--text-muted);max-width:460px;margin-bottom:24px}
-.hero-card{background:white;border:1px solid var(--border);border-radius:18px;padding:14px;box-shadow:0 12px 32px rgba(0,0,0,0.04)}
-.mock-ad{height:360px;border-radius:12px;background:#1a1917;position:relative;overflow:hidden;padding:24px;color:white;display:flex;flex-direction:column;justify-content:flex-end}
-.mock-ad:before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:#4d3b2e;right:-40px;top:20px;filter:blur(2px)}
-.mock-ad .lime-line{position:absolute;width:150px;height:4px;background:var(--lime);transform:rotate(-20deg);top:35px;left:-20px;border-radius:10px}
-.mock-ad small{position:relative;color:var(--lime);font-weight:800;letter-spacing:1.5px;font-size:11px}
-.mock-ad h2{position:relative;font-size:32px;line-height:1;margin:8px 0}
-.mock-ad p{position:relative;color:#ddd;margin:0;font-size:13px}
+.hero{max-width:1150px;margin:auto;padding:60px 5vw 40px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center;position:relative;z-index:1}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:4px 12px;border-radius:99px;background:rgba(194,248,59,0.08);border:1px solid rgba(194,248,59,0.2);color:var(--accent);font-size:11px;font-weight:700;margin-bottom:16px}
+h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spacing:-1.5px;font-weight:800;color:var(--white)}
+.hero p{font-size:15px;line-height:1.6;color:var(--text-muted);max-width:480px;margin-bottom:28px}
+
+.hero-card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,0.5)}
+.mock-ad{height:360px;border-radius:14px;background:#030508;position:relative;overflow:hidden;padding:24px;color:white;display:flex;flex-direction:column;justify-content:flex-end;border:1px solid rgba(255,255,255,0.05)}
+.mock-ad:before{content:"";position:absolute;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle, #3b2a1d 0%, transparent 70%);right:-50px;top:10px}
+.mock-ad .lime-line{position:absolute;width:140px;height:3px;background:var(--accent);transform:rotate(-20deg);top:35px;left:-15px;box-shadow:0 0 10px var(--accent)}
+.mock-ad small{position:relative;color:var(--accent);font-weight:800;letter-spacing:2px;font-size:10px}
+.mock-ad h2{position:relative;font-size:32px;line-height:1;margin:8px 0;font-weight:800}
+.mock-ad p{position:relative;color:#94a3b8;margin:0;font-size:12px}
 
 /* Features Grid */
-.features{max-width:1120px;margin:auto;padding:0 5vw 60px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.feature{padding:20px;background:white;border:1px solid var(--border);border-radius:14px;box-shadow:0 2px 4px rgba(0,0,0,0.01)}
-.feature b{display:block;margin-bottom:6px;font-size:14px}
+.features{max-width:1150px;margin:auto;padding:0 5vw 60px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative;z-index:1}
+.feature{padding:20px;background:var(--bg-card);border:1px solid var(--border);border-radius:16px;transition:all 0.2s ease}
+.feature:hover{background:var(--bg-card-hover);border-color:rgba(255,255,255,0.15);transform:translateY(-2px)}
+.feature b{display:block;margin-bottom:6px;font-size:14px;color:var(--white)}
 .feature span{font-size:12px;color:var(--text-muted);line-height:1.5}
 
-/* Application Layout */
+/* App Core Layout */
 .app{min-height:100vh;display:flex}
-.sidebar{width:210px;background:#fff;border-right:1px solid var(--border);padding:20px 14px;flex-shrink:0;display:flex;flex-direction:column}
-.side-logo{padding:0 10px 24px}
+.sidebar{width:220px;background:rgba(17, 21, 32, 0.6);backdrop-filter:blur(20px);border-right:1px solid var(--border);padding:20px 14px;flex-shrink:0;display:flex;flex-direction:column}
+.side-logo{padding:0 8px 24px}
 .side-item{padding:10px 12px;border-radius:10px;margin:2px 0;font-size:13px;font-weight:600;color:var(--text-muted);cursor:pointer;transition:all 0.15s ease}
-.side-item:hover{background:#f5f3ec;color:var(--black)}
-.side-item.active{background:#eef7cc;color:var(--black);font-weight:800}
+.side-item:hover{background:rgba(255,255,255,0.05);color:var(--white)}
+.side-item.active{background:rgba(194, 248, 59, 0.1);color:var(--accent);border:1px solid rgba(194, 248, 59, 0.2);font-weight:700}
 
-.main{flex:1;padding:28px 36px;max-width:1150px}
+.main{flex:1;padding:28px 40px;max-width:1200px}
 .toprow{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
-.toprow h2{margin:0;font-size:22px;font-weight:800}
+.toprow h2{margin:0;font-size:22px;font-weight:800;color:var(--white)}
 
-/* Cards & Grid */
+/* Cards & Studio Grid */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.design-card{background:white;border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform 0.2s}.design-card:hover{transform:translateY(-2px)}
-.thumb{height:160px;background:#24221f;display:flex;align-items:center;justify-content:center;color:white;font-size:22px;font-weight:800}
-.thumb.l1{background:#2a2620}.thumb.l2{background:#e3ded5;color:#222}.thumb.l3{background:#161616}
-.design-card .meta{padding:14px}.design-card b{font-size:13px}.muted{font-size:11px;color:var(--text-muted)}
+.design-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all 0.2s}.design-card:hover{border-color:rgba(255,255,255,0.2);transform:translateY(-2px)}
+.thumb{height:160px;background:#0a0e17;display:flex;align-items:center;justify-content:center;color:white;font-size:20px;font-weight:800}
+.thumb.l1{background:#111622}.thumb.l2{background:#1e2430;color:var(--accent)}.thumb.l3{background:#0d111a}
+.design-card .meta{padding:14px}.design-card b{font-size:13px;color:var(--white)}.muted{font-size:11px;color:var(--text-muted)}
 
-/* Create & Prompt Box */
-.create-box{background:white;border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:20px}
-.create-box textarea{width:100%;min-height:100px;border:1px solid var(--border);border-radius:12px;padding:14px;font-size:13px;resize:vertical;background:#fcfbf8;outline:none;transition:border 0.2s}
-.create-box textarea:focus{border-color:#999}
+/* Prompt Box */
+.create-box{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:22px;margin-bottom:20px}
+.create-box textarea{width:100%;min-height:90px;border:1px solid var(--border);border-radius:12px;padding:14px;font-size:13px;resize:vertical;background:#090d14;color:var(--text-main);outline:none;transition:border 0.2s}
+.create-box textarea:focus{border-color:var(--accent)}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
-.chip{padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:white;font-size:11px;font-weight:600;cursor:pointer}.chip:hover{background:#f3efe6}
+.chip{padding:6px 12px;border:1px solid var(--border);border-radius:99px;background:rgba(255,255,255,0.03);color:var(--text-muted);font-size:11px;font-weight:600;cursor:pointer}.chip:hover{background:rgba(255,255,255,0.08);color:var(--white)}
 
-/* Brand Grid */
+/* Brand & Editor Panels */
 .brand-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.panel{background:white;border:1px solid var(--border);border-radius:16px;padding:20px}.panel.ai{border-left:3px solid var(--lime)}
-.swatches{display:flex;gap:10px;margin-top:12px}
-.swatch{width:42px;height:42px;border-radius:50%;border:1px solid #ddd}
-.s1{background:#111}.s2{background:#f7f6f2}.s3{background:#d8d4cc}.s4{background:#c2ec38}
+.panel{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:22px}.panel.ai{border-left:3px solid var(--accent)}
+.swatches{display:flex;gap:10px;margin-top:14px}
+.swatch{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,0.1)}
+.s1{background:#000}.s2{background:#1f293d}.s3{background:#475569}.s4{background:#c2f83b}
 
-/* Design Editor */
-.editor{display:grid;grid-template-columns:160px 1fr 250px;gap:16px}
-.tools,.controls{background:white;border:1px solid var(--border);border-radius:14px;padding:14px}
-.tool{padding:10px 12px;border-radius:8px;font-size:12px;font-weight:600;color:var(--text-muted);cursor:pointer;margin-bottom:4px}
-.tool.active,.tool:hover{background:#f3efe6;color:var(--black);font-weight:700}
-.canvas{background:#e3ded5;border-radius:14px;display:flex;align-items:center;justify-content:center;min-height:480px;padding:20px}
-.poster{width:min(340px,90%);aspect-ratio:1/1.25;background:#24221f;border-radius:8px;color:white;padding:22px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;box-shadow:0 12px 30px rgba(0,0,0,0.12);transition:all 0.2s ease}
-.poster:before{content:"";position:absolute;width:120px;height:120px;border-radius:50%;right:20px;top:50px;background:#574334}
-.poster h2{font-size:32px;line-height:0.95;margin:0 0 8px;position:relative}
-.poster p{position:relative;margin:0 0 8px;font-size:12px}
+/* Editor Studio */
+.editor{display:grid;grid-template-columns:160px 1fr 260px;gap:16px}
+.tools,.controls{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:16px}
+.tool{padding:10px 12px;border-radius:10px;font-size:12px;font-weight:600;color:var(--text-muted);cursor:pointer;margin-bottom:4px;transition:all 0.15s}
+.tool.active,.tool:hover{background:rgba(255,255,255,0.06);color:var(--white);font-weight:700}
+.canvas{background:#030508;border:1px solid var(--border);border-radius:16px;display:flex;align-items:center;justify-content:center;min-height:480px;padding:20px}
+.poster{width:min(320px,90%);aspect-ratio:1/1.25;background:#111622;border-radius:12px;color:white;padding:24px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;box-shadow:0 20px 50px rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.08);transition:all 0.2s ease}
+.poster:before{content:"";position:absolute;width:120px;height:120px;border-radius:50%;right:20px;top:40px;background:radial-gradient(circle, #3b2a1d 0%, transparent 70%)}
+.poster h2{font-size:32px;line-height:0.95;margin:0 0 8px;position:relative;font-weight:800}
+.poster p{position:relative;margin:0 0 8px;font-size:12px;color:#94a3b8}
 .control{margin-bottom:12px}
 .control label{font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;font-weight:700}
-.field{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;background:#fcfbf8;font-size:12px;outline:none}
-.field:focus{border-color:#888}
+.field{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:10px;background:#090d14;color:var(--text-main);font-size:12px;outline:none}
+.field:focus{border-color:var(--accent)}
 
-/* Form Options & Selection */
+/* Onboarding & Forms */
 .options{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}
-.option{padding:16px 8px;border:1px solid var(--border);border-radius:12px;text-align:center;cursor:pointer;font-size:12px;background:white}
-.option.selected{border:2px solid var(--lime);background:#fafde8;font-weight:700}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--black);color:white;padding:10px 16px;border-radius:999px;display:none;font-size:12px;z-index:999;box-shadow:0 4px 12px rgba(0,0,0,0.15)}
+.option{padding:16px 8px;border:1px solid var(--border);border-radius:12px;text-align:center;cursor:pointer;font-size:12px;background:rgba(255,255,255,0.02)}
+.option.selected{border:1px solid var(--accent);background:rgba(194,248,59,0.06);color:var(--accent);font-weight:700}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--white);color:var(--bg-dark);padding:10px 18px;border-radius:99px;display:none;font-size:12px;font-weight:700;z-index:999;box-shadow:0 10px 25px rgba(0,0,0,0.5)}
 
 /* RTL Support */
-.rtl{font-family:"IBM Plex Sans Arabic",Arial,sans-serif}
+.rtl{font-family:'IBM Plex Sans Arabic',sans-serif}
 .rtl .nav,.rtl .toprow{direction:rtl}
 .rtl .hero,.rtl .features,.rtl .app,.rtl .onboard,.rtl .create-box,.rtl .ai-understood,.rtl .editor{direction:rtl}
 .rtl .sidebar{border-right:0;border-left:1px solid var(--border)}
-.rtl .eyebrow{letter-spacing:0;text-transform:none}
+.rtl .eyebrow{letter-spacing:0}
 .rtl .intent,.rtl .concept-body,.rtl .panel,.rtl .control{text-align:right}
-.rtl .panel.ai{border-left:1px solid var(--border);border-right:3px solid var(--lime)}
+.rtl .panel.ai{border-left:1px solid var(--border);border-right:3px solid var(--accent)}
 
 /* AI Flow Component */
 .ai-flow{max-width:850px}
-.ai-understood{margin-top:16px;background:#fcfbf8;border:1px solid var(--border);border-radius:16px;padding:18px;display:none}
+.ai-understood{margin-top:16px;background:#090d14;border:1px solid var(--border);border-radius:16px;padding:18px;display:none}
 .intent-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}
-.intent{background:white;border:1px solid var(--border);border-radius:10px;padding:10px}
+.intent{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:10px}
 .intent span{display:block;font-size:10px;color:var(--text-muted);margin-bottom:4px}
-.intent b{font-size:12px}
-.direction{margin-top:16px;padding:12px 14px;border-left:3px solid var(--lime);background:#fff}
+.intent b{font-size:12px;color:var(--white)}
+.direction{margin-top:16px;padding:12px 14px;border-left:3px solid var(--accent);background:var(--bg-card)}
 .style-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.style-btn{padding:8px 14px;border:1px solid var(--border);border-radius:999px;background:white;font-size:12px;font-weight:700;cursor:pointer}
-.style-btn:hover,.style-btn.selected{border-color:var(--black);background:var(--black);color:white}
+.style-btn{padding:8px 14px;border:1px solid var(--border);border-radius:99px;background:transparent;color:var(--text-main);font-size:12px;font-weight:700;cursor:pointer}
+.style-btn:hover,.style-btn.selected{border-color:var(--accent);background:var(--accent);color:var(--bg-dark)}
 .concepts{display:none;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
-.concept{background:white;border:1px solid var(--border);border-radius:14px;overflow:hidden}
-.concept-preview{height:180px;display:flex;flex-direction:column;justify-content:flex-end;padding:16px;position:relative;overflow:hidden}
-.concept-preview:before{content:"";position:absolute;width:110px;height:110px;border-radius:50%;right:-25px;top:25px;background:#574334}
+.concept{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.concept-preview{height:180px;display:flex;flex-direction:column;justify-content:flex-end;padding:16px;position:relative;overflow:hidden;background:#030508}
+.concept-preview:before{content:"";position:absolute;width:110px;height:110px;border-radius:50%;right:-25px;top:25px;background:radial-gradient(circle, #3b2a1d 0%, transparent 70%)}
 .concept-preview h3,.concept-preview p{position:relative;z-index:1}
-.concept-preview h3{font-size:22px;line-height:0.95;margin:6px 0}
-.concept-preview p{margin:0;font-size:11px}
-.concept:nth-child(2) .concept-preview{background:#ece7dd;color:#222}.concept:nth-child(2) .concept-preview:before{background:#c8bead}
-.concept:nth-child(3) .concept-preview{background:#161616;color:white}.concept:nth-child(3) .concept-preview:before{background:var(--lime)}
-.concept-body{padding:12px}.concept-body b{display:block;margin-bottom:4px;font-size:12px}
+.concept-preview h3{font-size:22px;line-height:0.95;margin:6px 0;color:var(--white)}
+.concept-preview p{margin:0;font-size:11px;color:#94a3b8}
+.concept-body{padding:12px}.concept-body b{display:block;margin-bottom:4px;font-size:12px;color:var(--white)}
 
 .loading-ai{display:none;align-items:center;gap:8px;padding:12px 0;color:var(--text-muted);font-size:12px}
-.ai-dot{width:6px;height:6px;border-radius:50%;background:var(--lime);animation:pulse 1s infinite}
+.ai-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1s infinite}
 .ai-dot:nth-child(2){animation-delay:.15s}.ai-dot:nth-child(3){animation-delay:.3s}
 @keyframes pulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
 
@@ -166,22 +171,23 @@ h1{font-size:clamp(32px,4vw,52px);line-height:1.08;margin:0 0 16px;letter-spacin
 <body>
 
 <section id="landing" class="screen active">
+<div class="ambient-glow"></div>
 <nav class="nav">
-  <div class="logo">CREATIVE AI</div>
+  <div class="logo"><i class="logo-badge"></i> CREATIVE AI</div>
   <div class="navlinks"><span>Features</span><span>Templates</span><span>Pricing</span><span>About</span></div>
   <div class="nav-actions">
     <button class="lang-toggle" onclick="toggleLanguage()">🌐 العربية</button>
     <button class="btn" onclick="show('signup')">Log in</button>
-    <button class="btn lime" onclick="show('signup')">Get Started →</button>
+    <button class="btn accent" onclick="show('signup')">Get Started →</button>
   </div>
 </nav>
 <div class="hero">
   <div>
-    <div class="eyebrow">AI Creative Studio for Business</div>
+    <div class="badge">✨ Next-Gen AI Creative Studio</div>
     <h1>Your business.<br>Your brand.<br>Your creative AI.</h1>
-    <p>Create professional business content in seconds — without being a designer.</p>
-    <button class="btn lime" onclick="show('signup')">✨ Create for Free →</button>
-    <div class="muted" style="margin-top:10px">7 Days Free Trial · No credit card required.</div>
+    <p>Generate high-converting ads, menus, and brand content in seconds — crafted specifically for your business identity.</p>
+    <button class="btn accent" onclick="show('signup')">✨ Start 7-Day Free Trial →</button>
+    <div class="muted" style="margin-top:12px">No credit card required. Cancel anytime.</div>
   </div>
   <div class="hero-card">
     <div class="mock-ad">
@@ -193,20 +199,21 @@ h1{font-size:clamp(32px,4vw,52px);line-height:1.08;margin:0 0 16px;letter-spacin
   </div>
 </div>
 <div class="features">
-  <div class="feature"><b>Understand your business</b><span>AI learns your brand and keeps your content consistent.</span></div>
-  <div class="feature"><b>Create with AI</b><span>Turn a simple idea into a ready-to-use design.</span></div>
-  <div class="feature"><b>Edit in one place</b><span>Refine text, colors, images and formats without complexity.</span></div>
-  <div class="feature"><b>Made for business</b><span>Posts, stories, menus, promotions and more.</span></div>
+  <div class="feature"><b>Understand Your Brand</b><span>AI analyzes your business style and maintains identity consistency.</span></div>
+  <div class="feature"><b>Prompt-Free AI</b><span>Turn simple ideas into launch-ready visuals without prompt writing.</span></div>
+  <div class="feature"><b>Smart Editor</b><span>Customize text, colors, fonts, and layouts with real-time feedback.</span></div>
+  <div class="feature"><b>Made for Scale</b><span>Promotions, social stories, menus, and ad banners in seconds.</span></div>
 </div>
 </section>
 
 <section id="signup" class="screen">
-<div class="onboard" style="padding-top:40px">
-  <div class="logo" style="margin-bottom:24px;text-align:center">CREATIVE AI</div>
-  <div class="panel" style="max-width:480px;margin:auto">
-    <div class="eyebrow">Start creating</div>
+<div class="ambient-glow"></div>
+<div style="padding-top:60px">
+  <div class="logo" style="margin-bottom:24px;justify-content:center"><i class="logo-badge"></i> CREATIVE AI</div>
+  <div class="panel" style="max-width:440px;margin:auto">
+    <div class="badge">Start Free Trial</div>
     <h2>Welcome to CREATIVE AI</h2>
-    <p class="muted">Create your account and start building your brand with AI.</p>
+    <p class="muted">Create your account to start building your brand with AI.</p>
     <button class="btn" style="width:100%;margin:16px 0 8px;justify-content:center">Continue with Google</button>
     <button class="btn dark" style="width:100%;justify-content:center" onclick="show('onboard')">Continue with Email</button>
     <p class="muted" style="text-align:center;margin-top:16px">Already have an account? Log in</p>
@@ -215,12 +222,11 @@ h1{font-size:clamp(32px,4vw,52px);line-height:1.08;margin:0 0 16px;letter-spacin
 </section>
 
 <section id="onboard" class="screen">
-<div class="onboard">
-  <div class="logo">CREATIVE AI</div>
-  <div class="panel" style="margin-top:20px">
-    <div class="eyebrow">Let's build your brand</div>
-    <h2>What type of business do you have?</h2>
-    <p class="muted">This helps us create the right style for your brand.</p>
+<div class="app" style="justify-content:center;align-items:center;padding:40px 20px">
+  <div class="panel" style="max-width:600px;width:100%">
+    <div class="badge">Business Profile</div>
+    <h2>What type of business do you run?</h2>
+    <p class="muted">This trains our AI to match your specific industry aesthetics.</p>
     <div class="options">
       <div class="option selected" onclick="selectOption(this)">☕<br><small>Café</small></div>
       <div class="option" onclick="selectOption(this)">🍽️<br><small>Restaurant</small></div>
@@ -231,11 +237,11 @@ h1{font-size:clamp(32px,4vw,52px);line-height:1.08;margin:0 0 16px;letter-spacin
       <div class="option" onclick="selectOption(this)">🎓<br><small>Education</small></div>
       <div class="option" onclick="selectOption(this)">✨<br><small>Other</small></div>
     </div>
-    <label class="eyebrow">Business name</label>
-    <input class="field" style="margin-bottom:12px" placeholder="e.g. Luna Café">
-    <label class="eyebrow">Tell us about your business <span class="muted">(optional)</span></label>
+    <label class="muted" style="display:block;margin-bottom:6px">Business Name</label>
+    <input class="field" style="margin-bottom:14px" placeholder="e.g. Luna Café">
+    <label class="muted" style="display:block;margin-bottom:6px">Tell us about your business <span class="muted">(optional)</span></label>
     <textarea class="field" rows="3" placeholder="What do you sell? What makes your business special?"></textarea>
-    <div style="text-align:right;margin-top:16px"><button class="btn lime" onclick="show('brand')">Continue →</button></div>
+    <div style="text-align:right;margin-top:18px"><button class="btn accent" onclick="show('brand')">Continue →</button></div>
   </div>
 </div>
 </section>
@@ -243,7 +249,7 @@ h1{font-size:clamp(32px,4vw,52px);line-height:1.08;margin:0 0 16px;letter-spacin
 <section id="brand" class="screen">
 <div class="app">
   <aside class="sidebar">
-    <div class="side-logo logo">CREATIVE AI</div>
+    <div class="side-logo logo"><i class="logo-badge"></i> CREATIVE AI</div>
     <div class="side-item" onclick="show('dashboard')">⌂ Home</div>
     <div class="side-item" onclick="show('create')">✦ Create</div>
     <div class="side-item">▱ Projects</div>
@@ -253,20 +259,20 @@ h1{font-size:clamp(32px,4vw,52px);line-height:1.08;margin:0 0 16px;letter-spacin
     <div style="margin-top:auto;padding-top:16px"><button class="lang-toggle" style="width:100%;justify-content:center" onclick="toggleLanguage()">🌐 العربية</button></div>
   </aside>
   <main class="main">
-    <div class="toprow"><div><h2>Your brand is ready.</h2><div class="muted">We created a starting identity for Luna Café.</div></div><button class="btn lime" onclick="show('create')">Create something →</button></div>
+    <div class="toprow"><div><h2>Your Brand Identity</h2><div class="muted">AI generated brand rules for Luna Café.</div></div><button class="btn accent" onclick="show('create')">Create Content →</button></div>
     <div class="brand-grid">
       <div class="panel">
-        <div class="eyebrow">Brand</div><h2>Luna Café</h2><p class="muted">Coffee · Desserts · Good Vibes</p>
-        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0">
-        <div class="eyebrow">Style</div><b>Modern · Premium · Warm</b>
-        <div class="eyebrow" style="margin-top:16px">Colors</div>
+        <div class="badge">Brand Profile</div><h2>Luna Café</h2><p class="muted">Coffee · Desserts · Good Vibes</p>
+        <hr style="border:0;border-top:1px solid var(--border);margin:16px 0">
+        <div class="muted">Style Aesthetic</div><b style="color:var(--white)">Modern · Premium · Warm</b>
+        <div class="muted" style="margin-top:16px">Color Palette</div>
         <div class="swatches"><i class="swatch s1"></i><i class="swatch s2"></i><i class="swatch s3"></i><i class="swatch s4"></i></div>
       </div>
       <div class="panel ai">
-        <div class="eyebrow">AI creative direction</div>
+        <div class="badge">AI Direction</div>
         <h3>Keep it warm, premium and inviting.</h3>
-        <p class="muted">Your content should feel calm and refined, with strong typography and small moments of lime for energy.</p>
-        <button class="btn" onclick="toast(lang==='ar'?'تم حفظ أسلوب العلامة':'Brand style saved')">Save brand style</button>
+        <p class="muted">Content should feel refined and calm, with clean typography and subtle neon accents for energy.</p>
+        <button class="btn" onclick="toast(lang==='ar'?'تم حفظ أسلوب العلامة':'Brand style saved')">Save Brand Guidelines</button>
       </div>
     </div>
   </main>
@@ -276,7 +282,7 @@ h1{font-size:clamp(32px,4vw,52px);line-height:1.08;margin:0 0 16px;letter-spacin
 <section id="dashboard" class="screen">
 <div class="app">
   <aside class="sidebar">
-    <div class="side-logo logo">CREATIVE AI</div>
+    <div class="side-logo logo"><i class="logo-badge"></i> CREATIVE AI</div>
     <div class="side-item active">⌂ Home</div>
     <div class="side-item" onclick="show('create')">✦ Create</div>
     <div class="side-item">▱ Projects</div>
@@ -286,7 +292,7 @@ h1{font-size:clamp(32px,4vw,52px);line-height:1.08;margin:0 0 16px;letter-spacin
     <div style="margin-top:auto;padding-top:16px"><button class="lang-toggle" style="width:100%;justify-content:center" onclick="toggleLanguage()">🌐 العربية</button></div>
   </aside>
   <main class="main">
-    <div class="toprow"><div><div class="eyebrow">Luna Café</div><h2>Good to see you.</h2></div><button class="btn lime" onclick="show('create')">+ Create</button></div>
+    <div class="toprow"><div><div class="badge">Luna Café Workspace</div><h2>Welcome back</h2></div><button class="btn accent" onclick="show('create')">+ New Design</button></div>
     <div class="cards">
       <div class="design-card"><div class="thumb l1">20% OFF</div><div class="meta"><b>Cold Drinks Promotion</b><div class="muted">Instagram Post · Today</div></div></div>
       <div class="design-card"><div class="thumb l2">NEW MENU</div><div class="meta"><b>Summer Menu</b><div class="muted">Story · Yesterday</div></div></div>
@@ -299,7 +305,7 @@ h1{font-size:clamp(32px,4vw,52px);line-height:1.08;margin:0 0 16px;letter-spacin
 <section id="create" class="screen">
 <div class="app">
   <aside class="sidebar">
-    <div class="side-logo logo">CREATIVE AI</div>
+    <div class="side-logo logo"><i class="logo-badge"></i> CREATIVE AI</div>
     <div class="side-item" onclick="show('dashboard')">⌂ Home</div>
     <div class="side-item active">✦ Create</div>
     <div class="side-item">▱ Projects</div>
@@ -309,7 +315,7 @@ h1{font-size:clamp(32px,4vw,52px);line-height:1.08;margin:0 0 16px;letter-spacin
     <div style="margin-top:auto;padding-top:16px"><button class="lang-toggle" style="width:100%;justify-content:center" onclick="toggleLanguage()">🌐 العربية</button></div>
   </aside>
   <main class="main">
-    <div class="toprow"><div><div class="eyebrow">Create with AI</div><h2>What are we creating today?</h2><div class="muted">Don't worry about prompts. Just tell us your idea.</div></div></div>
+    <div class="toprow"><div><div class="badge">AI Prompt Studio</div><h2>What are we creating today?</h2><div class="muted">Describe your idea naturally. No complex prompts needed.</div></div></div>
     <div class="create-box ai-flow">
       <textarea id="prompt" placeholder="Tell me what you need… e.g. I want a 20% discount ad on cold drinks for 3 days."></textarea>
       <div class="chips">
@@ -319,10 +325,10 @@ h1{font-size:clamp(32px,4vw,52px);line-height:1.08;margin:0 0 16px;letter-spacin
         <button class="chip" onclick="fill('Story')">Story</button>
         <button class="chip" onclick="fill('Menu')">Menu</button>
       </div>
-      <button class="btn dark" onclick="understandIdea()">✦ Understand my idea →</button>
-      <div id="loadingAI" class="loading-ai"><i class="ai-dot"></i><i class="ai-dot"></i><i class="ai-dot"></i><span>Understanding your idea…</span></div>
+      <button class="btn accent" onclick="understandIdea()">✦ Generate Concepts →</button>
+      <div id="loadingAI" class="loading-ai"><i class="ai-dot"></i><i class="ai-dot"></i><i class="ai-dot"></i><span>Analyzing business intent & generating concepts…</span></div>
       <div id="understood" class="ai-understood">
-        <div class="eyebrow">AI understood</div><h3>Got it. Here's what I understood.</h3>
+        <div class="badge">AI Understanding</div><h3>Got it. Here is the structured creative brief:</h3>
         <div class="intent-grid">
           <div class="intent"><span>Content</span><b id="intentContent">Promotion</b></div>
           <div class="intent"><span>Format</span><b id="intentFormat">Instagram Post</b></div>
@@ -330,8 +336,8 @@ h1{font-size:clamp(32px,4vw,52px);line-height:1.08;margin:0 0 16px;letter-spacin
           <div class="intent"><span>Product</span><b id="intentProduct">Cold Drinks</b></div>
           <div class="intent"><span>Duration</span><b id="intentDuration">3 Days</b></div>
         </div>
-        <div class="direction"><div class="eyebrow">Creative direction</div><b>Premium · Warm · Modern</b></div>
-        <div style="margin-top:16px"><div class="eyebrow">Choose a creative direction</div>
+        <div class="direction"><div class="muted">Creative Style Direction</div><b style="color:var(--white)">Premium · Warm · Modern</b></div>
+        <div style="margin-top:18px"><div class="muted" style="margin-bottom:8px">Select Design Aesthetic</div>
           <div class="style-row">
             <button class="style-btn" onclick="generateConcepts('Minimal',this)">Minimal</button>
             <button class="style-btn" onclick="generateConcepts('Premium',this)">Premium</button>
@@ -340,9 +346,9 @@ h1{font-size:clamp(32px,4vw,52px);line-height:1.08;margin:0 0 16px;letter-spacin
         </div>
       </div>
       <div id="concepts" class="concepts">
-        <div class="concept"><div class="concept-preview"><small style="position:relative;color:var(--lime);font-weight:800;font-size:10px">LUNA CAFÉ</small><h3>20% OFF</h3><p>Cold Drinks · 3 Days</p></div><div class="concept-body"><b>01 · Clean & Warm</b><div class="muted">Simple typography with a refined café feel.</div><button class="btn" style="width:100%;margin-top:8px" onclick="openEditor()">Use concept →</button></div></div>
-        <div class="concept"><div class="concept-preview"><small style="position:relative;font-weight:800;font-size:10px">LUNA CAFÉ</small><h3>20%<br>OFF</h3><p>Make your break better.</p></div><div class="concept-body"><b>02 · Premium</b><div class="muted">Elegant hierarchy with a soft premium mood.</div><button class="btn" style="width:100%;margin-top:8px" onclick="openEditor()">Use concept →</button></div></div>
-        <div class="concept"><div class="concept-preview"><small style="position:relative;color:var(--lime);font-weight:800;font-size:10px">LIMITED OFFER</small><h3>20% OFF</h3><p>Cold drinks · Only 3 days</p></div><div class="concept-body"><b>03 · Bold & Direct</b><div class="muted">Stronger contrast designed to stop the scroll.</div><button class="btn" style="width:100%;margin-top:8px" onclick="openEditor()">Use concept →</button></div></div>
+        <div class="concept"><div class="concept-preview"><small style="position:relative;color:var(--accent);font-weight:800;font-size:10px">LUNA CAFÉ</small><h3>20% OFF</h3><p>Cold Drinks · 3 Days</p></div><div class="concept-body"><b>01 · Clean & Warm</b><div class="muted">Simple typography with a refined café feel.</div><button class="btn accent" style="width:100%;margin-top:10px;justify-content:center" onclick="openEditor()">Open in Editor →</button></div></div>
+        <div class="concept"><div class="concept-preview"><small style="position:relative;font-weight:800;font-size:10px;color:var(--white)">LUNA CAFÉ</small><h3>20%<br>OFF</h3><p>Make your break better.</p></div><div class="concept-body"><b>02 · Premium</b><div class="muted">Elegant hierarchy with a soft premium mood.</div><button class="btn accent" style="width:100%;margin-top:10px;justify-content:center" onclick="openEditor()">Open in Editor →</button></div></div>
+        <div class="concept"><div class="concept-preview"><small style="position:relative;color:var(--accent);font-weight:800;font-size:10px">LIMITED OFFER</small><h3>20% OFF</h3><p>Cold drinks · Only 3 days</p></div><div class="concept-body"><b>03 · Bold & Direct</b><div class="muted">Stronger contrast designed to stop the scroll.</div><button class="btn accent" style="width:100%;margin-top:10px;justify-content:center" onclick="openEditor()">Open in Editor →</button></div></div>
       </div>
     </div>
   </main>
@@ -352,7 +358,7 @@ h1{font-size:clamp(32px,4vw,52px);line-height:1.08;margin:0 0 16px;letter-spacin
 <section id="editor" class="screen">
 <div class="app">
   <aside class="sidebar">
-    <div class="side-logo logo">CREATIVE AI</div>
+    <div class="side-logo logo"><i class="logo-badge"></i> CREATIVE AI</div>
     <div class="side-item" onclick="show('dashboard')">⌂ Home</div>
     <div class="side-item active">✦ Create</div>
     <div class="side-item">▱ Projects</div>
@@ -363,10 +369,10 @@ h1{font-size:clamp(32px,4vw,52px);line-height:1.08;margin:0 0 16px;letter-spacin
   </aside>
   <main class="main">
     <div class="toprow">
-      <div><div class="eyebrow">Design Editor</div><h2>Cold Drinks Promotion</h2></div>
+      <div><div class="badge">Canvas Editor</div><h2>Cold Drinks Promotion</h2></div>
       <div>
         <button class="btn" onclick="toast(lang==='ar'?'تم الحفظ في المشاريع':'Saved to Projects')">Save</button>
-        <button class="btn lime" onclick="toast(lang==='ar'?'جاري تجهيز التصميم...':'Preparing design...')">↓ Download</button>
+        <button class="btn accent" onclick="toast(lang==='ar'?'جاري تجهيز التصميم...':'Preparing design...')">↓ Download PNG</button>
       </div>
     </div>
     <div class="editor">
@@ -378,24 +384,24 @@ h1{font-size:clamp(32px,4vw,52px);line-height:1.08;margin:0 0 16px;letter-spacin
       </div>
       <div class="canvas">
         <div class="poster" id="posterCanvas">
-          <small id="posterBrand" style="position:relative;color:var(--lime);font-weight:800;font-size:10px">LUNA CAFÉ</small>
+          <small id="posterBrand" style="position:relative;color:var(--accent);font-weight:800;font-size:10px">LUNA CAFÉ</small>
           <h2 id="posterHeading">20% OFF</h2>
           <p id="posterSubtext">on all cold drinks</p>
           <small id="posterFooter" style="position:relative;font-size:10px">May 1 — May 3</small>
         </div>
       </div>
       <div class="controls">
-        <div class="eyebrow">Edit Content</div>
+        <div class="muted" style="margin-bottom:8px">Content Controls</div>
         <div class="control"><label>Brand Name</label><input class="field" id="inputBrand" value="LUNA CAFÉ" oninput="updateCanvas()"></div>
         <div class="control"><label>Heading</label><input class="field" id="inputHeading" value="20% OFF" oninput="updateCanvas()"></div>
         <div class="control"><label>Subtext</label><input class="field" id="inputSubtext" value="on all cold drinks" oninput="updateCanvas()"></div>
         <div class="control"><label>Footer Text</label><input class="field" id="inputFooter" value="May 1 — May 3" oninput="updateCanvas()"></div>
-        <hr style="border:0;border-top:1px solid var(--border);margin:12px 0">
-        <div class="eyebrow">Styling</div>
+        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0">
+        <div class="muted" style="margin-bottom:8px">Styling & Colors</div>
         <div class="control"><label>Font Size</label><input type="range" id="inputFontSize" min="20" max="60" value="32" oninput="updateCanvas()" style="width:100%"></div>
-        <div class="control"><label>Text Color</label><input type="color" id="inputTextColor" value="#ffffff" onchange="updateCanvas()" style="width:100%;height:32px;border-radius:6px;border:1px solid #ddd;cursor:pointer"></div>
-        <div class="control"><label>Background Color</label><input type="color" id="inputBgColor" value="#24221f" onchange="updateCanvas()" style="width:100%;height:32px;border-radius:6px;border:1px solid #ddd;cursor:pointer"></div>
-        <button class="btn" style="width:100%;margin-top:8px" onclick="toast(lang==='ar'?'جاري تحسين النص بالذكاء الاصطناعي...':'AI is refining text...')">✦ Refine Text</button>
+        <div class="control"><label>Text Color</label><input type="color" id="inputTextColor" value="#ffffff" onchange="updateCanvas()" style="width:100%;height:32px;border-radius:6px;border:1px solid var(--border);background:none;cursor:pointer"></div>
+        <div class="control"><label>Background Color</label><input type="color" id="inputBgColor" value="#111622" onchange="updateCanvas()" style="width:100%;height:32px;border-radius:6px;border:1px solid var(--border);background:none;cursor:pointer"></div>
+        <button class="btn" style="width:100%;margin-top:8px;justify-content:center" onclick="toast(lang==='ar'?'جاري تحسين النص بالذكاء الاصطناعي...':'AI is refining text...')">✦ Refine Text with AI</button>
       </div>
     </div>
   </main>
@@ -406,7 +412,7 @@ h1{font-size:clamp(32px,4vw,52px);line-height:1.08;margin:0 0 16px;letter-spacin
 
 <script>
 const AR={
-"Features":"المزايا","Templates":"القوالب","Pricing":"الأسعار","About":"عن التطبيق","Log in":"تسجيل الدخول","Get Started →":"ابدأ الآن →","AI Creative Studio for Business":"استوديو إبداعي بالذكاء الاصطناعي للأعمال","Your business.":"مشروعك.","Your brand.":"علامتك التجارية.","Your creative AI.":"ذكاؤك الإبداعي.","Create professional business content in seconds — without being a designer.":"أنشئ محتوى احترافيًا لنشاطك التجاري خلال ثوانٍ — بدون أن تكون مصممًا.","✨ Create for Free →":"✨ ابدأ تجربة مجانية →","Start creating":"ابدأ الإنشاء","Welcome to CREATIVE AI":"مرحبًا بك في CREATIVE AI","Create your account and start building your brand with AI.":"أنشئ حسابك وابدأ ببناء علامتك التجارية بالذكاء الاصطناعي.","Continue with Google":"المتابعة باستخدام Google","Continue with Email":"المتابعة بالبريد الإلكتروني","Already have an account? Log in":"لديك حساب بالفعل؟ سجّل الدخول","Let's build your brand":"لنَبْنِ علامتك التجارية","What type of business do you have?":"ما نوع نشاطك التجاري؟","This helps us create the right style for your brand.":"هذا يساعدنا على إنشاء الأسلوب المناسب لعلامتك التجارية.","Business name":"اسم النشاط التجاري","Tell us about your business":"أخبرنا قليلًا عن نشاطك التجاري","(optional)":"(اختياري)","Continue →":"متابعة →","Your brand is ready.":"علامتك التجارية جاهزة.","We created a starting identity for Luna Café.":"أنشأنا هوية أولية لـ Luna Café.","Create something →":"أنشئ شيئًا →","Brand":"العلامة التجارية","Style":"الأسلوب","Colors":"الألوان","AI creative direction":"التوجيه الإبداعي بالذكاء الاصطناعي","Keep it warm, premium and inviting.":"اجعل المحتوى دافئًا وفخمًا وجذابًا.","Your content should feel calm and refined, with strong typography and small moments of lime for energy.":"يجب أن يكون المحتوى هادئًا وراقيًا، مع خطوط واضحة ولمسات بسيطة من اللون الليموني لإضافة الحيوية.","Save brand style":"حفظ أسلوب العلامة","Good to see you.":"سعيدون بعودتك.","+ Create":"+ إنشاء","Cold Drinks Promotion":"عرض المشروبات الباردة","Instagram Post · Today":"منشور Instagram · اليوم","Summer Menu":"قائمة الصيف","Story · Yesterday":"ستوري · أمس","Brand Announcement":"إعلان العلامة التجارية","Post · 3 days ago":"منشور · منذ 3 أيام","Home":"الرئيسية","Create":"إنشاء","Projects":"المشاريع","AI Assistant":"المساعد الإبداعي","Create with AI":"الإنشاء بالذكاء الاصطناعي","What are we creating today?":"ماذا نُنشئ اليوم؟","Don't worry about prompts. Just tell us your idea.":"لا تحتاج إلى كتابة Prompt مثالي. فقط أخبرنا بفكرتك بطريقتك.","Promotion":"عرض ترويجي","New Product":"منتج جديد","Instagram Post":"منشور Instagram","Story":"ستوري","Menu":"قائمة طعام","✦ Understand my idea →":"✦ افهم فكرتي →","Understanding your idea…":"جاري فهم فكرتك…","AI understood":"هذا ما فهمناه","Got it. Here's what I understood.":"فهمنا فكرتك. هذا ما استنتجناه:","Content":"نوع المحتوى","Format":"التنسيق","Offer":"العرض","Product":"المنتج","Duration":"المدة","Creative direction":"التوجيه الإبداعي","Choose a creative direction":"اختر الأسلوب الإبداعي","Minimal":"بسيط","Premium":"فاخر","Bold":"جريء","Clean & Warm":"نظيف ودافئ","Simple typography with a refined café feel.":"خطوط بسيطة بإحساس راقٍ يناسب الكافيه.","Use concept →":"استخدم هذه الفكرة →","Design Editor":"محرر التصميم","Save":"حفظ","↓ Download":"↓ تحميل","Text":"النص","Colors":"الألوان","Background":"الخلفية","Size":"الحجم","Edit Content":"تعديل المحتوى","Heading":"العنوان","Subtext":"النص الفرعي","Footer Text":"النص السفلي","Font Size":"حجم الخط","Text Color":"لون النص","Background Color":"لون الخلفية","✦ Refine Text":"✦ تحسين النص","Brand Name":"اسم العلامة التجارية","7 Days Free Trial · No credit card required.":"تجربة مجانية لمدة 7 أيام · لا تتطلب بطاقة ائتمان."
+"Features":"المزايا","Templates":"القوالب","Pricing":"الأسعار","About":"عن التطبيق","Log in":"تسجيل الدخول","Get Started →":"ابدأ الآن →","Your business.":"مشروعك.","Your brand.":"علامتك التجارية.","Your creative AI.":"ذكاؤك الإبداعي.","✨ Start 7-Day Free Trial →":"✨ ابدأ التجربة المجانية (7 أيام) →","Start Free Trial":"ابدأ التجربة المجانية","Welcome to CREATIVE AI":"مرحبًا بك في CREATIVE AI","Continue with Google":"المتابعة باستخدام Google","Continue with Email":"المتابعة بالبريد الإلكتروني","Already have an account? Log in":"لديك حساب بالفعل؟ سجّل الدخول","What type of business do you run?":"ما نوع نشاطك التجاري؟","Business Name":"اسم النشاط التجاري","Continue →":"متابعة →","Your Brand Identity":"هوية علامتك التجارية","Create Content →":"إنشاء محتوى →","Save Brand Guidelines":"حفظ هوية العلامة","Welcome back":"سعيدون بعودتك","+ New Design":"+ تصميم جديد","Cold Drinks Promotion":"عرض المشروبات الباردة","Instagram Post · Today":"منشور Instagram · اليوم","Summer Menu":"قائمة الصيف","Story · Yesterday":"ستوري · أمس","Brand Announcement":"إعلان العلامة التجارية","Post · 3 days ago":"منشور · منذ 3 أيام","Home":"الرئيسية","Create":"إنشاء","Projects":"المشاريع","AI Assistant":"المساعد الإبداعي","What are we creating today?":"ماذا نُنشئ اليوم؟","Promotion":"عرض ترويجي","New Product":"منتج جديد","Instagram Post":"منشور Instagram","Story":"ستوري","Menu":"قائمة طعام","✦ Generate Concepts →":"✦ توليد التصاميم بالذكاء الاصطناعي →","Content":"نوع المحتوى","Format":"التنسيق","Offer":"العرض","Product":"المنتج","Duration":"المدة","Minimal":"بسيط","Premium":"فاخر","Bold":"جريء","Open in Editor →":"فتح في المحرر ←","Save":"حفظ","↓ Download PNG":"↓ تحميل PNG","Text":"النص","Colors":"الألوان","Background":"الخلفية","Size":"الحجم","Font Size":"حجم الخط","Text Color":"لون النص","Background Color":"لون الخلفية","✦ Refine Text with AI":"✦ تحسين النص بالذكاء الاصطناعي","Brand Name":"اسم العلامة التجارية","No credit card required. Cancel anytime.":"تجربة مجانية لمدة 7 أيام · لا تتطلب بطاقة ائتمان."
 };
 
 let lang='en';
