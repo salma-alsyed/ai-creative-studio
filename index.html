@@ -84,6 +84,12 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 .toprow{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
 .toprow h2{margin:0;font-size:22px;font-weight:800;color:var(--white)}
 
+/* Mobile Bottom Navigation Bar */
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:64px;background:rgba(11,15,23,0.92);backdrop-filter:blur(20px);border-top:1px solid var(--border);z-index:1000;justify-content:space-around;align-items:center;padding:0 10px}
+.mobile-nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:700;color:var(--text-muted);cursor:pointer;background:none;border:none;padding:6px 10px;border-radius:8px;transition:all 0.15s ease}
+.mobile-nav-item svg{width:20px;height:20px;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mobile-nav-item.active{color:var(--accent)}
+
 /* Cards & Studio Grid */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .design-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all 0.2s}.design-card:hover{border-color:rgba(255,255,255,0.2);transform:translateY(-2px)}
@@ -160,16 +166,22 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 .ai-dot:nth-child(2){animation-delay:.15s}.ai-dot:nth-child(3){animation-delay:.3s}
 @keyframes pulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
 
+/* Mobile Specific Optimizations */
 @media(max-width:850px){
   .navlinks{display:none}
   .hero{grid-template-columns:1fr;padding-top:30px}
   .features{grid-template-columns:1fr 1fr}
   .sidebar{display:none}
-  .main{padding:16px}
+  .mobile-nav{display:flex}
+  .main{padding:16px 16px 80px}
+  .toprow{flex-direction:column;align-items:flex-start;gap:12px}
   .cards{grid-template-columns:1fr}
-  .brand-grid,.editor{grid-template-columns:1fr}
-  .formats,.options{grid-template-columns:1fr 1fr}
-  .canvas{min-height:400px}
+  .brand-grid{grid-template-columns:1fr}
+  .editor{grid-template-columns:1fr}
+  .canvas{order:-1;min-height:360px}
+  .tools{display:flex;gap:8px;overflow-x:auto;padding:10px}
+  .tool{margin-bottom:0;white-space:nowrap}
+  .options{grid-template-columns:1fr 1fr}
   .intent-grid{grid-template-columns:1fr 1fr}
   .concepts{grid-template-columns:1fr}
 }
@@ -449,7 +461,7 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
   <main class="main">
     <div class="toprow">
       <div><div class="badge">Canvas Editor</div><h2>Cold Drinks Promotion</h2></div>
-      <div>
+      <div style="display:flex;gap:8px">
         <button class="btn" onclick="toast(lang==='ar'?'تم الحفظ في المشاريع':'Saved to Projects')">Save</button>
         <button class="btn accent" onclick="downloadPNG()">↓ Download PNG</button>
       </div>
@@ -487,11 +499,31 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 </div>
 </section>
 
+<!-- Mobile Bottom Navigation -->
+<div class="mobile-nav">
+  <button class="mobile-nav-item active" onclick="mobileNavTo('dashboard', this)">
+    <svg viewBox="0 0 24 24" fill="none"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span>Home</span>
+  </button>
+  <button class="mobile-nav-item" onclick="mobileNavTo('create', this)">
+    <svg viewBox="0 0 24 24" fill="none"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>
+    <span>Create</span>
+  </button>
+  <button class="mobile-nav-item" onclick="mobileNavTo('brand', this)">
+    <svg viewBox="0 0 24 24" fill="none"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.75 1.7-1.67 0-.41-.15-.79-.42-1.08-.27-.28-.44-.68-.44-1.12 0-.92.75-1.67 1.67-1.67H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"/></svg>
+    <span>Brand Kit</span>
+  </button>
+  <button class="mobile-nav-item" onclick="toggleLanguage()">
+    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+    <span>Lang</span>
+  </button>
+</div>
+
 <div id="toast" class="toast"></div>
 
 <script>
 const AR={
-"Features":"المزايا","Templates":"القوالب","Pricing":"الأسعار","About":"عن التطبيق","Log in":"تسجيل الدخول","Get Started →":"ابدأ الآن →","Your business.":"مشروعك.","Your brand.":"علامتك التجارية.","Your creative AI.":"ذكاؤك الإبداعي.","✨ Start 7-Day Free Trial →":"✨ ابدأ التجربة المجانية (7 أيام) →","Start Free Trial":"ابدأ التجربة المجانية","Welcome to CREATIVE AI":"مرحبًا بك في CREATIVE AI","Continue with Google":"المتابعة باستخدام Google","Continue with Email":"المتابعة بالبريد الإلكتروني","Already have an account? Log in":"لديك حساب بالفعل؟ سجّل الدخول","What type of business do you run?":"ما نوع نشاطك التجاري؟","Business Name":"اسم النشاط التجاري","Continue →":"متابعة →","Your Brand Identity":"هوية علامتك التجارية","Create Content →":"إنشاء محتوى →","Save Brand Guidelines":"حفظ هوية العلامة","Welcome back":"سعيدون بعودتك","+ New Design":"+ تصميم جديد","Cold Drinks Promotion":"عرض المشروبات الباردة","Instagram Post · Today":"منشور Instagram · اليوم","Summer Menu":"قائمة الصيف","Story · Yesterday":"ستوري · أمس","Brand Announcement":"إعلان العلامة التجارية","Post · 3 days ago":"منشور · منذ 3 أيام","Home":"الرئيسية","Create":"إنشاء","Projects":"المشاريع","AI Assistant":"المساعد الإبداعي","What are we creating today?":"ماذا نُنشئ اليوم؟","Promotion":"عرض ترويجي","New Product":"منتج جديد","Instagram Post":"منشور Instagram","Story":"ستوري","Menu":"قائمة طعام","✦ Generate Concepts →":"✦ توليد التصاميم بالذكاء الاصطناعي →","Content":"نوع المحتوى","Format":"التنسيق","Offer":"العرض","Product":"المنتج","Duration":"المدة","Minimal":"بسيط","Premium":"فاخر","Bold":"جريء","Open in Editor →":"فتح في المحرر ←","Save":"حفظ","↓ Download PNG":"↓ تحميل PNG","Text":"النص","Colors":"الألوان","Background":"الخلفية","Size":"الحجم","Font Size":"حجم الخط","Text Color":"لون النص","Background Color":"لون الخلفية","✦ Refine Text with AI":"✦ تحسين النص بالذكاء الاصطناعي","Brand Name":"اسم العلامة التجارية","No credit card required. Cancel anytime.":"تجربة مجانية لمدة 7 أيام · لا تتطلب بطاقة ائتمان."
+"Features":"المزايا","Templates":"القوالب","Pricing":"الأسعار","About":"عن التطبيق","Log in":"تسجيل الدخول","Get Started →":"ابدأ الآن →","Your business.":"مشروعك.","Your brand.":"علامتك التجارية.","Your creative AI.":"ذكاؤك الإبداعي.","✨ Start 7-Day Free Trial →":"✨ ابدأ التجربة المجانية (7 أيام) →","Start Free Trial":"ابدأ التجربة المجانية","Welcome to CREATIVE AI":"مرحبًا بك في CREATIVE AI","Continue with Google":"المتابعة باستخدام Google","Continue with Email":"المتابعة بالبريد الإلكتروني","Already have an account? Log in":"لديك حساب بالفعل؟ سجّل الدخول","What type of business do you run?":"ما نوع نشاطك التجاري؟","Business Name":"اسم النشاط التجاري","Continue →":"متابعة →","Your Brand Identity":"هوية علامتك التجارية","Create Content →":"إنشاء محتوى →","Save Brand Guidelines":"حفظ هوية العلامة","Welcome back":"سعيدون بعودتك","+ New Design":"+ تصميم جديد","Cold Drinks Promotion":"عرض المشروبات الباردة","Instagram Post · Today":"منشور Instagram · اليوم","Summer Menu":"قائمة الصيف","Story · Yesterday":"ستوري · أمس","Brand Announcement":"إعلان العلامة التجارية","Post · 3 days ago":"منشور · منذ 3 أيام","Home":"الرئيسية","Create":"إنشاء","Projects":"المشاريع","AI Assistant":"المساعد الإبداعي","What are we creating today?":"ماذا نُنشئ اليوم؟","Promotion":"عرض ترويجي","New Product":"منتج جديد","Instagram Post":"منشور Instagram","Story":"ستوري","Menu":"قائمة طعام","✦ Generate Concepts →":"✦ توليد التصاميم بالذكاء الاصطناعي →","Content":"نوع المحتوى","Format":"التنسيق","Offer":"العرض","Product":"المنتج","Duration":"المدة","Minimal":"بسيط","Premium":"فاخر","Bold":"جريء","Open in Editor →":"فتح في المحرر ←","Save":"حفظ","↓ Download PNG":"↓ تحميل PNG","Text":"النص","Colors":"الألوان","Background":"الخلفية","Size":"الحجم","Font Size":"حجم الخط","Text Color":"لون النص","Background Color":"لون الخلفية","✦ Refine Text with AI":"✦ تحسين النص بالذكاء الاصطناعي","Brand Name":"اسم العلامة التجارية","No credit card required. Cancel anytime.":"تجربة مجانية لمدة 7 أيام · لا تتطلب بطاقة ائتمان.","Lang":"اللغة"
 };
 
 let lang='en';
@@ -529,6 +561,12 @@ function show(id){
   document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
   setTimeout(translateStatic,0);
+}
+
+function mobileNavTo(screenId, el){
+  show(screenId);
+  document.querySelectorAll('.mobile-nav-item').forEach(btn=>btn.classList.remove('active'));
+  el.classList.add('active');
 }
 
 function selectOption(el){
@@ -606,7 +644,6 @@ function updateCanvas(){
   posterCanvas.style.color = textColor;
 }
 
-/* Download PNG Functionality */
 function downloadPNG(){
   const poster = document.getElementById('posterCanvas');
   toast(lang==='ar'?'جاري جلب وتنسيق الصورة...':'Generating PNG image...');
