@@ -21,31 +21,63 @@
   --text-main: #f3f4f6;
   --text-muted: #9ca3af;
   --white: #ffffff;
+  --input-bg: #090d14;
+  --canvas-bg: #030508;
+}
+
+body.light-mode {
+  --bg-dark: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --border: rgba(0, 0, 0, 0.08);
+  --accent: #65a30d;
+  --accent-glow: rgba(101, 163, 13, 0.15);
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --white: #0f172a;
+  --input-bg: #f1f5f9;
+  --canvas-bg: #e2e8f0;
 }
 
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg-dark);color:var(--text-main);font-family:'Plus Jakarta Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{margin:0;background:var(--bg-dark);color:var(--text-main);font-family:'Plus Jakarta Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background 0.3s ease, color 0.3s ease}
 button,input,textarea,select{font:inherit}button{cursor:pointer}
-.screen{min-height:100vh;display:none;position:relative}.screen.active{display:block}
+
+/* Micro-animations */
+.screen{min-height:100vh;display:none;position:relative;animation:fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1)}
+.screen.active{display:block}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.92); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
 
 /* Glow Background Effects */
 .ambient-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:350px;background:radial-gradient(circle, rgba(194,248,59,0.08) 0%, rgba(0,0,0,0) 70%);pointer-events:none;z-index:0}
 
 /* Modern Glass Header */
-.nav{height:60px;padding:0 6vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(7, 9, 14, 0.75);backdrop-filter:blur(16px);position:sticky;top:0;z-index:100}
+.nav{height:60px;padding:0 6vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(7, 9, 14, 0.75);backdrop-filter:blur(16px);position:sticky;top:0;z-index:100;transition:background 0.3s ease}
+body.light-mode .nav{background:rgba(255, 255, 255, 0.85)}
+
 .logo{font-size:15px;font-weight:800;letter-spacing:2px;color:var(--white);display:flex;align-items:center;gap:8px}
 .logo-badge{width:8px;height:8px;background:var(--accent);border-radius:50%;box-shadow:0 0 10px var(--accent)}
 .navlinks{display:flex;gap:28px;font-size:13px;font-weight:600;color:var(--text-muted)}
 .navlinks span{cursor:pointer;transition:color 0.2s}.navlinks span:hover{color:var(--white)}
-.nav-actions{display:flex;gap:10px;align-items:center}
+.nav-actions{display:flex;gap:8px;align-items:center}
 
-.btn{border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text-main);border-radius:99px;padding:8px 16px;font-size:12px;font-weight:700;transition:all 0.2s ease;display:inline-flex;align-items:center;gap:6px}
-.btn:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2)}
+.btn{border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text-main);border-radius:99px;padding:8px 16px;font-size:12px;font-weight:700;transition:all 0.2s cubic-bezier(0.16, 1, 0.3, 1);display:inline-flex;align-items:center;gap:6px}
+.btn:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2);transform:translateY(-1px)}
+.btn:active{transform:scale(0.97)}
 .btn.dark{background:var(--white);color:var(--bg-dark);border-color:var(--white)}.btn.dark:hover{background:#e2e8f0}
-.btn.accent{background:var(--accent);border-color:var(--accent);color:var(--bg-dark);box-shadow:0 0 20px var(--accent-glow)}.btn.accent:hover{background:#b1e62a}
+.btn.accent{background:var(--accent);border-color:var(--accent);color:var(--bg-dark);box-shadow:0 0 20px var(--accent-glow)}.btn.accent:hover{background:#b1e62a;transform:translateY(-1px)}
 
-.lang-toggle{border:1px solid var(--border);background:rgba(255,255,255,0.03);color:var(--text-main);border-radius:99px;padding:6px 12px;font-size:11px;font-weight:700;cursor:pointer;transition:all 0.2s ease}
-.lang-toggle:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2)}
+.lang-toggle,.theme-toggle{border:1px solid var(--border);background:rgba(255,255,255,0.03);color:var(--text-main);border-radius:99px;padding:6px 12px;font-size:11px;font-weight:700;cursor:pointer;transition:all 0.2s ease}
+.lang-toggle:hover,.theme-toggle:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2)}
 
 /* Hero Section */
 .hero{max-width:1150px;margin:auto;padding:60px 5vw 40px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center;position:relative;z-index:1}
@@ -63,14 +95,16 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 
 /* Features Grid */
 .features{max-width:1150px;margin:auto;padding:0 5vw 60px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative;z-index:1}
-.feature{padding:20px;background:var(--bg-card);border:1px solid var(--border);border-radius:16px;transition:all 0.2s ease}
-.feature:hover{background:var(--bg-card-hover);border-color:rgba(255,255,255,0.15);transform:translateY(-2px)}
+.feature{padding:20px;background:var(--bg-card);border:1px solid var(--border);border-radius:16px;transition:all 0.25s ease}
+.feature:hover{background:var(--bg-card-hover);border-color:rgba(255,255,255,0.15);transform:translateY(-3px)}
 .feature b{display:block;margin-bottom:6px;font-size:14px;color:var(--white)}
 .feature span{font-size:12px;color:var(--text-muted);line-height:1.5}
 
 /* App Core Layout */
 .app{min-height:100vh;display:flex}
-.sidebar{width:220px;background:rgba(17, 21, 32, 0.6);backdrop-filter:blur(20px);border-right:1px solid var(--border);padding:20px 14px;flex-shrink:0;display:flex;flex-direction:column}
+.sidebar{width:220px;background:rgba(17, 21, 32, 0.6);backdrop-filter:blur(20px);border-right:1px solid var(--border);padding:20px 14px;flex-shrink:0;display:flex;flex-direction:column;transition:background 0.3s ease}
+body.light-mode .sidebar{background:rgba(255, 255, 255, 0.7)}
+
 .side-logo{padding:0 8px 24px}
 
 .side-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:10px;margin:3px 0;font-size:13px;font-weight:600;color:var(--text-muted);cursor:pointer;transition:all 0.15s ease}
@@ -85,6 +119,7 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 
 /* Mobile Bottom Navigation Bar */
 .mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:64px;background:rgba(11,15,23,0.92);backdrop-filter:blur(20px);border-top:1px solid var(--border);z-index:1000;justify-content:space-around;align-items:center;padding:0 10px}
+body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
 .mobile-nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:700;color:var(--text-muted);cursor:pointer;background:none;border:none;padding:6px 10px;border-radius:8px;transition:all 0.15s ease}
 .mobile-nav-item svg{width:20px;height:20px;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .mobile-nav-item.active{color:var(--accent)}
@@ -97,7 +132,7 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 
 /* Prompt Box */
 .create-box{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:22px;margin-bottom:20px}
-.create-box textarea{width:100%;min-height:90px;border:1px solid var(--border);border-radius:12px;padding:14px;font-size:13px;resize:vertical;background:#090d14;color:var(--text-main);outline:none;transition:border 0.2s}
+.create-box textarea{width:100%;min-height:90px;border:1px solid var(--border);border-radius:12px;padding:14px;font-size:13px;resize:vertical;background:var(--input-bg);color:var(--text-main);outline:none;transition:border 0.2s}
 .create-box textarea:focus{border-color:var(--accent)}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
 .chip{padding:6px 12px;border:1px solid var(--border);border-radius:99px;background:rgba(255,255,255,0.03);color:var(--text-muted);font-size:11px;font-weight:600;cursor:pointer;transition:all 0.2s}.chip:hover,.chip.active{background:rgba(255,255,255,0.08);color:var(--white);border-color:var(--accent)}
@@ -114,25 +149,36 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 .tools,.controls{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:16px}
 .tool{padding:10px 12px;border-radius:10px;font-size:12px;font-weight:600;color:var(--text-muted);cursor:pointer;margin-bottom:4px;transition:all 0.15s}
 .tool.active,.tool:hover{background:rgba(255,255,255,0.06);color:var(--white);font-weight:700}
-.canvas{background:#030508;border:1px solid var(--border);border-radius:16px;display:flex;align-items:center;justify-content:center;min-height:500px;padding:24px}
+.canvas{background:var(--canvas-bg);border:1px solid var(--border);border-radius:16px;display:flex;align-items:center;justify-content:center;min-height:500px;padding:24px;position:relative}
 
 /* Dynamic Poster Canvas */
 .poster{width:min(320px,90%);aspect-ratio:1/1.25;background:#111622;border-radius:12px;color:white;padding:24px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;box-shadow:0 20px 50px rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.08);transition:all 0.3s ease;overflow:hidden}
-.poster:before{content:"";position:absolute;width:120px;height:120px;border-radius:50%;right:20px;top:40px;background:radial-gradient(circle, #3b2a1d 0%, transparent 70%)}
-.poster-logo-img{position:absolute;top:20px;left:20px;max-height:45px;max-width:100px;object-fit:contain;display:none;z-index:2}
-.poster h2{font-size:32px;line-height:0.95;margin:0 0 8px;position:relative;font-weight:800;z-index:1}
-.poster p{position:relative;margin:0 0 8px;font-size:12px;color:#94a3b8;z-index:1}
+.poster:before{content:"";position:absolute;width:120px;height:120px;border-radius:50%;right:20px;top:40px;background:radial-gradient(circle, #3b2a1d 0%, transparent 70%);pointer-events:none}
+
+/* Draggable Element Styles */
+.draggable-item{cursor:grab;user-select:none;touch-action:none;display:inline-block;transition:outline 0.15s, transform 0.05s ease-out;position:relative;z-index:2}
+.draggable-item:hover{outline:1px dashed rgba(194, 248, 59, 0.6);border-radius:4px}
+.draggable-item:active,.draggable-item.dragging{cursor:grabbing;outline:1.5px dashed var(--accent);z-index:10}
+
+.poster-logo-img{position:absolute;top:20px;left:20px;max-height:45px;max-width:100px;object-fit:contain;display:none;z-index:3}
+.poster h2{font-size:32px;line-height:0.95;margin:0 0 8px;font-weight:800}
+.poster p{margin:0 0 8px;font-size:12px;color:#94a3b8}
 
 .control{margin-bottom:12px}
 .control label{font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;font-weight:700}
-.field{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:10px;background:#090d14;color:var(--text-main);font-size:12px;outline:none}
+.field{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:10px;background:var(--input-bg);color:var(--text-main);font-size:12px;outline:none}
 .field:focus{border-color:var(--accent)}
+
+/* Full Screen Preview Modal */
+.preview-modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px;animation:fadeIn 0.25s ease}
+.preview-modal-content{position:relative;max-width:90vw;max-height:90vh;display:flex;flex-direction:column;align-items:center}
+.preview-close-btn{position:absolute;top:-45px;right:0;background:none;border:none;color:white;font-size:24px;cursor:pointer}
 
 /* Onboarding & Toast */
 .options{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}
 .option{padding:16px 8px;border:1px solid var(--border);border-radius:12px;text-align:center;cursor:pointer;font-size:12px;background:rgba(255,255,255,0.02)}
 .option.selected{border:1px solid var(--accent);background:rgba(194,248,59,0.06);color:var(--accent);font-weight:700}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--white);color:var(--bg-dark);padding:10px 18px;border-radius:99px;display:none;font-size:12px;font-weight:700;z-index:999;box-shadow:0 10px 25px rgba(0,0,0,0.5)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--white);color:var(--bg-dark);padding:10px 18px;border-radius:99px;display:none;font-size:12px;font-weight:700;z-index:999;box-shadow:0 10px 25px rgba(0,0,0,0.5);animation:popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)}
 
 /* RTL Support */
 .rtl{font-family:'IBM Plex Sans Arabic',sans-serif}
@@ -141,11 +187,10 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 .rtl .sidebar{border-right:0;border-left:1px solid var(--border)}
 .rtl .intent,.rtl .concept-body,.rtl .panel,.rtl .control{text-align:right}
 .rtl .panel.ai{border-left:1px solid var(--border);border-right:3px solid var(--accent)}
-.rtl .poster-logo-img{left:auto;right:20px}
 
 /* AI Flow Component */
 .ai-flow{max-width:850px}
-.ai-understood{margin-top:16px;background:#090d14;border:1px solid var(--border);border-radius:16px;padding:18px;display:none}
+.ai-understood{margin-top:16px;background:var(--input-bg);border:1px solid var(--border);border-radius:16px;padding:18px;display:none}
 .intent-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}
 .intent{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:10px}
 .intent span{display:block;font-size:10px;color:var(--text-muted);margin-bottom:4px}
@@ -197,6 +242,7 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
   <div class="logo"><i class="logo-badge"></i> CREATIVE AI</div>
   <div class="navlinks"><span onclick="show('templates')">Templates</span><span>Pricing</span><span>About</span></div>
   <div class="nav-actions">
+    <button class="theme-toggle" onclick="toggleTheme()">☀️ Theme</button>
     <button class="lang-toggle" onclick="toggleLanguage()">🌐 العربية</button>
     <button class="btn" onclick="show('signup')">Log in</button>
     <button class="btn accent" onclick="show('signup')">Get Started →</button>
@@ -222,7 +268,7 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 <div class="features">
   <div class="feature"><b>Understand Your Brand</b><span>AI analyzes your business style and maintains identity consistency.</span></div>
   <div class="feature"><b>Prompt-Free AI</b><span>Turn simple ideas into launch-ready visuals without prompt writing.</span></div>
-  <div class="feature"><b>Smart Editor</b><span>Customize text, colors, fonts, logos, and aspect ratios easily.</span></div>
+  <div class="feature"><b>Drag & Drop Editor</b><span>Drag logos, headings, and images anywhere inside posts & reels.</span></div>
   <div class="feature"><b>Made for Scale</b><span>Promotions, social stories, menus, and ad banners in seconds.</span></div>
 </div>
 </section>
@@ -287,7 +333,10 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
       <svg viewBox="0 0 24 24" fill="none"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.75 1.7-1.67 0-.41-.15-.79-.42-1.08-.27-.28-.44-.68-.44-1.12 0-.92.75-1.67 1.67-1.67H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"/></svg>
       <span>Brand Kit</span>
     </div>
-    <div style="margin-top:auto;padding-top:16px"><button class="lang-toggle" style="width:100%;justify-content:center" onclick="toggleLanguage()">🌐 العربية</button></div>
+    <div style="margin-top:auto;padding-top:16px;display:flex;flex-direction:column;gap:8px">
+      <button class="theme-toggle" style="width:100%;justify-content:center" onclick="toggleTheme()">☀️ Theme</button>
+      <button class="lang-toggle" style="width:100%;justify-content:center" onclick="toggleLanguage()">🌐 العربية</button>
+    </div>
   </aside>
   <main class="main">
     <div class="toprow"><div><h2>Your Brand Identity</h2><div class="muted">AI generated brand rules for Luna Café.</div></div><button class="btn accent" onclick="show('create')">Create Content →</button></div>
@@ -330,7 +379,10 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
       <svg viewBox="0 0 24 24" fill="none"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.75 1.7-1.67 0-.41-.15-.79-.42-1.08-.27-.28-.44-.68-.44-1.12 0-.92.75-1.67 1.67-1.67H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"/></svg>
       <span>Brand Kit</span>
     </div>
-    <div style="margin-top:auto;padding-top:16px"><button class="lang-toggle" style="width:100%;justify-content:center" onclick="toggleLanguage()">🌐 العربية</button></div>
+    <div style="margin-top:auto;padding-top:16px;display:flex;flex-direction:column;gap:8px">
+      <button class="theme-toggle" style="width:100%;justify-content:center" onclick="toggleTheme()">☀️ Theme</button>
+      <button class="lang-toggle" style="width:100%;justify-content:center" onclick="toggleLanguage()">🌐 العربية</button>
+    </div>
   </aside>
   <main class="main">
     <div class="toprow"><div><div class="badge">Luna Café Workspace</div><h2>Welcome back</h2></div><button class="btn accent" onclick="show('create')">+ New Design</button></div>
@@ -360,7 +412,10 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
       <svg viewBox="0 0 24 24" fill="none"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.75 1.7-1.67 0-.41-.15-.79-.42-1.08-.27-.28-.44-.68-.44-1.12 0-.92.75-1.67 1.67-1.67H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"/></svg>
       <span>Brand Kit</span>
     </div>
-    <div style="margin-top:auto;padding-top:16px"><button class="lang-toggle" style="width:100%;justify-content:center" onclick="toggleLanguage()">🌐 العربية</button></div>
+    <div style="margin-top:auto;padding-top:16px;display:flex;flex-direction:column;gap:8px">
+      <button class="theme-toggle" style="width:100%;justify-content:center" onclick="toggleTheme()">☀️ Theme</button>
+      <button class="lang-toggle" style="width:100%;justify-content:center" onclick="toggleLanguage()">🌐 العربية</button>
+    </div>
   </aside>
   <main class="main">
     <div class="toprow"><div><div class="badge">Template Library</div><h2>Ready-to-Use Business Templates</h2></div></div>
@@ -389,7 +444,10 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
       <svg viewBox="0 0 24 24" fill="none"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.75 1.7-1.67 0-.41-.15-.79-.42-1.08-.27-.28-.44-.68-.44-1.12 0-.92.75-1.67 1.67-1.67H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"/></svg>
       <span>Brand Kit</span>
     </div>
-    <div style="margin-top:auto;padding-top:16px"><button class="lang-toggle" style="width:100%;justify-content:center" onclick="toggleLanguage()">🌐 العربية</button></div>
+    <div style="margin-top:auto;padding-top:16px;display:flex;flex-direction:column;gap:8px">
+      <button class="theme-toggle" style="width:100%;justify-content:center" onclick="toggleTheme()">☀️ Theme</button>
+      <button class="lang-toggle" style="width:100%;justify-content:center" onclick="toggleLanguage()">🌐 العربية</button>
+    </div>
   </aside>
   <main class="main">
     <div class="toprow"><div><div class="badge">AI Prompt Studio</div><h2>What are we creating today?</h2><div class="muted">Describe your idea naturally. No complex prompts needed.</div></div></div>
@@ -452,30 +510,35 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
       <svg viewBox="0 0 24 24" fill="none"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.75 1.7-1.67 0-.41-.15-.79-.42-1.08-.27-.28-.44-.68-.44-1.12 0-.92.75-1.67 1.67-1.67H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"/></svg>
       <span>Brand Kit</span>
     </div>
-    <div style="margin-top:auto;padding-top:16px"><button class="lang-toggle" style="width:100%;justify-content:center" onclick="toggleLanguage()">🌐 العربية</button></div>
+    <div style="margin-top:auto;padding-top:16px;display:flex;flex-direction:column;gap:8px">
+      <button class="theme-toggle" style="width:100%;justify-content:center" onclick="toggleTheme()">☀️ Theme</button>
+      <button class="lang-toggle" style="width:100%;justify-content:center" onclick="toggleLanguage()">🌐 العربية</button>
+    </div>
   </aside>
   <main class="main">
     <div class="toprow">
       <div><div class="badge">Canvas Editor</div><h2>Design Studio</h2></div>
-      <div style="display:flex;gap:8px">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn" onclick="openPreviewModal()">🔍 Preview</button>
+        <button class="btn" onclick="resetPositions()">↺ Reset</button>
         <button class="btn" onclick="saveProject()">Save</button>
         <button class="btn accent" onclick="downloadPNG()">↓ Download PNG</button>
       </div>
     </div>
     <div class="editor">
       <div class="tools">
-        <div class="tool active">Text & Logo</div>
+        <div class="tool active">Text & Drag</div>
         <div class="tool">Fonts</div>
         <div class="tool">Ratio & Size</div>
         <div class="tool">Background</div>
       </div>
       <div class="canvas">
         <div class="poster" id="posterCanvas">
-          <img id="posterLogo" class="poster-logo-img" alt="Logo">
-          <small id="posterBrand" style="position:relative;color:var(--accent);font-weight:800;font-size:10px">LUNA CAFÉ</small>
-          <h2 id="posterHeading">20% OFF</h2>
-          <p id="posterSubtext">on all cold drinks</p>
-          <small id="posterFooter" style="position:relative;font-size:10px">May 1 — May 3</small>
+          <img id="posterLogo" class="poster-logo-img draggable-item" alt="Logo">
+          <div class="draggable-item"><small id="posterBrand" style="color:var(--accent);font-weight:800;font-size:10px">LUNA CAFÉ</small></div>
+          <div class="draggable-item"><h2 id="posterHeading">20% OFF</h2></div>
+          <div class="draggable-item"><p id="posterSubtext">on all cold drinks</p></div>
+          <div class="draggable-item"><small id="posterFooter" style="font-size:10px">May 1 — May 3</small></div>
         </div>
       </div>
       <div class="controls">
@@ -487,6 +550,8 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
           <button class="chip" onclick="setAspectRatio('16:9', this)">Banner 16:9</button>
         </div>
 
+        <button class="btn" style="width:100%;margin:6px 0 12px;justify-content:center" onclick="resetPositions()">↺ Reset Element Positions (إعادة ضبط)</button>
+
         <hr style="border:0;border-top:1px solid var(--border);margin:12px 0">
 
         <!-- Logo Upload Controls -->
@@ -496,7 +561,7 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
         </div>
         <div id="logoSizeControl" style="display:none" class="control">
           <label>Logo Size (حجم الشعار)</label>
-          <input type="range" id="inputLogoSize" min="20" max="90" value="45" oninput="updateCanvas()" style="width:100%">
+          <input type="range" id="inputLogoSize" min="20" max="110" value="45" oninput="updateCanvas()" style="width:100%">
           <button class="btn" style="margin-top:4px;padding:4px 10px;font-size:10px" onclick="clearLogo()">❌ Clear Logo</button>
         </div>
 
@@ -540,6 +605,14 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 </div>
 </section>
 
+<!-- Fullscreen Preview Modal -->
+<div id="previewModal" class="preview-modal">
+  <div class="preview-modal-content">
+    <button class="preview-close-btn" onclick="closePreviewModal()">✕</button>
+    <div id="modalCanvasContainer" style="transform: scale(1.15);"></div>
+  </div>
+</div>
+
 <!-- Mobile Bottom Navigation -->
 <div class="mobile-nav">
   <button class="mobile-nav-item active" onclick="mobileNavTo('dashboard', this)">
@@ -568,6 +641,7 @@ const AR={
 };
 
 let lang='en';
+let theme='dark';
 let currentAspectRatio = '1:1';
 
 const presetTemplates = [
@@ -581,9 +655,98 @@ const defaultProjects = [
   { id: 1, brand: "LUNA CAFÉ", heading: "20% OFF", subtext: "Cold Drinks Promotion", footer: "May 1 — May 3", fontSize: "32", fontFamily: "'Cairo', sans-serif", textColor: "#ffffff", bgColor: "#111622", bgImage: "https://images.unsplash.com/photo-1551024709-8f23befc6f87", ratio: "1:1", date: "Today" }
 ];
 
+/* Theme Toggle Function */
+function toggleTheme(){
+  theme = theme === 'dark' ? 'light' : 'dark';
+  document.body.classList.toggle('light-mode', theme === 'light');
+  document.querySelectorAll('.theme-toggle').forEach(btn => {
+    btn.textContent = theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
+  });
+  toast(lang==='ar'? (theme==='light'?'تم تفعيل الوضع الفاتح':'تم تفعيل الوضع الداكن') : `Switched to ${theme} mode`);
+}
+
+/* Fullscreen Preview Modal Engine */
+function openPreviewModal(){
+  const canvas = document.getElementById('posterCanvas');
+  const modalContainer = document.getElementById('modalCanvasContainer');
+  modalContainer.innerHTML = '';
+  
+  const clone = canvas.cloneNode(true);
+  clone.style.boxShadow = '0 30px 80px rgba(0,0,0,0.9)';
+  modalContainer.appendChild(clone);
+  
+  document.getElementById('previewModal').style.display = 'flex';
+}
+
+function closePreviewModal(){
+  document.getElementById('previewModal').style.display = 'none';
+}
+
+/* Drag & Drop Core Engine for Canvas Elements */
+function initDragAndDrop() {
+  const draggables = document.querySelectorAll('.draggable-item');
+  
+  draggables.forEach(el => {
+    let isDragging = false;
+    let startX, startY, currentX = 0, currentY = 0;
+
+    el.addEventListener('mousedown', dragStart);
+    el.addEventListener('touchstart', dragStart, {passive: false});
+
+    function dragStart(e) {
+      isDragging = true;
+      el.classList.add('dragging');
+      
+      const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+      const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+
+      startX = clientX - (parseFloat(el.dataset.x) || 0);
+      startY = clientY - (parseFloat(el.dataset.y) || 0);
+
+      document.addEventListener('mousemove', drag);
+      document.addEventListener('touchmove', drag, {passive: false});
+      document.addEventListener('mouseup', dragEnd);
+      document.addEventListener('touchend', dragEnd);
+    }
+
+    function drag(e) {
+      if (!isDragging) return;
+      if (e.cancelable) e.preventDefault();
+
+      const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+      const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+
+      currentX = clientX - startX;
+      currentY = clientY - startY;
+
+      el.dataset.x = currentX;
+      el.dataset.y = currentY;
+      el.style.transform = `translate(${currentX}px, ${currentY}px)`;
+    }
+
+    function dragEnd() {
+      isDragging = false;
+      el.classList.remove('dragging');
+      document.removeEventListener('mousemove', drag);
+      document.removeEventListener('touchmove', drag);
+      document.removeEventListener('mouseup', dragEnd);
+      document.removeEventListener('touchend', dragEnd);
+    }
+  });
+}
+
+function resetPositions() {
+  document.querySelectorAll('.draggable-item').forEach(el => {
+    el.dataset.x = 0;
+    el.dataset.y = 0;
+    el.style.transform = 'translate(0px, 0px)';
+  });
+  toast(lang==='ar'?'تم إعادة ضبط مواضع العناصر!':'Layout reset!');
+}
+
 function translateStatic(){
   document.querySelectorAll('body *').forEach(el=>{
-    if(el.classList.contains('lang-toggle')) return;
+    if(el.classList.contains('lang-toggle') || el.classList.contains('theme-toggle')) return;
     if(el.children.length===0){
       if(!el.dataset.enText) el.dataset.enText=el.textContent;
       const en=el.dataset.enText.trim();
@@ -679,7 +842,7 @@ function openEditor(){
   show('editor');
 }
 
-/* Feature 1: Logo Upload */
+/* Feature: Logo Upload */
 function handleLogoUpload(e){
   const file = e.target.files[0];
   if(file){
@@ -689,7 +852,7 @@ function handleLogoUpload(e){
       img.src = evt.target.result;
       img.style.display = 'block';
       document.getElementById('logoSizeControl').style.display = 'block';
-      toast(lang==='ar'?'تم رفع الشعار بنجاح!':'Logo uploaded!');
+      toast(lang==='ar'?'تم رفع الشعار! يمكنك سحبه في أي مكان 🎯':'Logo uploaded! Drag it anywhere 🎯');
     }
     reader.readAsDataURL(file);
   }
@@ -703,7 +866,7 @@ function clearLogo(){
   document.getElementById('logoSizeControl').style.display = 'none';
 }
 
-/* Feature 2: Aspect Ratio Switcher */
+/* Aspect Ratio Switcher */
 function setAspectRatio(ratio, btn){
   currentAspectRatio = ratio;
   const canvas = document.getElementById('posterCanvas');
@@ -725,7 +888,6 @@ function setAspectRatio(ratio, btn){
   }
 }
 
-/* Feature 3 & Canvas Updates */
 function setBgImage(url){
   document.getElementById('inputBgImage').value = url;
   updateCanvas();
@@ -767,7 +929,7 @@ function updateCanvas(){
   }
 }
 
-/* Feature 4: Preset Template Gallery */
+/* Preset Template Gallery */
 function renderPresetTemplates(){
   const grid = document.getElementById('presetTemplatesGrid');
   if(!grid) return;
@@ -803,6 +965,7 @@ function loadPresetTemplate(id){
   document.getElementById('inputBgColor').value = template.bgColor;
   document.getElementById('inputBgImage').value = template.bgImage;
 
+  resetPositions();
   setAspectRatio(template.ratio);
   updateCanvas();
   show('editor');
@@ -874,6 +1037,7 @@ function loadProject(id){
   document.getElementById('inputBgColor').value = project.bgColor || '#111622';
   document.getElementById('inputBgImage').value = project.bgImage || '';
 
+  resetPositions();
   if(project.ratio) setAspectRatio(project.ratio);
 
   updateCanvas();
@@ -912,6 +1076,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   translateStatic();
   renderSavedProjects();
   renderPresetTemplates();
+  initDragAndDrop();
 });
 </script>
 </body>
