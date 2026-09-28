@@ -111,7 +111,7 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 .s1{background:#000}.s2{background:#1f293d}.s3{background:#475569}.s4{background:#c2f83b}
 
 /* Editor Studio */
-.editor{display:grid;grid-template-columns:160px 1fr 260px;gap:16px}
+.editor{display:grid;grid-template-columns:160px 1fr 280px;gap:16px}
 .tools,.controls{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:16px}
 .tool{padding:10px 12px;border-radius:10px;font-size:12px;font-weight:600;color:var(--text-muted);cursor:pointer;margin-bottom:4px;transition:all 0.15s}
 .tool.active,.tool:hover{background:rgba(255,255,255,0.06);color:var(--white);font-weight:700}
@@ -487,6 +487,16 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
         <div class="control"><label>Font Size</label><input type="range" id="inputFontSize" min="20" max="60" value="32" oninput="updateCanvas()" style="width:100%"></div>
         <div class="control"><label>Text Color</label><input type="color" id="inputTextColor" value="#ffffff" onchange="updateCanvas()" style="width:100%;height:32px;border-radius:6px;border:1px solid var(--border);background:none;cursor:pointer"></div>
         <div class="control"><label>Background Color</label><input type="color" id="inputBgColor" value="#111622" onchange="updateCanvas()" style="width:100%;height:32px;border-radius:6px;border:1px solid var(--border);background:none;cursor:pointer"></div>
+        
+        <!-- Unsplash Background Image Control -->
+        <div class="control"><label>Background Image URL</label><input class="field" id="inputBgImage" placeholder="https://images.unsplash.com/..." oninput="updateCanvas()"></div>
+        <div class="chips" style="margin-top:-4px;margin-bottom:12px">
+          <button class="chip" onclick="setBgImage('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb')">☕ Coffee</button>
+          <button class="chip" onclick="setBgImage('https://images.unsplash.com/photo-1551024709-8f23befc6f87')">🍹 Drinks</button>
+          <button class="chip" onclick="setBgImage('https://images.unsplash.com/photo-1555396273-367ea4eb4db5')">🍽️ Food</button>
+          <button class="chip" onclick="setBgImage('')">❌ Clear</button>
+        </div>
+
         <button class="btn" style="width:100%;margin-top:8px;justify-content:center" onclick="toast(lang==='ar'?'جاري تحسين النص بالذكاء الاصطناعي...':'AI is refining text...')">✦ Refine Text with AI</button>
       </div>
     </div>
@@ -518,15 +528,14 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 
 <script>
 const AR={
-"Features":"المزايا","Templates":"القوالب","Pricing":"الأسعار","About":"عن التطبيق","Log in":"تسجيل الدخول","Get Started →":"ابدأ الآن →","Your business.":"مشروعك.","Your brand.":"علامتك التجارية.","Your creative AI.":"ذكاؤك الإبداعي.","✨ Start 7-Day Free Trial →":"✨ ابدأ التجربة المجانية (7 أيام) →","Start Free Trial":"ابدأ التجربة المجانية","Welcome to CREATIVE AI":"مرحبًا بك في CREATIVE AI","Continue with Google":"المتابعة باستخدام Google","Continue with Email":"المتابعة بالبريد الإلكتروني","Already have an account? Log in":"لديك حساب بالفعل؟ سجّل الدخول","What type of business do you run?":"ما نوع نشاطك التجاري؟","Business Name":"اسم النشاط التجاري","Continue →":"متابعة →","Your Brand Identity":"هوية علامتك التجارية","Create Content →":"إنشاء محتوى →","Save Brand Guidelines":"حفظ هوية العلامة","Welcome back":"سعيدون بعودتك","+ New Design":"+ تصميم جديد","Home":"الرئيسية","Create":"إنشاء","Projects":"المشاريع","AI Assistant":"المساعد الإبداعي","What are we creating today?":"ماذا نُنشئ اليوم؟","Promotion":"عرض ترويجي","New Product":"منتج جديد","Instagram Post":"منشور Instagram","Story":"ستوري","Menu":"قائمة طعام","✦ Generate Concepts →":"✦ توليد التصاميم بالذكاء الاصطناعي →","Content":"نوع المحتوى","Format":"التنسيق","Offer":"العرض","Product":"المنتج","Duration":"المدة","Minimal":"بسيط","Premium":"فاخر","Bold":"جريء","Open in Editor →":"فتح في المحرر ←","Save":"حفظ","↓ Download PNG":"↓ تحميل PNG","Text":"النص","Colors":"الألوان","Background":"الخلفية","Size":"الحجم","Font Size":"حجم الخط","Text Color":"لون النص","Background Color":"لون الخلفية","✦ Refine Text with AI":"✦ تحسين النص بالذكاء الاصطناعي","Brand Name":"اسم العلامة التجارية","No credit card required. Cancel anytime.":"تجربة مجانية لمدة 7 أيام · لا تتطلب بطاقة ائتمان.","Lang":"اللغة"
+"Features":"المزايا","Templates":"القوالب","Pricing":"الأسعار","About":"عن التطبيق","Log in":"تسجيل الدخول","Get Started →":"ابدأ الآن →","Your business.":"مشروعك.","Your brand.":"علامتك التجارية.","Your creative AI.":"ذكاؤك الإبداعي.","✨ Start 7-Day Free Trial →":"✨ ابدأ التجربة المجانية (7 أيام) →","Start Free Trial":"ابدأ التجربة المجانية","Welcome to CREATIVE AI":"مرحبًا بك في CREATIVE AI","Continue with Google":"المتابعة باستخدام Google","Continue with Email":"المتابعة بالبريد الإلكتروني","Already have an account? Log in":"لديك حساب بالفعل؟ سجّل الدخول","What type of business do you run?":"ما نوع نشاطك التجاري؟","Business Name":"اسم النشاط التجاري","Continue →":"متابعة →","Your Brand Identity":"هوية علامتك التجارية","Create Content →":"إنشاء محتوى →","Save Brand Guidelines":"حفظ هوية العلامة","Welcome back":"سعيدون بعودتك","+ New Design":"+ تصميم جديد","Home":"الرئيسية","Create":"إنشاء","Projects":"المشاريع","AI Assistant":"المساعد الإبداعي","What are we creating today?":"ماذا نُنشئ اليوم؟","Promotion":"عرض ترويجي","New Product":"منتج جديد","Instagram Post":"منشور Instagram","Story":"ستوري","Menu":"قائمة طعام","✦ Generate Concepts →":"✦ توليد التصاميم بالذكاء الاصطناعي →","Content":"نوع المحتوى","Format":"التنسيق","Offer":"العرض","Product":"المنتج","Duration":"المدة","Minimal":"بسيط","Premium":"فاخر","Bold":"جريء","Open in Editor →":"فتح في المحرر ←","Save":"حفظ","↓ Download PNG":"↓ تحميل PNG","Text":"النص","Colors":"الألوان","Background":"الخلفية","Size":"الحجم","Font Size":"حجم الخط","Text Color":"لون النص","Background Color":"لون الخلفية","Background Image URL":"رابط صورة الخلفية","✦ Refine Text with AI":"✦ تحسين النص بالذكاء الاصطناعي","Brand Name":"اسم العلامة التجارية","No credit card required. Cancel anytime.":"تجربة مجانية لمدة 7 أيام · لا تتطلب بطاقة ائتمان.","Lang":"اللغة"
 };
 
 let lang='en';
 
-// Default mock projects if empty
 const defaultProjects = [
-  { id: 1, brand: "LUNA CAFÉ", heading: "20% OFF", subtext: "Cold Drinks Promotion", footer: "May 1 — May 3", fontSize: "32", textColor: "#ffffff", bgColor: "#111622", date: "Today" },
-  { id: 2, brand: "LUNA CAFÉ", heading: "NEW MENU", subtext: "Summer Drink Lineup", footer: "Available Now", fontSize: "28", textColor: "#c2f83b", bgColor: "#1e2430", date: "Yesterday" }
+  { id: 1, brand: "LUNA CAFÉ", heading: "20% OFF", subtext: "Cold Drinks Promotion", footer: "May 1 — May 3", fontSize: "32", textColor: "#ffffff", bgColor: "#111622", bgImage: "https://images.unsplash.com/photo-1551024709-8f23befc6f87", date: "Today" },
+  { id: 2, brand: "LUNA CAFÉ", heading: "NEW MENU", subtext: "Summer Drink Lineup", footer: "Available Now", fontSize: "28", textColor: "#c2f83b", bgColor: "#1e2430", bgImage: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb", date: "Yesterday" }
 ];
 
 function translateStatic(){
@@ -625,6 +634,11 @@ function openEditor(){
   show('editor');
 }
 
+function setBgImage(url){
+  document.getElementById('inputBgImage').value = url;
+  updateCanvas();
+}
+
 function updateCanvas(){
   const brand = document.getElementById('inputBrand').value;
   const heading = document.getElementById('inputHeading').value;
@@ -633,6 +647,7 @@ function updateCanvas(){
   const fontSize = document.getElementById('inputFontSize').value;
   const textColor = document.getElementById('inputTextColor').value;
   const bgColor = document.getElementById('inputBgColor').value;
+  const bgImage = document.getElementById('inputBgImage').value;
 
   document.getElementById('posterBrand').textContent = brand;
   document.getElementById('posterHeading').textContent = heading;
@@ -643,11 +658,18 @@ function updateCanvas(){
   const posterHeading = document.getElementById('posterHeading');
   
   posterHeading.style.fontSize = fontSize + 'px';
-  posterCanvas.style.backgroundColor = bgColor;
   posterCanvas.style.color = textColor;
+
+  if (bgImage) {
+    posterCanvas.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.75)), url('${bgImage}')`;
+    posterCanvas.style.backgroundSize = 'cover';
+    posterCanvas.style.backgroundPosition = 'center';
+  } else {
+    posterCanvas.style.backgroundImage = 'none';
+    posterCanvas.style.backgroundColor = bgColor;
+  }
 }
 
-/* LocalStorage Project Saving & Loading */
 function saveProject(){
   const project = {
     id: Date.now(),
@@ -658,6 +680,7 @@ function saveProject(){
     fontSize: document.getElementById('inputFontSize').value,
     textColor: document.getElementById('inputTextColor').value,
     bgColor: document.getElementById('inputBgColor').value,
+    bgImage: document.getElementById('inputBgImage').value,
     date: new Date().toLocaleDateString(lang==='ar'?'ar-EG':'en-US',{month:'short',day:'numeric'})
   };
 
@@ -676,17 +699,23 @@ function renderSavedProjects(){
     saved = defaultProjects;
   }
 
-  grid.innerHTML = saved.map(p => `
-    <div class="design-card" onclick="loadProject(${p.id})">
-      <div class="thumb" style="background:${p.bgColor}; color:${p.textColor}; font-size:${Math.min(parseInt(p.fontSize), 24)}px;">
-        ${p.heading || 'Design'}
+  grid.innerHTML = saved.map(p => {
+    const bgStyle = p.bgImage 
+      ? `background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.75)), url('${p.bgImage}') center/cover;`
+      : `background:${p.bgColor};`;
+
+    return `
+      <div class="design-card" onclick="loadProject(${p.id})">
+        <div class="thumb" style="${bgStyle} color:${p.textColor}; font-size:${Math.min(parseInt(p.fontSize), 24)}px;">
+          ${p.heading || 'Design'}
+        </div>
+        <div class="meta">
+          <b>${p.brand || 'Untitled'}</b>
+          <div class="muted">${p.subtext || 'Custom Design'} · ${p.date}</div>
+        </div>
       </div>
-      <div class="meta">
-        <b>${p.brand || 'Untitled'}</b>
-        <div class="muted">${p.subtext || 'Custom Design'} · ${p.date}</div>
-      </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
 function loadProject(id){
@@ -694,13 +723,14 @@ function loadProject(id){
   const project = saved.find(p => p.id === id);
   if(!project) return;
 
-  document.getElementById('inputBrand').value = project.brand;
-  document.getElementById('inputHeading').value = project.heading;
-  document.getElementById('inputSubtext').value = project.subtext;
-  document.getElementById('inputFooter').value = project.footer;
-  document.getElementById('inputFontSize').value = project.fontSize;
-  document.getElementById('inputTextColor').value = project.textColor;
-  document.getElementById('inputBgColor').value = project.bgColor;
+  document.getElementById('inputBrand').value = project.brand || '';
+  document.getElementById('inputHeading').value = project.heading || '';
+  document.getElementById('inputSubtext').value = project.subtext || '';
+  document.getElementById('inputFooter').value = project.footer || '';
+  document.getElementById('inputFontSize').value = project.fontSize || '32';
+  document.getElementById('inputTextColor').value = project.textColor || '#ffffff';
+  document.getElementById('inputBgColor').value = project.bgColor || '#111622';
+  document.getElementById('inputBgImage').value = project.bgImage || '';
 
   updateCanvas();
   show('editor');
