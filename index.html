@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700;800&family=Almarai:wght@400;700;800&family=Readex+Pro:wght@400;600;700&display=swap');
 
 :root {
   --bg-dark: #07090e;
@@ -73,7 +73,6 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 .sidebar{width:220px;background:rgba(17, 21, 32, 0.6);backdrop-filter:blur(20px);border-right:1px solid var(--border);padding:20px 14px;flex-shrink:0;display:flex;flex-direction:column}
 .side-logo{padding:0 8px 24px}
 
-/* Sidebar Item & SVG Alignment */
 .side-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:10px;margin:3px 0;font-size:13px;font-weight:600;color:var(--text-muted);cursor:pointer;transition:all 0.15s ease}
 .side-item:hover{background:rgba(255,255,255,0.05);color:var(--white)}
 .side-item.active{background:rgba(194, 248, 59, 0.1);color:var(--accent);border:1px solid rgba(194, 248, 59, 0.2);font-weight:700}
@@ -93,7 +92,7 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 /* Cards & Studio Grid */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .design-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all 0.2s;cursor:pointer}.design-card:hover{border-color:rgba(255,255,255,0.2);transform:translateY(-2px)}
-.thumb{height:160px;background:#0a0e17;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;font-weight:800;padding:12px;text-align:center;overflow:hidden}
+.thumb{height:180px;background:#0a0e17;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;font-weight:800;padding:12px;text-align:center;overflow:hidden;position:relative}
 .design-card .meta{padding:14px}.design-card b{font-size:13px;color:var(--white)}.muted{font-size:11px;color:var(--text-muted)}
 
 /* Prompt Box */
@@ -101,7 +100,7 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 .create-box textarea{width:100%;min-height:90px;border:1px solid var(--border);border-radius:12px;padding:14px;font-size:13px;resize:vertical;background:#090d14;color:var(--text-main);outline:none;transition:border 0.2s}
 .create-box textarea:focus{border-color:var(--accent)}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
-.chip{padding:6px 12px;border:1px solid var(--border);border-radius:99px;background:rgba(255,255,255,0.03);color:var(--text-muted);font-size:11px;font-weight:600;cursor:pointer}.chip:hover{background:rgba(255,255,255,0.08);color:var(--white)}
+.chip{padding:6px 12px;border:1px solid var(--border);border-radius:99px;background:rgba(255,255,255,0.03);color:var(--text-muted);font-size:11px;font-weight:600;cursor:pointer;transition:all 0.2s}.chip:hover,.chip.active{background:rgba(255,255,255,0.08);color:var(--white);border-color:var(--accent)}
 
 /* Brand & Editor Panels */
 .brand-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -110,22 +109,26 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 .swatch{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,0.1)}
 .s1{background:#000}.s2{background:#1f293d}.s3{background:#475569}.s4{background:#c2f83b}
 
-/* Editor Studio */
-.editor{display:grid;grid-template-columns:160px 1fr 280px;gap:16px}
+/* Editor Studio Layout */
+.editor{display:grid;grid-template-columns:140px 1fr 300px;gap:16px}
 .tools,.controls{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:16px}
 .tool{padding:10px 12px;border-radius:10px;font-size:12px;font-weight:600;color:var(--text-muted);cursor:pointer;margin-bottom:4px;transition:all 0.15s}
 .tool.active,.tool:hover{background:rgba(255,255,255,0.06);color:var(--white);font-weight:700}
-.canvas{background:#030508;border:1px solid var(--border);border-radius:16px;display:flex;align-items:center;justify-content:center;min-height:480px;padding:20px}
-.poster{width:min(320px,90%);aspect-ratio:1/1.25;background:#111622;border-radius:12px;color:white;padding:24px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;box-shadow:0 20px 50px rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.08);transition:all 0.2s ease;overflow:hidden}
+.canvas{background:#030508;border:1px solid var(--border);border-radius:16px;display:flex;align-items:center;justify-content:center;min-height:500px;padding:24px}
+
+/* Dynamic Poster Canvas */
+.poster{width:min(320px,90%);aspect-ratio:1/1.25;background:#111622;border-radius:12px;color:white;padding:24px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;box-shadow:0 20px 50px rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.08);transition:all 0.3s ease;overflow:hidden}
 .poster:before{content:"";position:absolute;width:120px;height:120px;border-radius:50%;right:20px;top:40px;background:radial-gradient(circle, #3b2a1d 0%, transparent 70%)}
-.poster h2{font-size:32px;line-height:0.95;margin:0 0 8px;position:relative;font-weight:800}
-.poster p{position:relative;margin:0 0 8px;font-size:12px;color:#94a3b8}
+.poster-logo-img{position:absolute;top:20px;left:20px;max-height:45px;max-width:100px;object-fit:contain;display:none;z-index:2}
+.poster h2{font-size:32px;line-height:0.95;margin:0 0 8px;position:relative;font-weight:800;z-index:1}
+.poster p{position:relative;margin:0 0 8px;font-size:12px;color:#94a3b8;z-index:1}
+
 .control{margin-bottom:12px}
 .control label{font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;font-weight:700}
 .field{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:10px;background:#090d14;color:var(--text-main);font-size:12px;outline:none}
 .field:focus{border-color:var(--accent)}
 
-/* Onboarding & Forms */
+/* Onboarding & Toast */
 .options{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}
 .option{padding:16px 8px;border:1px solid var(--border);border-radius:12px;text-align:center;cursor:pointer;font-size:12px;background:rgba(255,255,255,0.02)}
 .option.selected{border:1px solid var(--accent);background:rgba(194,248,59,0.06);color:var(--accent);font-weight:700}
@@ -136,9 +139,9 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 .rtl .nav,.rtl .toprow{direction:rtl}
 .rtl .hero,.rtl .features,.rtl .app,.rtl .onboard,.rtl .create-box,.rtl .ai-understood,.rtl .editor{direction:rtl}
 .rtl .sidebar{border-right:0;border-left:1px solid var(--border)}
-.rtl .eyebrow{letter-spacing:0}
 .rtl .intent,.rtl .concept-body,.rtl .panel,.rtl .control{text-align:right}
 .rtl .panel.ai{border-left:1px solid var(--border);border-right:3px solid var(--accent)}
+.rtl .poster-logo-img{left:auto;right:20px}
 
 /* AI Flow Component */
 .ai-flow{max-width:850px}
@@ -165,7 +168,7 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 .ai-dot:nth-child(2){animation-delay:.15s}.ai-dot:nth-child(3){animation-delay:.3s}
 @keyframes pulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
 
-/* Mobile Specific Optimizations */
+/* Mobile Optimizations */
 @media(max-width:850px){
   .navlinks{display:none}
   .hero{grid-template-columns:1fr;padding-top:30px}
@@ -192,7 +195,7 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 <div class="ambient-glow"></div>
 <nav class="nav">
   <div class="logo"><i class="logo-badge"></i> CREATIVE AI</div>
-  <div class="navlinks"><span>Features</span><span>Templates</span><span>Pricing</span><span>About</span></div>
+  <div class="navlinks"><span onclick="show('templates')">Templates</span><span>Pricing</span><span>About</span></div>
   <div class="nav-actions">
     <button class="lang-toggle" onclick="toggleLanguage()">🌐 العربية</button>
     <button class="btn" onclick="show('signup')">Log in</button>
@@ -219,7 +222,7 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
 <div class="features">
   <div class="feature"><b>Understand Your Brand</b><span>AI analyzes your business style and maintains identity consistency.</span></div>
   <div class="feature"><b>Prompt-Free AI</b><span>Turn simple ideas into launch-ready visuals without prompt writing.</span></div>
-  <div class="feature"><b>Smart Editor</b><span>Customize text, colors, fonts, and layouts with real-time feedback.</span></div>
+  <div class="feature"><b>Smart Editor</b><span>Customize text, colors, fonts, logos, and aspect ratios easily.</span></div>
   <div class="feature"><b>Made for Scale</b><span>Promotions, social stories, menus, and ad banners in seconds.</span></div>
 </div>
 </section>
@@ -276,21 +279,13 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
       <svg viewBox="0 0 24 24" fill="none"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>
       <span>Create</span>
     </div>
-    <div class="side-item">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-      <span>Projects</span>
-    </div>
-    <div class="side-item">
+    <div class="side-item" onclick="show('templates')">
       <svg viewBox="0 0 24 24" fill="none"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
       <span>Templates</span>
     </div>
     <div class="side-item active" onclick="show('brand')">
       <svg viewBox="0 0 24 24" fill="none"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.75 1.7-1.67 0-.41-.15-.79-.42-1.08-.27-.28-.44-.68-.44-1.12 0-.92.75-1.67 1.67-1.67H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"/></svg>
       <span>Brand Kit</span>
-    </div>
-    <div class="side-item">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
-      <span>AI Assistant</span>
     </div>
     <div style="margin-top:auto;padding-top:16px"><button class="lang-toggle" style="width:100%;justify-content:center" onclick="toggleLanguage()">🌐 العربية</button></div>
   </aside>
@@ -327,11 +322,7 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
       <svg viewBox="0 0 24 24" fill="none"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>
       <span>Create</span>
     </div>
-    <div class="side-item">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-      <span>Projects</span>
-    </div>
-    <div class="side-item">
+    <div class="side-item" onclick="show('templates')">
       <svg viewBox="0 0 24 24" fill="none"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
       <span>Templates</span>
     </div>
@@ -339,15 +330,41 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
       <svg viewBox="0 0 24 24" fill="none"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.75 1.7-1.67 0-.41-.15-.79-.42-1.08-.27-.28-.44-.68-.44-1.12 0-.92.75-1.67 1.67-1.67H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"/></svg>
       <span>Brand Kit</span>
     </div>
-    <div class="side-item">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
-      <span>AI Assistant</span>
-    </div>
     <div style="margin-top:auto;padding-top:16px"><button class="lang-toggle" style="width:100%;justify-content:center" onclick="toggleLanguage()">🌐 العربية</button></div>
   </aside>
   <main class="main">
     <div class="toprow"><div><div class="badge">Luna Café Workspace</div><h2>Welcome back</h2></div><button class="btn accent" onclick="show('create')">+ New Design</button></div>
     <div class="cards" id="savedProjectsGrid"></div>
+  </main>
+</div>
+</section>
+
+<!-- Preset Templates Gallery Screen -->
+<section id="templates" class="screen">
+<div class="app">
+  <aside class="sidebar">
+    <div class="side-logo logo"><i class="logo-badge"></i> CREATIVE AI</div>
+    <div class="side-item" onclick="show('dashboard')">
+      <svg viewBox="0 0 24 24" fill="none"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Home</span>
+    </div>
+    <div class="side-item" onclick="show('create')">
+      <svg viewBox="0 0 24 24" fill="none"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>
+      <span>Create</span>
+    </div>
+    <div class="side-item active" onclick="show('templates')">
+      <svg viewBox="0 0 24 24" fill="none"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+      <span>Templates</span>
+    </div>
+    <div class="side-item" onclick="show('brand')">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.75 1.7-1.67 0-.41-.15-.79-.42-1.08-.27-.28-.44-.68-.44-1.12 0-.92.75-1.67 1.67-1.67H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"/></svg>
+      <span>Brand Kit</span>
+    </div>
+    <div style="margin-top:auto;padding-top:16px"><button class="lang-toggle" style="width:100%;justify-content:center" onclick="toggleLanguage()">🌐 العربية</button></div>
+  </aside>
+  <main class="main">
+    <div class="toprow"><div><div class="badge">Template Library</div><h2>Ready-to-Use Business Templates</h2></div></div>
+    <div class="cards" id="presetTemplatesGrid"></div>
   </main>
 </div>
 </section>
@@ -364,21 +381,13 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
       <svg viewBox="0 0 24 24" fill="none"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>
       <span>Create</span>
     </div>
-    <div class="side-item">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-      <span>Projects</span>
-    </div>
-    <div class="side-item">
+    <div class="side-item" onclick="show('templates')">
       <svg viewBox="0 0 24 24" fill="none"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
       <span>Templates</span>
     </div>
     <div class="side-item" onclick="show('brand')">
       <svg viewBox="0 0 24 24" fill="none"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.75 1.7-1.67 0-.41-.15-.79-.42-1.08-.27-.28-.44-.68-.44-1.12 0-.92.75-1.67 1.67-1.67H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"/></svg>
       <span>Brand Kit</span>
-    </div>
-    <div class="side-item">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
-      <span>AI Assistant</span>
     </div>
     <div style="margin-top:auto;padding-top:16px"><button class="lang-toggle" style="width:100%;justify-content:center" onclick="toggleLanguage()">🌐 العربية</button></div>
   </aside>
@@ -435,11 +444,7 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
       <svg viewBox="0 0 24 24" fill="none"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>
       <span>Create</span>
     </div>
-    <div class="side-item">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-      <span>Projects</span>
-    </div>
-    <div class="side-item">
+    <div class="side-item" onclick="show('templates')">
       <svg viewBox="0 0 24 24" fill="none"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
       <span>Templates</span>
     </div>
@@ -447,15 +452,11 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
       <svg viewBox="0 0 24 24" fill="none"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.75 1.7-1.67 0-.41-.15-.79-.42-1.08-.27-.28-.44-.68-.44-1.12 0-.92.75-1.67 1.67-1.67H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"/></svg>
       <span>Brand Kit</span>
     </div>
-    <div class="side-item">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
-      <span>AI Assistant</span>
-    </div>
     <div style="margin-top:auto;padding-top:16px"><button class="lang-toggle" style="width:100%;justify-content:center" onclick="toggleLanguage()">🌐 العربية</button></div>
   </aside>
   <main class="main">
     <div class="toprow">
-      <div><div class="badge">Canvas Editor</div><h2>Cold Drinks Promotion</h2></div>
+      <div><div class="badge">Canvas Editor</div><h2>Design Studio</h2></div>
       <div style="display:flex;gap:8px">
         <button class="btn" onclick="saveProject()">Save</button>
         <button class="btn accent" onclick="downloadPNG()">↓ Download PNG</button>
@@ -463,13 +464,14 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
     </div>
     <div class="editor">
       <div class="tools">
-        <div class="tool active">Text</div>
-        <div class="tool">Colors</div>
+        <div class="tool active">Text & Logo</div>
+        <div class="tool">Fonts</div>
+        <div class="tool">Ratio & Size</div>
         <div class="tool">Background</div>
-        <div class="tool">Size</div>
       </div>
       <div class="canvas">
         <div class="poster" id="posterCanvas">
+          <img id="posterLogo" class="poster-logo-img" alt="Logo">
           <small id="posterBrand" style="position:relative;color:var(--accent);font-weight:800;font-size:10px">LUNA CAFÉ</small>
           <h2 id="posterHeading">20% OFF</h2>
           <p id="posterSubtext">on all cold drinks</p>
@@ -477,18 +479,54 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
         </div>
       </div>
       <div class="controls">
-        <div class="muted" style="margin-bottom:8px">Content Controls</div>
+        <!-- Aspect Ratio Controls -->
+        <div class="muted" style="margin-bottom:8px">Aspect Ratio (الأبعاد)</div>
+        <div class="chips" style="margin-top:0">
+          <button class="chip active" onclick="setAspectRatio('1:1', this)">Square 1:1</button>
+          <button class="chip" onclick="setAspectRatio('9:16', this)">Story 9:16</button>
+          <button class="chip" onclick="setAspectRatio('16:9', this)">Banner 16:9</button>
+        </div>
+
+        <hr style="border:0;border-top:1px solid var(--border);margin:12px 0">
+
+        <!-- Logo Upload Controls -->
+        <div class="muted" style="margin-bottom:8px">Brand Logo (شعار المنشأة)</div>
+        <div class="control">
+          <input type="file" id="inputLogo" accept="image/*" class="field" onchange="handleLogoUpload(event)">
+        </div>
+        <div id="logoSizeControl" style="display:none" class="control">
+          <label>Logo Size (حجم الشعار)</label>
+          <input type="range" id="inputLogoSize" min="20" max="90" value="45" oninput="updateCanvas()" style="width:100%">
+          <button class="btn" style="margin-top:4px;padding:4px 10px;font-size:10px" onclick="clearLogo()">❌ Clear Logo</button>
+        </div>
+
+        <hr style="border:0;border-top:1px solid var(--border);margin:12px 0">
+
+        <!-- Typography Controls -->
+        <div class="muted" style="margin-bottom:8px">Typography & Font (الخطوط)</div>
+        <div class="control">
+          <label>Font Family (نوع الخط)</label>
+          <select class="field" id="inputFontFamily" onchange="updateCanvas()">
+            <option value="'Cairo', sans-serif">Cairo (القاهرة)</option>
+            <option value="'Tajawal', sans-serif">Tajawal (تجوال)</option>
+            <option value="'Almarai', sans-serif">Almarai (المرعي)</option>
+            <option value="'Readex Pro', sans-serif">Readex Pro (ريدكس)</option>
+            <option value="'Plus Jakarta Sans', sans-serif">Jakarta Sans (En)</option>
+          </select>
+        </div>
+
         <div class="control"><label>Brand Name</label><input class="field" id="inputBrand" value="LUNA CAFÉ" oninput="updateCanvas()"></div>
         <div class="control"><label>Heading</label><input class="field" id="inputHeading" value="20% OFF" oninput="updateCanvas()"></div>
         <div class="control"><label>Subtext</label><input class="field" id="inputSubtext" value="on all cold drinks" oninput="updateCanvas()"></div>
         <div class="control"><label>Footer Text</label><input class="field" id="inputFooter" value="May 1 — May 3" oninput="updateCanvas()"></div>
-        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0">
+
+        <hr style="border:0;border-top:1px solid var(--border);margin:12px 0">
+
         <div class="muted" style="margin-bottom:8px">Styling & Colors</div>
         <div class="control"><label>Font Size</label><input type="range" id="inputFontSize" min="20" max="60" value="32" oninput="updateCanvas()" style="width:100%"></div>
         <div class="control"><label>Text Color</label><input type="color" id="inputTextColor" value="#ffffff" onchange="updateCanvas()" style="width:100%;height:32px;border-radius:6px;border:1px solid var(--border);background:none;cursor:pointer"></div>
         <div class="control"><label>Background Color</label><input type="color" id="inputBgColor" value="#111622" onchange="updateCanvas()" style="width:100%;height:32px;border-radius:6px;border:1px solid var(--border);background:none;cursor:pointer"></div>
-        
-        <!-- Unsplash Background Image Control -->
+
         <div class="control"><label>Background Image URL</label><input class="field" id="inputBgImage" placeholder="https://images.unsplash.com/..." oninput="updateCanvas()"></div>
         <div class="chips" style="margin-top:-4px;margin-bottom:12px">
           <button class="chip" onclick="setBgImage('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb')">☕ Coffee</button>
@@ -496,8 +534,6 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
           <button class="chip" onclick="setBgImage('https://images.unsplash.com/photo-1555396273-367ea4eb4db5')">🍽️ Food</button>
           <button class="chip" onclick="setBgImage('')">❌ Clear</button>
         </div>
-
-        <button class="btn" style="width:100%;margin-top:8px;justify-content:center" onclick="toast(lang==='ar'?'جاري تحسين النص بالذكاء الاصطناعي...':'AI is refining text...')">✦ Refine Text with AI</button>
       </div>
     </div>
   </main>
@@ -514,9 +550,9 @@ h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spac
     <svg viewBox="0 0 24 24" fill="none"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>
     <span>Create</span>
   </button>
-  <button class="mobile-nav-item" onclick="mobileNavTo('brand', this)">
-    <svg viewBox="0 0 24 24" fill="none"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.75 1.7-1.67 0-.41-.15-.79-.42-1.08-.27-.28-.44-.68-.44-1.12 0-.92.75-1.67 1.67-1.67H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"/></svg>
-    <span>Brand Kit</span>
+  <button class="mobile-nav-item" onclick="mobileNavTo('templates', this)">
+    <svg viewBox="0 0 24 24" fill="none"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+    <span>Templates</span>
   </button>
   <button class="mobile-nav-item" onclick="toggleLanguage()">
     <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
@@ -532,10 +568,17 @@ const AR={
 };
 
 let lang='en';
+let currentAspectRatio = '1:1';
+
+const presetTemplates = [
+  { id: 'p1', name: "Special Brew Offer", category: "Café", brand: "LUNA CAFÉ", heading: "BUY 1 GET 1", subtext: "On all specialty drip coffees", footer: "Valid Today Only", font: "'Cairo', sans-serif", ratio: "1:1", bgColor: "#120e0a", bgImage: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb", textColor: "#ffffff" },
+  { id: 'p2', name: "Burger Feast Discount", category: "Restaurant", brand: "BURGER LAB", heading: "25% OFF", subtext: "On Double Wagyu Meals", footer: "Use Code: WAGYU25", font: "'Tajawal', sans-serif", ratio: "9:16", bgColor: "#1a0f0d", bgImage: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5", textColor: "#c2f83b" },
+  { id: 'p3', name: "Beauty Salon Weekend", category: "Salon", brand: "GLAMOUR STUDIO", heading: "GLOW PACKAGE", subtext: "Hair Styling & Skin Care", footer: "Book Weekend Slots", font: "'Almarai', sans-serif", ratio: "1:1", bgColor: "#18111e", bgImage: "https://images.unsplash.com/photo-1560066984-138dadb4c035", textColor: "#ffffff" },
+  { id: 'p4', name: "Summer Collection Sale", category: "Store", brand: "URBAN THREADS", heading: "SUMMER SALE", subtext: "Up to 50% Off Selected Items", footer: "In-Store & Online", font: "'Readex Pro', sans-serif", ratio: "16:9", bgColor: "#0e171e", bgImage: "https://images.unsplash.com/photo-1441986300917-64674bd600d8", textColor: "#c2f83b" }
+];
 
 const defaultProjects = [
-  { id: 1, brand: "LUNA CAFÉ", heading: "20% OFF", subtext: "Cold Drinks Promotion", footer: "May 1 — May 3", fontSize: "32", textColor: "#ffffff", bgColor: "#111622", bgImage: "https://images.unsplash.com/photo-1551024709-8f23befc6f87", date: "Today" },
-  { id: 2, brand: "LUNA CAFÉ", heading: "NEW MENU", subtext: "Summer Drink Lineup", footer: "Available Now", fontSize: "28", textColor: "#c2f83b", bgColor: "#1e2430", bgImage: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb", date: "Yesterday" }
+  { id: 1, brand: "LUNA CAFÉ", heading: "20% OFF", subtext: "Cold Drinks Promotion", footer: "May 1 — May 3", fontSize: "32", fontFamily: "'Cairo', sans-serif", textColor: "#ffffff", bgColor: "#111622", bgImage: "https://images.unsplash.com/photo-1551024709-8f23befc6f87", ratio: "1:1", date: "Today" }
 ];
 
 function translateStatic(){
@@ -565,6 +608,7 @@ function toggleLanguage(){
   lang=lang==='en'?'ar':'en';
   translateStatic();
   renderSavedProjects();
+  renderPresetTemplates();
 }
 
 function show(id){
@@ -572,6 +616,7 @@ function show(id){
   document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
   if(id==='dashboard') renderSavedProjects();
+  if(id==='templates') renderPresetTemplates();
   setTimeout(translateStatic,0);
 }
 
@@ -634,6 +679,53 @@ function openEditor(){
   show('editor');
 }
 
+/* Feature 1: Logo Upload */
+function handleLogoUpload(e){
+  const file = e.target.files[0];
+  if(file){
+    const reader = new FileReader();
+    reader.onload = function(evt){
+      const img = document.getElementById('posterLogo');
+      img.src = evt.target.result;
+      img.style.display = 'block';
+      document.getElementById('logoSizeControl').style.display = 'block';
+      toast(lang==='ar'?'تم رفع الشعار بنجاح!':'Logo uploaded!');
+    }
+    reader.readAsDataURL(file);
+  }
+}
+
+function clearLogo(){
+  const img = document.getElementById('posterLogo');
+  img.src = '';
+  img.style.display = 'none';
+  document.getElementById('inputLogo').value = '';
+  document.getElementById('logoSizeControl').style.display = 'none';
+}
+
+/* Feature 2: Aspect Ratio Switcher */
+function setAspectRatio(ratio, btn){
+  currentAspectRatio = ratio;
+  const canvas = document.getElementById('posterCanvas');
+  
+  if(btn){
+    btn.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  if(ratio === '1:1'){
+    canvas.style.aspectRatio = '1 / 1';
+    canvas.style.width = 'min(340px, 90%)';
+  } else if(ratio === '9:16'){
+    canvas.style.aspectRatio = '9 / 16';
+    canvas.style.width = 'min(270px, 80%)';
+  } else if(ratio === '16:9'){
+    canvas.style.aspectRatio = '16 / 9';
+    canvas.style.width = 'min(440px, 95%)';
+  }
+}
+
+/* Feature 3 & Canvas Updates */
 function setBgImage(url){
   document.getElementById('inputBgImage').value = url;
   updateCanvas();
@@ -645,9 +737,11 @@ function updateCanvas(){
   const subtext = document.getElementById('inputSubtext').value;
   const footer = document.getElementById('inputFooter').value;
   const fontSize = document.getElementById('inputFontSize').value;
+  const fontFamily = document.getElementById('inputFontFamily').value;
   const textColor = document.getElementById('inputTextColor').value;
   const bgColor = document.getElementById('inputBgColor').value;
   const bgImage = document.getElementById('inputBgImage').value;
+  const logoSize = document.getElementById('inputLogoSize') ? document.getElementById('inputLogoSize').value : 45;
 
   document.getElementById('posterBrand').textContent = brand;
   document.getElementById('posterHeading').textContent = heading;
@@ -656,9 +750,12 @@ function updateCanvas(){
 
   const posterCanvas = document.getElementById('posterCanvas');
   const posterHeading = document.getElementById('posterHeading');
+  const posterLogo = document.getElementById('posterLogo');
   
+  posterCanvas.style.fontFamily = fontFamily;
   posterHeading.style.fontSize = fontSize + 'px';
   posterCanvas.style.color = textColor;
+  if(posterLogo) posterLogo.style.maxHeight = logoSize + 'px';
 
   if (bgImage) {
     posterCanvas.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.75)), url('${bgImage}')`;
@@ -670,6 +767,48 @@ function updateCanvas(){
   }
 }
 
+/* Feature 4: Preset Template Gallery */
+function renderPresetTemplates(){
+  const grid = document.getElementById('presetTemplatesGrid');
+  if(!grid) return;
+
+  grid.innerHTML = presetTemplates.map(t => {
+    return `
+      <div class="design-card" onclick="loadPresetTemplate('${t.id}')">
+        <div class="thumb" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.75)), url('${t.bgImage}') center/cover; color:${t.textColor}; font-family:${t.font};">
+          <div>
+            <div style="font-size:10px; opacity:0.8">${t.brand}</div>
+            <div style="font-size:20px; font-weight:800">${t.heading}</div>
+          </div>
+        </div>
+        <div class="meta">
+          <b>${t.name}</b>
+          <div class="muted">${t.category} · Aspect ${t.ratio}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function loadPresetTemplate(id){
+  const template = presetTemplates.find(t => t.id === id);
+  if(!template) return;
+
+  document.getElementById('inputBrand').value = template.brand;
+  document.getElementById('inputHeading').value = template.heading;
+  document.getElementById('inputSubtext').value = template.subtext;
+  document.getElementById('inputFooter').value = template.footer;
+  document.getElementById('inputFontFamily').value = template.font;
+  document.getElementById('inputTextColor').value = template.textColor;
+  document.getElementById('inputBgColor').value = template.bgColor;
+  document.getElementById('inputBgImage').value = template.bgImage;
+
+  setAspectRatio(template.ratio);
+  updateCanvas();
+  show('editor');
+  toast(lang==='ar'?'تم تحميل القالب بنجاح! 🎨':'Template loaded! 🎨');
+}
+
 function saveProject(){
   const project = {
     id: Date.now(),
@@ -678,9 +817,11 @@ function saveProject(){
     subtext: document.getElementById('inputSubtext').value,
     footer: document.getElementById('inputFooter').value,
     fontSize: document.getElementById('inputFontSize').value,
+    fontFamily: document.getElementById('inputFontFamily').value,
     textColor: document.getElementById('inputTextColor').value,
     bgColor: document.getElementById('inputBgColor').value,
     bgImage: document.getElementById('inputBgImage').value,
+    ratio: currentAspectRatio,
     date: new Date().toLocaleDateString(lang==='ar'?'ar-EG':'en-US',{month:'short',day:'numeric'})
   };
 
@@ -706,7 +847,7 @@ function renderSavedProjects(){
 
     return `
       <div class="design-card" onclick="loadProject(${p.id})">
-        <div class="thumb" style="${bgStyle} color:${p.textColor}; font-size:${Math.min(parseInt(p.fontSize), 24)}px;">
+        <div class="thumb" style="${bgStyle} color:${p.textColor}; font-family:${p.fontFamily || 'sans-serif'}; font-size:${Math.min(parseInt(p.fontSize), 24)}px;">
           ${p.heading || 'Design'}
         </div>
         <div class="meta">
@@ -728,9 +869,12 @@ function loadProject(id){
   document.getElementById('inputSubtext').value = project.subtext || '';
   document.getElementById('inputFooter').value = project.footer || '';
   document.getElementById('inputFontSize').value = project.fontSize || '32';
+  document.getElementById('inputFontFamily').value = project.fontFamily || "'Cairo', sans-serif";
   document.getElementById('inputTextColor').value = project.textColor || '#ffffff';
   document.getElementById('inputBgColor').value = project.bgColor || '#111622';
   document.getElementById('inputBgImage').value = project.bgImage || '';
+
+  if(project.ratio) setAspectRatio(project.ratio);
 
   updateCanvas();
   show('editor');
@@ -767,6 +911,7 @@ function toast(msg){
 window.addEventListener('DOMContentLoaded',()=>{
   translateStatic();
   renderSavedProjects();
+  renderPresetTemplates();
 });
 </script>
 </body>
