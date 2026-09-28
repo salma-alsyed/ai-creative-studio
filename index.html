@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CREATIVE AI — Next-Gen AI Studio for Business</title>
+<title>CREATIVE AI — استديو التصميم الذكي</title>
 
-<!-- html2canvas & jsPDF Libraries for HD Exports -->
+<!-- مكتبات التصدير عالي الدقة HTML2Canvas و jsPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
@@ -41,10 +41,10 @@ body.light-mode {
 }
 
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg-dark);color:var(--text-main);font-family:'Plus Jakarta Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background 0.3s ease, color 0.3s ease}
+body{margin:0;background:var(--bg-dark);color:var(--text-main);font-family:'IBM Plex Sans Arabic','Plus Jakarta Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background 0.3s ease, color 0.3s ease}
 button,input,textarea,select{font:inherit}button{cursor:pointer}
 
-/* Micro-animations */
+/* حركة الشاشات */
 .screen{min-height:100vh;display:none;position:relative;animation:fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1)}
 .screen.active{display:block}
 
@@ -58,14 +58,14 @@ button,input,textarea,select{font:inherit}button{cursor:pointer}
   100% { transform: scale(1); opacity: 1; }
 }
 
-/* Glow Background Effects */
+/* إضاءة الخلفية */
 .ambient-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:350px;background:radial-gradient(circle, rgba(194,248,59,0.08) 0%, rgba(0,0,0,0) 70%);pointer-events:none;z-index:0}
 
-/* Modern Glass Header */
+/* الشريط العلوي */
 .nav{height:60px;padding:0 6vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(7, 9, 14, 0.75);backdrop-filter:blur(16px);position:sticky;top:0;z-index:100;transition:background 0.3s ease}
 body.light-mode .nav{background:rgba(255, 255, 255, 0.85)}
 
-.logo{font-size:15px;font-weight:800;letter-spacing:2px;color:var(--white);display:flex;align-items:center;gap:8px;cursor:pointer}
+.logo{font-size:15px;font-weight:800;letter-spacing:1px;color:var(--white);display:flex;align-items:center;gap:8px;cursor:pointer}
 .logo-badge{width:8px;height:8px;background:var(--accent);border-radius:50%;box-shadow:0 0 10px var(--accent)}
 .navlinks{display:flex;gap:28px;font-size:13px;font-weight:600;color:var(--text-muted)}
 .navlinks span{cursor:pointer;transition:color 0.2s}.navlinks span:hover{color:var(--white)}
@@ -80,30 +80,29 @@ body.light-mode .nav{background:rgba(255, 255, 255, 0.85)}
 .lang-toggle,.theme-toggle{border:1px solid var(--border);background:rgba(255,255,255,0.03);color:var(--text-main);border-radius:99px;padding:6px 12px;font-size:11px;font-weight:700;cursor:pointer;transition:all 0.2s ease}
 .lang-toggle:hover,.theme-toggle:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2)}
 
-/* Hero Section */
+/* قسم الواجهة الرئيسية */
 .hero{max-width:1150px;margin:auto;padding:60px 5vw 40px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center;position:relative;z-index:1}
-.badge{display:inline-flex;align-items:center;gap:8px;padding:4px 12px;border-radius:99px;background:rgba(194,248,59,0.08);border:1px solid rgba(194,248,59,0.2);color:var(--accent);font-size:11px;font-weight:700;margin-bottom:16px}
-h1{font-size:clamp(36px,4.5vw,56px);line-height:1.05;margin:0 0 16px;letter-spacing:-1.5px;font-weight:800;color:var(--white)}
+h1{font-size:clamp(36px,4.5vw,54px);line-height:1.1;margin:0 0 16px;letter-spacing:-1px;font-weight:800;color:var(--white)}
 .hero p{font-size:15px;line-height:1.6;color:var(--text-muted);max-width:480px;margin-bottom:28px}
 
 .hero-card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,0.5)}
 .mock-ad{height:360px;border-radius:14px;background:#030508;position:relative;overflow:hidden;padding:24px;color:white;display:flex;flex-direction:column;justify-content:flex-end;border:1px solid rgba(255,255,255,0.05)}
-.mock-ad:before{content:"";position:absolute;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle, #3b2a1d 0%, transparent 70%);right:-50px;top:10px}
-.mock-ad .lime-line{position:absolute;width:140px;height:3px;background:var(--accent);transform:rotate(-20deg);top:35px;left:-15px;box-shadow:0 0 10px var(--accent)}
-.mock-ad small{position:relative;color:var(--accent);font-weight:800;letter-spacing:2px;font-size:10px}
+.mock-ad:before{content:"";position:absolute;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle, #3b2a1d 0%, transparent 70%);left:-50px;top:10px}
+.mock-ad .lime-line{position:absolute;width:140px;height:3px;background:var(--accent);transform:rotate(20deg);top:35px;right:-15px;box-shadow:0 0 10px var(--accent)}
+.mock-ad small{position:relative;color:var(--accent);font-weight:800;letter-spacing:1px;font-size:10px}
 .mock-ad h2{position:relative;font-size:32px;line-height:1;margin:8px 0;font-weight:800}
 .mock-ad p{position:relative;color:#94a3b8;margin:0;font-size:12px}
 
-/* Features Grid */
+/* شبكة المميزات */
 .features{max-width:1150px;margin:auto;padding:0 5vw 60px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative;z-index:1}
 .feature{padding:20px;background:var(--bg-card);border:1px solid var(--border);border-radius:16px;transition:all 0.25s ease}
 .feature:hover{background:var(--bg-card-hover);border-color:rgba(255,255,255,0.15);transform:translateY(-3px)}
 .feature b{display:block;margin-bottom:6px;font-size:14px;color:var(--white)}
 .feature span{font-size:12px;color:var(--text-muted);line-height:1.5}
 
-/* App Core Layout */
+/* تخطيط التطبيق الرئيسي */
 .app{min-height:100vh;display:flex}
-.sidebar{width:220px;background:rgba(17, 21, 32, 0.6);backdrop-filter:blur(20px);border-right:1px solid var(--border);padding:20px 14px;flex-shrink:0;display:flex;flex-direction:column;transition:background 0.3s ease}
+.sidebar{width:220px;background:rgba(17, 21, 32, 0.6);backdrop-filter:blur(20px);border-left:1px solid var(--border);padding:20px 14px;flex-shrink:0;display:flex;flex-direction:column;transition:background 0.3s ease}
 body.light-mode .sidebar{background:rgba(255, 255, 255, 0.7)}
 
 .side-logo{padding:0 8px 24px}
@@ -118,34 +117,34 @@ body.light-mode .sidebar{background:rgba(255, 255, 255, 0.7)}
 .toprow{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
 .toprow h2{margin:0;font-size:22px;font-weight:800;color:var(--white)}
 
-/* Mobile Bottom Navigation Bar */
+/* شريط التنقل السفلي للجوال */
 .mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:64px;background:rgba(11,15,23,0.92);backdrop-filter:blur(20px);border-top:1px solid var(--border);z-index:1000;justify-content:space-around;align-items:center;padding:0 10px}
 body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
 .mobile-nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:700;color:var(--text-muted);cursor:pointer;background:none;border:none;padding:6px 10px;border-radius:8px;transition:all 0.15s ease}
 .mobile-nav-item svg{width:20px;height:20px;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .mobile-nav-item.active{color:var(--accent)}
 
-/* Cards & Studio Grid */
+/* كروت المشاريع والقوالب */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .design-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all 0.2s;cursor:pointer}.design-card:hover{border-color:rgba(255,255,255,0.2);transform:translateY(-2px)}
 .thumb{height:180px;background:#0a0e17;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;font-weight:800;padding:12px;text-align:center;overflow:hidden;position:relative}
 .design-card .meta{padding:14px}.design-card b{font-size:13px;color:var(--white)}.muted{font-size:11px;color:var(--text-muted)}
 
-/* Prompt Box */
+/* صندوق الأوامر النصية */
 .create-box{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:22px;margin-bottom:20px}
 .create-box textarea{width:100%;min-height:90px;border:1px solid var(--border);border-radius:12px;padding:14px;font-size:13px;resize:vertical;background:var(--input-bg);color:var(--text-main);outline:none;transition:border 0.2s}
 .create-box textarea:focus{border-color:var(--accent)}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
 .chip{padding:6px 12px;border:1px solid var(--border);border-radius:99px;background:rgba(255,255,255,0.03);color:var(--text-muted);font-size:11px;font-weight:600;cursor:pointer;transition:all 0.2s}.chip:hover,.chip.active{background:rgba(255,255,255,0.08);color:var(--white);border-color:var(--accent)}
 
-/* Brand & Editor Panels */
+/* لوحات التحكم */
 .brand-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.panel{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:22px}.panel.ai{border-left:3px solid var(--accent)}
+.panel{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:22px}.panel.ai{border-right:3px solid var(--accent)}
 .swatches{display:flex;gap:10px;margin-top:14px}
 .swatch{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,0.1)}
 .s1{background:#000}.s2{background:#1f293d}.s3{background:#475569}.s4{background:#c2f83b}
 
-/* Editor Studio Sticky Layout */
+/* تخطيط الاستديو الثابت (Sticky) */
 .editor{display:grid;grid-template-columns:140px 1fr 320px;gap:16px;align-items:start}
 .tools{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:16px;position:sticky;top:80px}
 .controls{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:16px}
@@ -153,7 +152,7 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
 .tool.active,.tool:hover{background:rgba(255,255,255,0.06);color:var(--white);font-weight:700}
 .canvas{background:var(--canvas-bg);border:1px solid var(--border);border-radius:16px;display:flex;align-items:center;justify-content:center;min-height:520px;padding:24px;position:sticky;top:80px;z-index:10}
 
-/* Mobile Sheet Handle Bar */
+/* شريط طي ورفع التحكم في الجوال */
 .mobile-sheet-handle {
   display: none;
   align-items: center;
@@ -170,7 +169,7 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
   border-radius: 16px 16px 0 0;
 }
 
-/* Dynamic Poster Canvas & Draggable Elements */
+/* الكانفاس التفاعلي والعناصر المنجرفة */
 .poster{width:min(320px,90%);aspect-ratio:1/1.25;background:#111622;border-radius:12px;color:white;padding:24px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;box-shadow:0 20px 50px rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.08);transition:all 0.3s ease;overflow:hidden;background-size:cover;background-position:center}
 .poster-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.5);pointer-events:none;z-index:1;transition:background 0.2s}
 
@@ -178,9 +177,9 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
 .draggable-item:hover{outline:1px dashed rgba(194, 248, 59, 0.6);border-radius:4px}
 .draggable-item:active,.draggable-item.dragging{cursor:grabbing;outline:1.5px dashed var(--accent);z-index:10}
 
-.poster-logo-img{position:absolute;top:20px;left:20px;max-height:45px;max-width:100px;object-fit:contain;display:none;z-index:3}
-.poster-qr-img{position:absolute;bottom:20px;right:20px;width:55px;height:55px;background:white;padding:3px;border-radius:6px;display:none;z-index:4;box-shadow:0 4px 12px rgba(0,0,0,0.4)}
-.poster-badge-tag{position:absolute;top:20px;right:20px;background:var(--accent);color:#000;font-weight:800;font-size:11px;padding:5px 10px;border-radius:99px;display:none;box-shadow:0 4px 12px rgba(0,0,0,0.4);z-index:4}
+.poster-logo-img{position:absolute;top:20px;right:20px;max-height:45px;max-width:100px;object-fit:contain;display:none;z-index:3}
+.poster-qr-img{position:absolute;bottom:20px;left:20px;width:55px;height:55px;background:white;padding:3px;border-radius:6px;display:none;z-index:4;box-shadow:0 4px 12px rgba(0,0,0,0.4)}
+.poster-badge-tag{position:absolute;top:20px;left:20px;background:var(--accent);color:#000;font-weight:800;font-size:11px;padding:5px 10px;border-radius:99px;display:none;box-shadow:0 4px 12px rgba(0,0,0,0.4);z-index:4}
 
 .poster h2{font-size:32px;line-height:0.95;margin:0 0 8px;font-weight:800}
 .poster p{margin:0 0 8px;font-size:12px;color:#94a3b8}
@@ -190,40 +189,35 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
 .field{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:10px;background:var(--input-bg);color:var(--text-main);font-size:12px;outline:none}
 .field:focus{border-color:var(--accent)}
 
-/* Full Screen Preview Modal */
+/* نافذة المعاينة */
 .preview-modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px;animation:fadeIn 0.25s ease}
 .preview-modal-content{position:relative;max-width:90vw;max-height:90vh;display:flex;flex-direction:column;align-items:center}
-.preview-close-btn{position:absolute;top:-45px;right:0;background:none;border:none;color:white;font-size:24px;cursor:pointer}
+.preview-close-btn{position:absolute;top:-45px;left:0;background:none;border:none;color:white;font-size:24px;cursor:pointer}
 
-/* Onboarding & Toast */
+/* خيارات والتنبيهات */
 .options{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}
 .option{padding:16px 8px;border:1px solid var(--border);border-radius:12px;text-align:center;cursor:pointer;font-size:12px;background:rgba(255,255,255,0.02)}
 .option.selected{border:1px solid var(--accent);background:rgba(194,248,59,0.06);color:var(--accent);font-weight:700}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--white);color:var(--bg-dark);padding:10px 18px;border-radius:99px;display:none;font-size:12px;font-weight:700;z-index:999;box-shadow:0 10px 25px rgba(0,0,0,0.5);animation:popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)}
 
-/* RTL Support */
-.rtl{font-family:'IBM Plex Sans Arabic',sans-serif}
-.rtl .nav,.rtl .toprow{direction:rtl}
-.rtl .hero,.rtl .features,.rtl .app,.rtl .onboard,.rtl .create-box,.rtl .ai-understood,.rtl .editor{direction:rtl}
-.rtl .sidebar{border-right:0;border-left:1px solid var(--border)}
+/* معالجة اتجاه اللغة RTL */
 .rtl .intent,.rtl .concept-body,.rtl .panel,.rtl .control{text-align:right}
-.rtl .panel.ai{border-left:1px solid var(--border);border-right:3px solid var(--accent)}
 
-/* AI Flow Component */
+/* مكونات الذكاء الاصطناعي */
 .ai-flow{max-width:850px}
 .ai-understood{margin-top:16px;background:var(--input-bg);border:1px solid var(--border);border-radius:16px;padding:18px;display:none}
 .intent-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}
 .intent{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:10px}
 .intent span{display:block;font-size:10px;color:var(--text-muted);margin-bottom:4px}
 .intent b{font-size:12px;color:var(--white)}
-.direction{margin-top:16px;padding:12px 14px;border-left:3px solid var(--accent);background:var(--bg-card)}
+.direction{margin-top:16px;padding:12px 14px;border-right:3px solid var(--accent);background:var(--bg-card)}
 .style-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .style-btn{padding:8px 14px;border:1px solid var(--border);border-radius:99px;background:transparent;color:var(--text-main);font-size:12px;font-weight:700;cursor:pointer}
 .style-btn:hover,.style-btn.selected{border-color:var(--accent);background:var(--accent);color:var(--bg-dark)}
 .concepts{display:none;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
 .concept{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
 .concept-preview{height:180px;display:flex;flex-direction:column;justify-content:flex-end;padding:16px;position:relative;overflow:hidden;background:#030508}
-.concept-preview:before{content:"";position:absolute;width:110px;height:110px;border-radius:50%;right:-25px;top:25px;background:radial-gradient(circle, #3b2a1d 0%, transparent 70%)}
+.concept-preview:before{content:"";position:absolute;width:110px;height:110px;border-radius:50%;left:-25px;top:25px;background:radial-gradient(circle, #3b2a1d 0%, transparent 70%)}
 .concept-preview h3,.concept-preview p{position:relative;z-index:1}
 .concept-preview h3{font-size:22px;line-height:0.95;margin:6px 0;color:var(--white)}
 .concept-preview p{margin:0;font-size:11px;color:#94a3b8}
@@ -234,11 +228,11 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
 .ai-dot:nth-child(2){animation-delay:.15s}.ai-dot:nth-child(3){animation-delay:.3s}
 @keyframes pulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
 
-/* Gradient & Filter Swatches */
+/* عينات الألوان */
 .swatch-btn{width:28px;height:28px;border-radius:50%;border:1px solid rgba(255,255,255,0.2);cursor:pointer;display:inline-block;transition:transform 0.15s}
 .swatch-btn:hover{transform:scale(1.15)}
 
-/* Mobile Responsive Optimizations & Bottom Sheet */
+/* تجاوب شاشات الجوال والتنقل المنسدل */
 @media(max-width:850px){
   .navlinks{display:none}
   .hero{grid-template-columns:1fr;padding-top:30px}
@@ -251,7 +245,7 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
   .brand-grid{grid-template-columns:1fr}
   .editor{grid-template-columns:1fr}
 
-  /* Fixed Top Canvas for Mobile */
+  /* تثبيت منطقة التصميم في أعلى الجوال */
   .canvas{
     order:-1;
     position:sticky;
@@ -267,7 +261,7 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
     width:min(280px, 80vw);
   }
 
-  /* Sliding Bottom Sheet for Mobile Controls */
+  /* اللوحة السفلية المتحركة لإعدادات التعديل */
   .mobile-sheet-handle {
     display:flex;
   }
@@ -299,7 +293,7 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
 }
 </style>
 </head>
-<body>
+<body class="rtl">
 
 <section id="landing" class="screen active">
 <div class="ambient-glow"></div>
@@ -308,15 +302,13 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
   <div class="navlinks"><span onclick="show('templates')">القوالب</span><span>الأسعار</span><span>عن التطبيق</span></div>
   <div class="nav-actions">
     <button class="theme-toggle" onclick="toggleTheme()">☀️ Theme</button>
-    <!-- Language button ONLY in Top Bar -->
-    <button class="lang-toggle" onclick="toggleLanguage()">🌐 العربية</button>
+    <button class="lang-toggle" onclick="toggleLanguage()">🌐 English</button>
     <button class="btn" onclick="show('signup')">تسجيل الدخول</button>
     <button class="btn accent" onclick="show('signup')">يلا نبدأ التصميم ←</button>
   </div>
 </nav>
 <div class="hero">
   <div>
-    <div class="badge">✨ Next-Gen AI Studio</div>
     <h1>مشروعك.<br>علامتك التجارية.<br>ذكاؤك الإبداعي.</h1>
     <p>صمم إعلانات جذابة، قوائم طعام، ومحتوى تسويقي في ثوانٍ — مخصص لهوية تجارتك.</p>
     <button class="btn accent" onclick="show('signup')">✨ يلا نبدأ التصميم مجاناً ←</button>
@@ -414,7 +406,7 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
       <div class="panel ai">
         <h3>توجيهات الذكاء الاصطناعي</h3>
         <p class="muted">يتم تركيز المحتوى على الأسلوب الدافئ والأنيق مع خطوط واضحة وتدرجات هادئة.</p>
-        <button class="btn" onclick="toast(lang==='ar'?'تم حفظ أسلوب العلامة':'Brand style saved')">حفظ هوية العلامة</button>
+        <button class="btn" onclick="toast('تم حفظ أسلوب العلامة')">حفظ هوية العلامة</button>
       </div>
     </div>
   </main>
@@ -452,7 +444,7 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
 </div>
 </section>
 
-<!-- Preset Templates Gallery Screen -->
+<!-- مكتبة القوالب الجاهزة -->
 <section id="templates" class="screen">
 <div class="app">
   <aside class="sidebar">
@@ -580,7 +572,6 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
         <button class="btn" onclick="openPreviewModal()">🔍 معاينة</button>
         <button class="btn" onclick="resetPositions()">↺ ضبط الأماكن</button>
         <button class="btn" onclick="saveProject()">حفظ التصميم</button>
-        <!-- Multi-Format Export Options -->
         <button class="btn accent" onclick="downloadPNG()">↓ تحميل (PNG)</button>
         <button class="btn dark" onclick="downloadJPG()">↓ تحميل (JPG)</button>
         <button class="btn" onclick="downloadPDF()">📄 طباعة PDF</button>
@@ -608,13 +599,13 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
         </div>
       </div>
       <div class="controls">
-        <!-- Mobile Sliding Sheet Handle -->
+        <!-- شريط رفع وخفض اللوحة السفلية للجوال -->
         <div class="mobile-sheet-handle" onclick="toggleMobileControls()">
           <span id="sheetIcon">▲</span>
           <span id="sheetText">تعديل التصميم والإعدادات</span>
         </div>
 
-        <!-- AI Image Generator Control -->
+        <!-- مولد الخلفيات بالذكاء الاصطناعي -->
         <div class="muted" style="margin-bottom:8px">✨ إنشاء خلفية بالذكاء الاصطناعي (Pollinations AI)</div>
         <div class="control">
           <input class="field" id="inputAiBgPrompt" placeholder="صف الصورة مثلاً: كوب قهوة دافئ بإضاءة نيون" style="margin-bottom:6px">
@@ -623,7 +614,7 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
 
         <hr style="border:0;border-top:1px solid var(--border);margin:12px 0">
 
-        <!-- QR Code Generator Controls -->
+        <!-- مولد رمز الـ QR -->
         <div class="muted" style="margin-bottom:8px">📱 إنشاء رمز الـ QR (لمنيو أو متجر)</div>
         <div class="control">
           <input class="field" id="inputQrUrl" placeholder="أدخل الرابط مثل: https://instagram.com/mycafe" style="margin-bottom:6px">
@@ -635,7 +626,7 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
 
         <hr style="border:0;border-top:1px solid var(--border);margin:12px 0">
 
-        <!-- Promo Stickers & Badges -->
+        <!-- شارات وملصقات التخفيضات -->
         <div class="muted" style="margin-bottom:8px">🏷️ الشارات وملصقات التخفيضات</div>
         <div class="chips" style="margin-top:0">
           <button class="chip" onclick="setPromoBadge('🔥 HOT DEAL')">🔥 HOT DEAL</button>
@@ -647,7 +638,7 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
 
         <hr style="border:0;border-top:1px solid var(--border);margin:12px 0">
 
-        <!-- Aspect Ratio Controls -->
+        <!-- التحكم بالأبعاد -->
         <div class="muted" style="margin-bottom:8px">أبعاد التصميم (Aspect Ratio)</div>
         <div class="chips" style="margin-top:0">
           <button class="chip active" onclick="setAspectRatio('1:1', this)">مربع 1:1</button>
@@ -659,7 +650,7 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
 
         <hr style="border:0;border-top:1px solid var(--border);margin:12px 0">
 
-        <!-- Logo Upload Controls -->
+        <!-- رفع اللوجو -->
         <div class="muted" style="margin-bottom:8px">شعار النشاط التجاري (اللوجو)</div>
         <div class="control">
           <input type="file" id="inputLogo" accept="image/*" class="field" onchange="handleLogoUpload(event)">
@@ -672,7 +663,7 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
 
         <hr style="border:0;border-top:1px solid var(--border);margin:12px 0">
 
-        <!-- Background Options & Custom Upload -->
+        <!-- خلفية التصميم وتدرجات الألوان -->
         <div class="muted" style="margin-bottom:8px">خلفية التصميم</div>
         <div class="control">
           <label>رفع صورة خلفية خاصة</label>
@@ -697,7 +688,6 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
           <button class="chip" onclick="setBgImage('')">❌ تفريغ</button>
         </div>
 
-        <!-- Background FX Sliders -->
         <div class="control">
           <label>شفافية الطبقة المظلمة (Overlay)</label>
           <input type="range" id="inputOverlayOpacity" min="0" max="90" value="50" oninput="updateCanvas()" style="width:100%">
@@ -718,7 +708,7 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
 
         <hr style="border:0;border-top:1px solid var(--border);margin:12px 0">
 
-        <!-- Typography & Text FX Controls -->
+        <!-- التحكم بالنصوص والخطوط -->
         <div class="muted" style="margin-bottom:8px">تنسيق النصوص والخطوط</div>
         <div class="control">
           <label>نوع الخط العربي/الإنجليزي</label>
@@ -750,7 +740,7 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
 </div>
 </section>
 
-<!-- Fullscreen Preview Modal -->
+<!-- نافذة المعاينة بالكامل -->
 <div id="previewModal" class="preview-modal">
   <div class="preview-modal-content">
     <button class="preview-close-btn" onclick="closePreviewModal()">✕</button>
@@ -758,7 +748,7 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
   </div>
 </div>
 
-<!-- Mobile Bottom Navigation Bar (Home points back to Dashboard) -->
+<!-- شريط التنقل السفلي للجوال -->
 <div class="mobile-nav">
   <button class="mobile-nav-item active" onclick="mobileNavTo('dashboard', this)">
     <svg viewBox="0 0 24 24" fill="none"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -781,10 +771,6 @@ body.light-mode .mobile-nav{background:rgba(255, 255, 255, 0.95)}
 <div id="toast" class="toast"></div>
 
 <script>
-const AR={
-"Features":"المزايا","Templates":"القوالب","Pricing":"الأسعار","About":"عن التطبيق","Log in":"تسجيل الدخول","Get Started →":"يلا نبدأ التصميم ←","Your business.":"مشروعك.","Your brand.":"علامتك التجارية.","Your creative AI.":"ذكاؤك الإبداعي.","✨ Start 7-Day Free Trial →":"✨ يلا نبدأ التصميم مجاناً ←","Start Free Trial":"ابدأ التجربة المجانية","Welcome to CREATIVE AI":"مرحبًا بك في CREATIVE AI","Continue with Google":"المتابعة باستخدام Google","Continue with Email":"المتابعة بالبريد الإلكتروني","Already have an account? Log in":"لديك حساب بالفعل؟ تسجيل الدخول","What type of business do you run?":"ما نوع نشاطك التجاري؟","Business Name":"اسم النشاط التجاري","Continue →":"متابعة ←","Your Brand Identity":"هوية علامتك التجارية","Create Content →":"إنشاء محتوى ←","Save Brand Guidelines":"حفظ هوية العلامة","Welcome back":"سعيدون بعودتك 👋","+ New Design":"+ تصميم جديد","Home":"الرئيسية","Create":"إنشاء","Projects":"المشاريع","AI Assistant":"المساعد الإبداعي","What are we creating today?":"ماذا نُنشئ اليوم؟","Promotion":"عرض ترويجي","New Product":"منتج جديد","Instagram Post":"منشور انستغرام","Story":"ستوري","Menu":"قائمة طعام","✦ Generate Concepts →":"✦ توليد التصاميم بالذكاء الاصطناعي ←","Content":"نوع المحتوى","Format":"التنسيق","Offer":"العرض","Product":"المنتج","Duration":"المدة","Minimal":"بسيط","Premium":"فاخر","Bold":"جريء","Open in Editor →":"فتح في المحرر ←","Save":"حفظ","↓ Download PNG":"↓ تحميل (PNG)","Text":"النص","Colors":"الألوان","Background":"الخلفية","Size":"الحجم","Font Size":"حجم الخط","Text Color":"لون النص","Background Color":"لون الخلفية","Background Image URL":"رابط صورة الخلفية","✦ Refine Text with AI":"✦ تحسين النص بالذكاء الاصطناعي","Brand Name":"اسم العلامة التجارية","No credit card required. Cancel anytime.":"تجربة مجانية لمدة 7 أيام · لا تتطلب بطاقة ائتمان.","Brand Kit":"الهوية التجارية"
-};
-
 let lang='ar';
 let theme='dark';
 let currentAspectRatio = '1:1';
@@ -795,24 +781,24 @@ const presetTemplates = [
   { id: 'p1', name: "عرض القهوة المقطرة", category: "كافيهات", brand: "LUNA CAFÉ", heading: "اشتري 1 واحصل على 1", subtext: "على جميع أنواع القهوة المختصة", footer: "ساري اليوم فقط", font: "'Cairo', sans-serif", ratio: "1:1", bgColor: "#120e0a", bgImage: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb", textColor: "#ffffff" },
   { id: 'p2', name: "وجبة البرجر العائلية", category: "مطاعم", brand: "BURGER LAB", heading: "خصم 25%", subtext: "على جميع وجبات الواغيو المزدوجة", footer: "استخدم كود: WAGYU25", font: "'Tajawal', sans-serif", ratio: "9:16", bgColor: "#1a0f0d", bgImage: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5", textColor: "#c2f83b" },
   { id: 'p3', name: "باقة العناية والتجميل", category: "صالونات", brand: "GLAMOUR STUDIO", heading: "باقة النضارة", subtext: "تصفيف الشعر والعناية بالبشرة", footer: "احجز جلسة نهاية الأسبوع", font: "'Almarai', sans-serif", ratio: "1:1", bgColor: "#18111e", bgImage: "https://images.unsplash.com/photo-1560066984-138dadb4c035", textColor: "#ffffff" },
-  { id: 'p4', name: "تخفيضات تشكيلة الصيف", category: "متاجر", brand: "URBAN THREADS", heading: "تخفيضات الصيف", subtext: "خصومات تصل إلى 50% على قطع مختارة", footer: "في الفرن وعبر المتجر الإلكتروني", font: "'Readex Pro', sans-serif", ratio: "16:9", bgColor: "#0e171e", bgImage: "https://images.unsplash.com/photo-1441986300917-64674bd600d8", textColor: "#c2f83b" }
+  { id: 'p4', name: "تخفيضات تشكيلة الصيف", category: "متاجر", brand: "URBAN THREADS", heading: "تخفيضات الصيف", subtext: "خصومات تصل إلى 50% على قطع مختارة", footer: "في الفرع وعبر المتجر الإلكتروني", font: "'Readex Pro', sans-serif", ratio: "16:9", bgColor: "#0e171e", bgImage: "https://images.unsplash.com/photo-1441986300917-64674bd600d8", textColor: "#c2f83b" }
 ];
 
 const defaultProjects = [
   { id: 1, brand: "LUNA CAFÉ", heading: "20% OFF", subtext: "عرض المشروبات الباردة", footer: "1 مايو — 3 مايو", fontSize: "32", fontFamily: "'Cairo', sans-serif", textColor: "#ffffff", bgColor: "#111622", bgImage: "https://images.unsplash.com/photo-1551024709-8f23befc6f87", ratio: "1:1", date: "اليوم" }
 ];
 
-/* Theme Toggle Function */
+/* تبديل الوضع الداكن والفاتح */
 function toggleTheme(){
   theme = theme === 'dark' ? 'light' : 'dark';
   document.body.classList.toggle('light-mode', theme === 'light');
   document.querySelectorAll('.theme-toggle').forEach(btn => {
     btn.textContent = theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
   });
-  toast(lang==='ar'? (theme==='light'?'تم تفعيل الوضع الفاتح':'تم تفعيل الوضع الداكن') : `Switched to ${theme} mode`);
+  toast(theme==='light'?'تم تفعيل الوضع الفاتح':'تم تفعيل الوضع الداكن');
 }
 
-/* Toggle Mobile Sliding Controls Sheet */
+/* فتح وإغلاق لوحة التحكم في الجوال */
 function toggleMobileControls() {
   const controls = document.querySelector('.controls');
   const icon = document.getElementById('sheetIcon');
@@ -822,27 +808,21 @@ function toggleMobileControls() {
   
   const isExpanded = controls.classList.contains('expanded');
   if (icon) icon.textContent = isExpanded ? '▼' : '▲';
-  if (text) {
-    if (lang === 'ar') {
-      text.textContent = isExpanded ? 'إغلاق اللوحة' : 'تعديل التصميم والإعدادات';
-    } else {
-      text.textContent = isExpanded ? 'Close Panel' : 'Edit Design & Settings';
-    }
-  }
+  if (text) text.textContent = isExpanded ? 'إغلاق اللوحة' : 'تعديل التصميم والإعدادات';
 }
 
-/* Feature: Generate QR Code */
+/* توليد رمز الـ QR */
 function generateQRCode() {
   const url = document.getElementById('inputQrUrl').value.trim();
   if(!url){
-    toast(lang==='ar'?'يرجى كتابة رابط أولاً 🔗':'Please enter a link first 🔗');
+    toast('يرجى كتابة رابط أولاً 🔗');
     return;
   }
 
   const qrImg = document.getElementById('posterQrCode');
   qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(url)}`;
   qrImg.style.display = 'block';
-  toast(lang==='ar'?'تم إنشاء رمز الـ QR وتطبيقه على البوستر! 📱':'QR Code generated and added to poster! 📱');
+  toast('تم إنشاء رمز الـ QR وتطبيقه على البوستر! 📱');
 }
 
 function clearQRCode() {
@@ -852,27 +832,27 @@ function clearQRCode() {
   document.getElementById('inputQrUrl').value = '';
 }
 
-/* Feature: Promo Badges & Stickers */
+/* الشارات وملصقات العروض */
 function setPromoBadge(text) {
   const badge = document.getElementById('posterBadge');
   badge.textContent = text;
   badge.style.display = 'inline-block';
-  toast(lang==='ar'?`تمت إضافة الشارة: ${text}`:`Badge applied: ${text}`);
+  toast(`تمت إضافة الشارة: ${text}`);
 }
 
 function clearBadge() {
   document.getElementById('posterBadge').style.display = 'none';
 }
 
-/* Pollinations AI Integration for Background Image Generation */
+/* إنتاج خلفية ذكاء اصطناعي عبر Pollinations AI */
 function generateAIBackground(){
   const promptInput = document.getElementById('inputAiBgPrompt').value.trim();
   if(!promptInput){
-    toast(lang==='ar'?'يرجى كتابة وصف للصورة أولاً':'Please enter an image prompt first');
+    toast('يرجى كتابة وصف للصورة أولاً');
     return;
   }
   
-  toast(lang==='ar'?'جاري توليد الصورة بالذكاء الاصطناعي... 🎨':'Generating AI background image... 🎨');
+  toast('جاري توليد الصورة بالذكاء الاصطناعي... 🎨');
   
   const seed = Math.floor(Math.random() * 100000);
   const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(promptInput)}?width=1080&height=1080&nologo=true&seed=${seed}`;
@@ -881,19 +861,19 @@ function generateAIBackground(){
   img.crossOrigin = "Anonymous";
   img.onload = function(){
     setBgImage(imageUrl);
-    toast(lang==='ar'?'تم إنشاء وتطبيق خلفية الذكاء الاصطناعي بنجاح! ✨':'AI Background applied successfully! ✨');
+    toast('تم إنشاء وتطبيق خلفية الذكاء الاصطناعي بنجاح! ✨');
   };
   img.onerror = function(){
-    toast(lang==='ar'?'حدث خطأ أثناء تحميل صورة الذكاء الاصطناعي':'Error generating AI background');
+    toast('حدث خطأ أثناء تحميل صورة الذكاء الاصطناعي');
   };
   img.src = imageUrl;
 }
 
-/* Pollinations AI Integration for Text & Creative Brief Understanding */
+/* تحليل الأفكار واستخراج النصوص بالذكاء الاصطناعي */
 async function understandIdea(){
   const userPrompt = document.getElementById('prompt').value.trim();
   if(!userPrompt){
-    toast(lang==='ar'?'اكتب فكرتك أولًا ✨':'Tell me your idea first ✨');
+    toast('اكتب فكرتك أولًا ✨');
     return;
   }
 
@@ -905,7 +885,7 @@ async function understandIdea(){
     const p = userPrompt.toLowerCase();
     const content = p.includes('menu')||p.includes('قائمة')?'قائمة طعام':(p.includes('story')||p.includes('ستوري')?'ستوري':(p.includes('product')||p.includes('منتج')?'منتج جديد':'عرض ترويجي'));
     const format = p.includes('story')||p.includes('ستوري')?'ستوري انستغرام':'منشور انستغرام';
-    const offer = (userPrompt.match(/\d+\s*%/) || [lang==='ar'?'عرض خاص':'SPECIAL OFFER'])[0].toUpperCase();
+    const offer = (userPrompt.match(/\d+\s*%/) || ['عرض خاص'])[0].toUpperCase();
     const product = p.includes('coffee')||p.includes('قهوة')?'قهوة مختصة':(p.includes('dessert')||p.includes('حلويات')?'حلويات':'مشروبات باردة');
     const duration = (userPrompt.match(/\d+\s*(day|days|week|weeks|أيام|يوم)/i) || ['3 أيام'])[0];
 
@@ -915,7 +895,6 @@ async function understandIdea(){
     document.getElementById('intentProduct').textContent = product;
     document.getElementById('intentDuration').textContent = duration;
 
-    // Connect with Pollinations AI for realistic ad copywriting suggestions
     const aiApiUrl = `https://text.pollinations.ai/${encodeURIComponent("Write 3 short Arabic advertisement headings and subtexts for this business idea: " + userPrompt + ". Return plain text with 3 lines in format Heading | Subtext")}`;
     
     fetch(aiApiUrl)
@@ -930,8 +909,8 @@ async function understandIdea(){
         } else {
           currentGeneratedConcepts = [
             { heading: offer, sub: product + " · " + duration },
-            { heading: lang==='ar'?'خصم مميز':'SPECIAL DISCOUNT', sub: userPrompt },
-            { heading: lang==='ar'?'لفترة محدودة':'LIMITED TIME', sub: lang==='ar'?'استمتع بأفضل العروض اليوم':'Best deals today' }
+            { heading: 'خصم مميز', sub: userPrompt },
+            { heading: 'لفترة محدودة', sub: 'استمتع بأفضل العروض اليوم' }
           ];
         }
         updateConceptCardsUI();
@@ -939,8 +918,8 @@ async function understandIdea(){
       .catch(() => {
         currentGeneratedConcepts = [
           { heading: offer, sub: product + " · " + duration },
-          { heading: lang==='ar'?'خصم مميز':'SPECIAL DISCOUNT', sub: userPrompt },
-          { heading: lang==='ar'?'لفترة محدودة':'LIMITED TIME', sub: lang==='ar'?'استمتع بأفضل العروض اليوم':'Best deals today' }
+          { heading: 'خصم مميز', sub: userPrompt },
+          { heading: 'لفترة محدودة', sub: 'استمتع بأفضل العروض اليوم' }
         ];
         updateConceptCardsUI();
       });
@@ -948,24 +927,20 @@ async function understandIdea(){
     setTimeout(() => {
       document.getElementById('loadingAI').style.display = 'none';
       document.getElementById('understood').style.display = 'block';
-      translateStatic();
     }, 800);
 
   } catch(e) {
     document.getElementById('loadingAI').style.display = 'none';
-    toast(lang==='ar'?'حدث خطأ أثناء معالجة الذكاء الاصطناعي':'Error processing AI response');
+    toast('حدث خطأ أثناء معالجة الذكاء الاصطناعي');
   }
 }
 
 function updateConceptCardsUI(){
   if(!currentGeneratedConcepts || currentGeneratedConcepts.length < 3) return;
-  
   document.getElementById('c1Heading').textContent = currentGeneratedConcepts[0].heading;
   document.getElementById('c1Sub').textContent = currentGeneratedConcepts[0].sub;
-  
   document.getElementById('c2Heading').textContent = currentGeneratedConcepts[1].heading;
   document.getElementById('c2Sub').textContent = currentGeneratedConcepts[1].sub;
-  
   document.getElementById('c3Heading').textContent = currentGeneratedConcepts[2].heading;
   document.getElementById('c3Sub').textContent = currentGeneratedConcepts[2].sub;
 }
@@ -979,16 +954,14 @@ function openEditorWithConcept(index){
   show('editor');
 }
 
-/* Fullscreen Preview Modal Engine */
+/* شاشة المعاينة كاملة */
 function openPreviewModal(){
   const canvas = document.getElementById('posterCanvas');
   const modalContainer = document.getElementById('modalCanvasContainer');
   modalContainer.innerHTML = '';
-  
   const clone = canvas.cloneNode(true);
   clone.style.boxShadow = '0 30px 80px rgba(0,0,0,0.9)';
   modalContainer.appendChild(clone);
-  
   document.getElementById('previewModal').style.display = 'flex';
 }
 
@@ -996,10 +969,9 @@ function closePreviewModal(){
   document.getElementById('previewModal').style.display = 'none';
 }
 
-/* Drag & Drop Core Engine for Canvas Elements */
+/* نظام السحب والإفلات */
 function initDragAndDrop() {
   const draggables = document.querySelectorAll('.draggable-item');
-  
   draggables.forEach(el => {
     let isDragging = false;
     let startX, startY, currentX = 0, currentY = 0;
@@ -1010,13 +982,10 @@ function initDragAndDrop() {
     function dragStart(e) {
       isDragging = true;
       el.classList.add('dragging');
-      
       const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
       const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
-
       startX = clientX - (parseFloat(el.dataset.x) || 0);
       startY = clientY - (parseFloat(el.dataset.y) || 0);
-
       document.addEventListener('mousemove', drag);
       document.addEventListener('touchmove', drag, {passive: false});
       document.addEventListener('mouseup', dragEnd);
@@ -1026,13 +995,10 @@ function initDragAndDrop() {
     function drag(e) {
       if (!isDragging) return;
       if (e.cancelable) e.preventDefault();
-
       const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
       const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
-
       currentX = clientX - startX;
       currentY = clientY - startY;
-
       el.dataset.x = currentX;
       el.dataset.y = currentY;
       el.style.transform = `translate(${currentX}px, ${currentY}px)`;
@@ -1055,37 +1021,7 @@ function resetPositions() {
     el.dataset.y = 0;
     el.style.transform = 'translate(0px, 0px)';
   });
-  toast(lang==='ar'?'تم إعادة ضبط مواضع العناصر!':'Layout reset!');
-}
-
-function translateStatic(){
-  document.querySelectorAll('body *').forEach(el=>{
-    if(el.classList.contains('lang-toggle') || el.classList.contains('theme-toggle')) return;
-    if(el.children.length===0){
-      if(!el.dataset.enText) el.dataset.enText=el.textContent;
-      const en=el.dataset.enText.trim();
-      if(lang==='ar' && AR[en]) el.textContent=AR[en];
-      if(lang==='en' && en) el.textContent=en;
-    }
-  });
-  
-  const prompt=document.getElementById('prompt');
-  if(prompt) prompt.placeholder=lang==='ar'?'اكتب فكرتك هنا… مثال: أريد إعلان خصم 20٪ على المشروبات الباردة لمدة 3 أيام.':'Tell me what you need… e.g. I want a 20% discount ad on cold drinks for 3 days.';
-  
-  document.querySelectorAll('.lang-toggle').forEach(btn => {
-    btn.textContent = lang==='ar'?'🌐 English':'🌐 العربية';
-  });
-  
-  document.documentElement.lang=lang==='ar'?'ar':'en';
-  document.body.classList.toggle('rtl',lang==='ar');
-  document.body.dir=lang==='ar'?'rtl':'ltr';
-}
-
-function toggleLanguage(){
-  lang=lang==='en'?'ar':'en';
-  translateStatic();
-  renderSavedProjects();
-  renderPresetTemplates();
+  toast('تم إعادة ضبط مواضع العناصر!');
 }
 
 function show(id){
@@ -1094,7 +1030,6 @@ function show(id){
   window.scrollTo(0,0);
   if(id==='dashboard') renderSavedProjects();
   if(id==='templates') renderPresetTemplates();
-  setTimeout(translateStatic,0);
 }
 
 function mobileNavTo(screenId, el){
@@ -1109,21 +1044,17 @@ function selectOption(el){
 }
 
 function fill(text){
-  document.getElementById('prompt').value=lang==='ar'?'أريد إنشاء '+text+' لـ لونا كافيه.':'I want to create a '+text+' for Luna Café.';
+  document.getElementById('prompt').value = 'أريد إنشاء ' + text + ' لـ لونا كافيه.';
 }
 
 function generateConcepts(style,button){
   document.querySelectorAll('.style-btn').forEach(b=>b.classList.remove('selected'));
   button.classList.add('selected');
   document.getElementById('concepts').style.display='grid';
-  toast(lang==='ar'?`تم اختيار أسلوب ${style}`:`${style} direction selected`);
+  toast(`تم اختيار أسلوب ${style}`);
 }
 
-function openEditor(){
-  show('editor');
-}
-
-/* Feature: Logo Upload */
+/* رفع الشعار */
 function handleLogoUpload(e){
   const file = e.target.files[0];
   if(file){
@@ -1133,7 +1064,7 @@ function handleLogoUpload(e){
       img.src = evt.target.result;
       img.style.display = 'block';
       document.getElementById('logoSizeControl').style.display = 'block';
-      toast(lang==='ar'?'تم رفع الشعار! يمكنك سحبه في أي مكان 🎯':'Logo uploaded! Drag it anywhere 🎯');
+      toast('تم رفع الشعار! يمكنك سحبه في أي مكان 🎯');
     }
     reader.readAsDataURL(file);
   }
@@ -1147,7 +1078,7 @@ function clearLogo(){
   document.getElementById('logoSizeControl').style.display = 'none';
 }
 
-/* Background Custom File Upload */
+/* رفع خلفية خاصة */
 function handleBgUpload(e){
   const file = e.target.files[0];
   if(file){
@@ -1155,7 +1086,7 @@ function handleBgUpload(e){
     reader.onload = function(evt){
       const canvas = document.getElementById('posterCanvas');
       canvas.style.backgroundImage = `url('${evt.target.result}')`;
-      toast(lang==='ar'?'تم تفعيل صورة الخلفية الخاصة 🖼️':'Custom background applied 🖼️');
+      toast('تم تفعيل صورة الخلفية الخاصة 🖼️');
     }
     reader.readAsDataURL(file);
   }
@@ -1164,7 +1095,7 @@ function handleBgUpload(e){
 function setBgGradient(gradientStr){
   const canvas = document.getElementById('posterCanvas');
   canvas.style.backgroundImage = gradientStr;
-  toast(lang==='ar'?'تم تطبيق تدرج الألوان ✨':'Gradient applied ✨');
+  toast('تم تطبيق تدرج الألوان ✨');
 }
 
 function setFilterEffect(filterStr, btn){
@@ -1176,11 +1107,9 @@ function setFilterEffect(filterStr, btn){
   updateCanvas();
 }
 
-/* Aspect Ratio Switcher */
 function setAspectRatio(ratio, btn){
   currentAspectRatio = ratio;
   const canvas = document.getElementById('posterCanvas');
-  
   if(btn){
     btn.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
     btn.classList.add('active');
@@ -1246,7 +1175,6 @@ function updateCanvas(){
   document.getElementById('posterSubtext').style.textShadow = textShadowStyle;
 }
 
-/* Preset Template Gallery */
 function renderPresetTemplates(){
   const grid = document.getElementById('presetTemplatesGrid');
   if(!grid) return;
@@ -1285,7 +1213,7 @@ function loadPresetTemplate(id){
   setAspectRatio(template.ratio);
   setBgImage(template.bgImage);
   show('editor');
-  toast(lang==='ar'?'تم تحميل القالب بنجاح! 🎨':'Template loaded! 🎨');
+  toast('تم تحميل القالب بنجاح! 🎨');
 }
 
 function saveProject(){
@@ -1300,13 +1228,13 @@ function saveProject(){
     textColor: document.getElementById('inputTextColor').value,
     bgColor: document.getElementById('inputBgColor').value,
     ratio: currentAspectRatio,
-    date: new Date().toLocaleDateString(lang==='ar'?'ar-EG':'en-US',{month:'short',day:'numeric'})
+    date: new Date().toLocaleDateString('ar-EG',{month:'short',day:'numeric'})
   };
 
   let saved = JSON.parse(localStorage.getItem('ai_creative_projects') || '[]');
   saved.unshift(project);
   localStorage.setItem('ai_creative_projects', JSON.stringify(saved));
-  toast(lang==='ar'?'تم حفظ التصميم في المشاريع! 💾':'Saved to Projects! 💾');
+  toast('تم حفظ التصميم في المشاريع! 💾');
 }
 
 function renderSavedProjects(){
@@ -1356,39 +1284,39 @@ function loadProject(id){
 
   updateCanvas();
   show('editor');
-  toast(lang==='ar'?'تم تحميل التصميم ✨':'Design loaded ✨');
+  toast('تم تحميل التصميم ✨');
 }
 
-/* Multi-Format Export Methods (PNG, JPG, PDF) */
+/* التصدير بصيغ PNG / JPG / PDF */
 function downloadPNG(){
   const poster = document.getElementById('posterCanvas');
-  toast(lang==='ar'?'جاري تجهيز صورة PNG...':'Generating PNG...');
+  toast('جاري تجهيز صورة PNG...');
   
   html2canvas(poster, { scale: 2, useCORS: true, backgroundColor: null }).then(canvas => {
     const link = document.createElement('a');
     link.download = 'creative-ai-design.png';
     link.href = canvas.toDataURL('image/png');
     link.click();
-    toast(lang==='ar'?'تم تنزيل صورة PNG! 🎉':'Downloaded PNG successfully! 🎉');
+    toast('تم تنزيل صورة PNG! 🎉');
   });
 }
 
 function downloadJPG(){
   const poster = document.getElementById('posterCanvas');
-  toast(lang==='ar'?'جاري تجهيز صورة JPG...':'Generating JPG...');
+  toast('جاري تجهيز صورة JPG...');
   
   html2canvas(poster, { scale: 2, useCORS: true, backgroundColor: '#000000' }).then(canvas => {
     const link = document.createElement('a');
     link.download = 'creative-ai-design.jpg';
     link.href = canvas.toDataURL('image/jpeg', 0.95);
     link.click();
-    toast(lang==='ar'?'تم تنزيل صورة JPG! 🎉':'Downloaded JPG successfully! 🎉');
+    toast('تم تنزيل صورة JPG! 🎉');
   });
 }
 
 function downloadPDF(){
   const poster = document.getElementById('posterCanvas');
-  toast(lang==='ar'?'جاري تحويل التصميم لملف PDF...':'Generating PDF...');
+  toast('جاري تحويل التصميم لملف PDF...');
   
   html2canvas(poster, { scale: 2, useCORS: true }).then(canvas => {
     const imgData = canvas.toDataURL('image/png');
@@ -1399,7 +1327,7 @@ function downloadPDF(){
     
     pdf.addImage(imgData, 'PNG', 0, 10, pdfWidth, pdfHeight);
     pdf.save('creative-ai-design.pdf');
-    toast(lang==='ar'?'تم تنزيل ملف PDF بنجاح! 📄':'Downloaded PDF successfully! 📄');
+    toast('تم تنزيل ملف PDF بنجاح! 📄');
   });
 }
 
@@ -1411,7 +1339,6 @@ function toast(msg){
 }
 
 window.addEventListener('DOMContentLoaded',()=>{
-  translateStatic();
   renderSavedProjects();
   renderPresetTemplates();
   initDragAndDrop();
