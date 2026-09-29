@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>CREATIVE AI — استديو التصميم والذكاء الاصطناعي</title>
+<title>CREATIVE AI — استديو التصميم والذكاء الاصطناعي الفاخر</title>
 
 <!-- مكتبات التصدير عالي الدقة وتأثيرات الاحتفال -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -15,8 +15,8 @@
 
 :root {
   --bg-dark: #07090e;
-  --bg-card: rgba(17, 21, 32, 0.82);
-  --bg-card-hover: rgba(24, 31, 46, 0.9);
+  --bg-card: rgba(17, 21, 32, 0.85);
+  --bg-card-hover: rgba(24, 31, 46, 0.92);
   --border: rgba(255, 255, 255, 0.08);
   --accent: #c2f83b;
   --accent-glow: rgba(194, 248, 59, 0.25);
@@ -29,7 +29,7 @@
 
 body.light-mode {
   --bg-dark: #f8fafc;
-  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-card: rgba(255, 255, 255, 0.92);
   --bg-card-hover: #f1f5f9;
   --border: rgba(0, 0, 0, 0.08);
   --accent: #65a30d;
@@ -169,7 +169,7 @@ body[dir="ltr"] .sidebar{border-left:none;border-right:1px solid var(--border)}
 .panel{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:24px;backdrop-filter:blur(20px)}
 
 /* تخطيط الاستديو الفاخر */
-.editor{display:grid;grid-template-columns:150px 1fr 340px;gap:18px;align-items:start}
+.editor{display:grid;grid-template-columns:150px 1fr 350px;gap:18px;align-items:start}
 .tools{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:16px;position:sticky;top:84px}
 .controls{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:18px}
 .tool{padding:10px 12px;border-radius:10px;font-size:12px;font-weight:700;color:var(--text-muted);cursor:pointer;margin-bottom:6px;transition:all 0.15s;display:flex;align-items:center;gap:8px}
@@ -197,13 +197,89 @@ body[dir="ltr"] .sidebar{border-left:none;border-right:1px solid var(--border)}
 .field{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:10px;background:var(--input-bg);color:var(--text-main);font-size:12px;outline:none}
 .field:focus{border-color:var(--accent)}
 
-/* أدوات التحكم بالألوان المتقدمة */
-.color-picker-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;background:rgba(0,0,0,0.2);padding:8px 12px;border-radius:10px;border:1px solid var(--border)}
-.color-picker-row span{font-size:11px;font-weight:700;color:var(--text-main)}
-.color-picker-input{width:32px;height:32px;border:none;border-radius:50%;cursor:pointer;background:none}
+/* كروت الألوان المتقدمة والعصرية */
+.palette-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
 
-/* زر التحكم العائم المحسن للجوال */
+.palette-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.palette-card:hover, .palette-card.active {
+  border-color: var(--accent);
+  background: rgba(255,255,255,0.07);
+  transform: translateY(-2px);
+}
+
+.palette-card-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.palette-swatches {
+  display: flex;
+  gap: 4px;
+  height: 18px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.palette-swatch {
+  flex: 1;
+  height: 100%;
+}
+
+.color-picker-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  background: rgba(0,0,0,0.25);
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.color-picker-row span { font-size: 11px; font-weight: 700; color: var(--text-main); }
+.color-picker-input { width: 30px; height: 30px; border: none; border-radius: 50%; cursor: pointer; background: none; }
+
+/* مقبض اللمس والزر العائم للجوال */
 .mobile-floating-pill { display: none; }
+
+.sheet-handle {
+  width: 100%;
+  padding: 10px 0 14px;
+  display: flex;
+  justify-content: center;
+  cursor: grab;
+  touch-action: none;
+}
+
+.sheet-handle-bar {
+  width: 45px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 99px;
+  transition: background 0.2s;
+}
+
+.sheet-handle:active .sheet-handle-bar {
+  background: var(--accent);
+}
 
 @media(max-width:850px){
   .navlinks{display:none}
@@ -250,7 +326,6 @@ body[dir="ltr"] .sidebar{border-left:none;border-right:1px solid var(--border)}
     cursor: pointer;
     transition: all 0.25s ease;
   }
-  .mobile-floating-pill .handle-bar { width: 20px; height: 3px; background: var(--accent); border-radius: 99px; }
 
   .controls {
     position: fixed;
@@ -258,7 +333,7 @@ body[dir="ltr"] .sidebar{border-left:none;border-right:1px solid var(--border)}
     left: 0;
     right: 0;
     z-index: 1000;
-    max-height: 82vh;
+    max-height: 85vh;
     overflow-y: auto;
     border-radius: 24px 24px 0 0;
     box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.95);
@@ -266,7 +341,7 @@ body[dir="ltr"] .sidebar{border-left:none;border-right:1px solid var(--border)}
     backdrop-filter: blur(25px);
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     transform: translateY(100%);
-    padding: 20px 20px 80px;
+    padding: 10px 20px 80px;
   }
 
   .controls.active { transform: translateY(0); }
@@ -274,11 +349,9 @@ body[dir="ltr"] .sidebar{border-left:none;border-right:1px solid var(--border)}
 }
 
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--white);color:var(--bg-dark);padding:10px 22px;border-radius:99px;display:none;font-size:12px;font-weight:800;z-index:20000;box-shadow:0 10px 30px rgba(0,0,0,0.5)}
-.swatch-btn{width:28px;height:28px;border-radius:50%;border:1px solid rgba(255,255,255,0.2);cursor:pointer;display:inline-block;transition:transform 0.15s}
-.swatch-btn:hover{transform:scale(1.15)}
 
 .ai-assistant-box {
-  background: linear-gradient(135deg, rgba(194,248,59,0.1), rgba(0,0,0,0.35));
+  background: linear-gradient(135deg, rgba(194,248,59,0.12), rgba(0,0,0,0.4));
   border: 1px solid rgba(194,248,59,0.35);
   border-radius: 14px;
   padding: 14px;
@@ -464,7 +537,7 @@ body[dir="ltr"] .sidebar{border-left:none;border-right:1px solid var(--border)}
 </div>
 </section>
 
-<!-- 7️⃣ استديو التصميم المتطور بالألوان الممتدة وإضافة الصور الذكية -->
+<!-- 7️⃣ استديو التصميم المتطور بالألوان العصرية وتوليد الخلفيات بالـ AI -->
 <section id="editor" class="screen">
 <div class="app">
   <aside class="sidebar">
@@ -490,7 +563,6 @@ body[dir="ltr"] .sidebar{border-left:none;border-right:1px solid var(--border)}
 
     <!-- زر السهم العائم للجوال -->
     <button class="mobile-floating-pill" id="mobileSheetBtn" onclick="toggleMobileSheet()">
-      <div class="handle-bar"></div>
       <span id="mobileBtnText" data-i18n="mobileControlText">تعديل التصميم ومساعد الـ AI</span>
       <span id="mobileBtnIcon">▲</span>
     </button>
@@ -519,30 +591,69 @@ body[dir="ltr"] .sidebar{border-left:none;border-right:1px solid var(--border)}
       </div>
 
       <div class="controls" id="mobileControlsPanel">
+        <!-- مقبض السحب بالإصبع للجوال -->
+        <div class="sheet-handle" id="sheetHandle">
+          <div class="sheet-handle-bar"></div>
+        </div>
+
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
           <b style="color:var(--white);font-size:14px" data-i18n="studioControlsTitle">إعدادات التحكم ومساعد AI</b>
           <button class="btn" style="padding:4px 10px;font-size:11px" onclick="toggleMobileSheet()" data-i18n="btnClose">▼ إغلاق</button>
         </div>
 
-        <!-- 🤖 مساعد الذكاء الاصطناعي الذكي للصور والألوان -->
+        <!-- 🤖 1. توليد خلفية خاصة بالذكاء الاصطناعي بناءً على وصف العميل -->
         <div class="ai-assistant-box">
-          <b style="color:var(--accent);font-size:12px;display:block;margin-bottom:6px" data-i18n="aiAssistTitle">🤖 مساعد الذكاء الاصطناعي السريع</b>
-          <div style="display:flex;gap:6px;flex-wrap:wrap">
-            <button class="btn accent" style="padding:6px 12px;font-size:11px" onclick="aiAutoSelectImage()" data-i18n="aiSelectImg">🖼️ اختر صورة AI مناسبة</button>
-            <button class="btn" style="padding:6px 12px;font-size:11px" onclick="aiMagicPalette()" data-i18n="aiPalette">🎨 نسق سحري AI</button>
-            <button class="btn" style="padding:4px 10px;font-size:11px" onclick="aiMagicRewrite('luxury')" data-i18n="aiLuxury">✨ صياغة فاخرة</button>
-            <button class="btn" style="padding:4px 10px;font-size:11px" onclick="aiMagicRewrite('promo')" data-i18n="aiPromo">🔥 صياغة عروض</button>
+          <b style="color:var(--accent);font-size:12px;display:block;margin-bottom:6px" data-i18n="aiCustomBgHeader">🎨 توليد خلفية خاصة بالذكاء الاصطناعي</b>
+          <input class="field" id="aiBgPromptInput" data-i18n-ph="aiBgPromptPh" placeholder="اكتب وصف الخلفية المطلوبة… مثال: فنجان قهوة محاط بحبوب القهوة مع نيون دافئ" style="margin-bottom:8px">
+          <button class="btn accent" style="width:100%;justify-content:center" onclick="generateAiBackground()" data-i18n="btnGenBgAi">✨ توليد خلفيات بالذكاء الاصطناعي</button>
+
+          <div id="aiBgResultsGrid" style="display:none;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px"></div>
+        </div>
+
+        <!-- 🎨 2. جدول وكروت الألوان العصرية -->
+        <div class="muted" style="margin-bottom:8px" data-i18n="presetPalettesHeader">🎨 پاليتات ألوان عصرية جاهزة</div>
+        <div class="palette-cards-grid">
+          <div class="palette-card active" onclick="applyPresetPalette('linear-gradient(135deg, #111520, #090d14)', '#c2f83b', '#ffffff')">
+            <div class="palette-card-title">Cyber Neon ⚡</div>
+            <div class="palette-swatches">
+              <div class="palette-swatch" style="background:#111520"></div>
+              <div class="palette-swatch" style="background:#090d14"></div>
+              <div class="palette-swatch" style="background:#c2f83b"></div>
+            </div>
+          </div>
+          <div class="palette-card" onclick="applyPresetPalette('linear-gradient(135deg, #11998e, #38ef7d)', '#ffffff', '#ffffff')">
+            <div class="palette-card-title">Emerald Luxury 💎</div>
+            <div class="palette-swatches">
+              <div class="palette-swatch" style="background:#11998e"></div>
+              <div class="palette-swatch" style="background:#38ef7d"></div>
+              <div class="palette-swatch" style="background:#ffffff"></div>
+            </div>
+          </div>
+          <div class="palette-card" onclick="applyPresetPalette('linear-gradient(135deg, #8a2387, #e94057, #f27121)', '#c2f83b', '#ffffff')">
+            <div class="palette-card-title">Sunset Glow 🔥</div>
+            <div class="palette-swatches">
+              <div class="palette-swatch" style="background:#8a2387"></div>
+              <div class="palette-swatch" style="background:#e94057"></div>
+              <div class="palette-swatch" style="background:#f27121"></div>
+            </div>
+          </div>
+          <div class="palette-card" onclick="applyPresetPalette('linear-gradient(135deg, #0f2027, #203a43, #2c5364)', '#00f2fe', '#ffffff')">
+            <div class="palette-card-title">Midnight Gold 🌙</div>
+            <div class="palette-swatches">
+              <div class="palette-swatch" style="background:#0f2027"></div>
+              <div class="palette-swatch" style="background:#203a43"></div>
+              <div class="palette-swatch" style="background:#00f2fe"></div>
+            </div>
           </div>
         </div>
 
-        <!-- 🎨 الألوان والتنسيق المتقدم والحر -->
-        <div class="muted" style="margin-bottom:8px" data-i18n="customColorHeader">🎨 تخصيص الألوان والتنسيق حسب الرغبة</div>
+        <div class="muted" style="margin-bottom:8px" data-i18n="customColorHeader">⚙️ منتقي الألوان الحر المباشر</div>
         <div class="color-picker-row">
-          <span data-i18n="pickerAccent">لون العروض والإشعاع (Accent)</span>
+          <span data-i18n="pickerAccent">لون الإشعاع والعروض (Accent)</span>
           <input type="color" id="pickerAccent" class="color-picker-input" value="#c2f83b" onchange="setCustomAccentColor(this.value)">
         </div>
         <div class="color-picker-row">
-          <span data-i18n="pickerText">لون النصوص الرئيسية (Text)</span>
+          <span data-i18n="pickerText">لون النصوص الرئيسية (Heading)</span>
           <input type="color" id="pickerText" class="color-picker-input" value="#ffffff" onchange="setCustomTextColor(this.value)">
         </div>
         <div class="color-picker-row">
@@ -550,27 +661,16 @@ body[dir="ltr"] .sidebar{border-left:none;border-right:1px solid var(--border)}
           <input type="range" id="sliderOverlay" min="0" max="90" value="45" style="width:100px" oninput="setOverlayDarkness(this.value)">
         </div>
 
-        <div class="muted" style="margin:12px 0 6px" data-i18n="presetPalettesHeader">پاليتات وتدرجات فاخرة جاهزة</div>
-        <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
-          <span class="swatch-btn" title="Sunset Gold" style="background:linear-gradient(135deg, #ff416c, #ff4b2b)" onclick="applyPresetPalette('linear-gradient(135deg, #ff416c, #ff4b2b)', '#c2f83b')"></span>
-          <span class="swatch-btn" title="Emerald Luxury" style="background:linear-gradient(135deg, #11998e, #38ef7d)" onclick="applyPresetPalette('linear-gradient(135deg, #11998e, #38ef7d)', '#ffffff')"></span>
-          <span class="swatch-btn" title="Neon Cyber" style="background:linear-gradient(135deg, #8a2387, #e94057, #f27121)" onclick="applyPresetPalette('linear-gradient(135deg, #8a2387, #e94057, #f27121)', '#c2f83b')"></span>
-          <span class="swatch-btn" title="Midnight Tech" style="background:linear-gradient(135deg, #0f2027, #203a43, #2c5364)" onclick="applyPresetPalette('linear-gradient(135deg, #0f2027, #203a43, #2c5364)', '#00f2fe')"></span>
-          <span class="swatch-btn" title="Rose Gold" style="background:linear-gradient(135deg, #23074d, #cc5333)" onclick="applyPresetPalette('linear-gradient(135deg, #23074d, #cc5333)', '#ffd700')"></span>
-          <span class="swatch-btn" title="Terracotta" style="background:linear-gradient(135deg, #b92b27, #1565c0)" onclick="applyPresetPalette('linear-gradient(135deg, #b92b27, #1565c0)', '#ffffff')"></span>
-        </div>
-
         <hr style="border:0;border-top:1px solid var(--border);margin:14px 0">
 
-        <!-- 🖼️ خيارات وقوائم الصور والبحث -->
-        <div class="muted" style="margin-bottom:8px" data-i18n="imageGalleryHeader">🖼️ مكتبة صور عالية الدقة حسب المجال</div>
+        <!-- 🖼️️ 3. صور الخلفية المصنفة -->
+        <div class="muted" style="margin-bottom:8px" data-i18n="imageGalleryHeader">🖼️ صور خلفية مصنفة حسب المجال</div>
         <div class="chips" style="margin-top:0">
           <button class="chip" onclick="setBgImage('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb')">☕ كافيهات</button>
           <button class="chip" onclick="setBgImage('https://images.unsplash.com/photo-1555396273-367ea4eb4db5')">🍽️ أطباق</button>
           <button class="chip" onclick="setBgImage('https://images.unsplash.com/photo-1560066984-138dadb4c035')">✂️ صالونات</button>
-          <button class="chip" onclick="setBgImage('https://images.unsplash.com/photo-1441986300917-64674bd600d8')">🛍️ منتجات</button>
+          <button class="chip" onclick="setBgImage('https://images.unsplash.com/photo-1441986300917-64674bd600d8')">🛍️️ منتجات</button>
           <button class="chip" onclick="setBgImage('https://images.unsplash.com/photo-1600585154340-be6161a56a0c')">🏢 عقارات</button>
-          <button class="chip" onclick="setBgImage('https://images.unsplash.com/photo-1551024709-8f23befc6f87')">🍹 عصائر</button>
         </div>
 
         <div class="muted" style="margin:10px 0 6px" data-i18n="uploadImgLabel">🖼️ رفع صورة أو شعار خاص من جهازك</div>
@@ -580,7 +680,7 @@ body[dir="ltr"] .sidebar{border-left:none;border-right:1px solid var(--border)}
 
         <hr style="border:0;border-top:1px solid var(--border);margin:14px 0">
 
-        <!-- 📱 مولد الـ QR Code -->
+        <!-- 📱 الـ QR Code -->
         <div class="muted" style="margin-bottom:8px" data-i18n="qrLabel">📱 إنشاء رمز الـ QR (متجر / منيو)</div>
         <div class="control">
           <input class="field" id="inputQrUrl" placeholder="أدخل الرابط مثل: https://instagram.com" style="margin-bottom:6px">
@@ -592,7 +692,7 @@ body[dir="ltr"] .sidebar{border-left:none;border-right:1px solid var(--border)}
 
         <hr style="border:0;border-top:1px solid var(--border);margin:14px 0">
 
-        <!-- 🏷️ شارات العروض -->
+        <!-- 🏷️ الشارات والأبعاد -->
         <div class="muted" style="margin-bottom:8px" data-i18n="badgesLabel">🏷️ الشارات وملصقات التخفيضات</div>
         <div class="chips" style="margin-top:0">
           <button class="chip" onclick="setPromoBadge('🔥 HOT DEAL')">🔥 HOT DEAL</button>
@@ -603,7 +703,6 @@ body[dir="ltr"] .sidebar{border-left:none;border-right:1px solid var(--border)}
 
         <hr style="border:0;border-top:1px solid var(--border);margin:14px 0">
 
-        <!-- 📐 اختيار الأبعاد -->
         <div class="muted" style="margin-bottom:8px" data-i18n="ratioLabel">أبعاد البوستر</div>
         <div class="chips" style="margin-top:0">
           <button class="chip active" onclick="setAspectRatio('1:1', this)">مربع 1:1</button>
@@ -613,7 +712,7 @@ body[dir="ltr"] .sidebar{border-left:none;border-right:1px solid var(--border)}
 
         <hr style="border:0;border-top:1px solid var(--border);margin:14px 0">
 
-        <!-- ✍️ التحكم بالنصوص والخطوط -->
+        <!-- ✍️ النصوص والخطوط -->
         <div class="muted" style="margin-bottom:8px" data-i18n="textControlsLabel">تعديل النصوص والخطوط</div>
         <div class="control">
           <label data-i18n="fontFamilyLabel">نوع الخط العربي</label>
@@ -660,19 +759,7 @@ body[dir="ltr"] .sidebar{border-left:none;border-right:1px solid var(--border)}
 let theme = 'dark';
 let lang = 'ar';
 
-/* صور AI المجهزة ذات جودة عالية حسب المجال */
-const aiImageLibrary = [
-  'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb',
-  'https://images.unsplash.com/photo-1555396273-367ea4eb4db5',
-  'https://images.unsplash.com/photo-1560066984-138dadb4c035',
-  'https://images.unsplash.com/photo-1441986300917-64674bd600d8',
-  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c',
-  'https://images.unsplash.com/photo-1551024709-8f23befc6f87',
-  'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
-  'https://images.unsplash.com/photo-1578985545062-69928b1d9587'
-];
-
-/* القاموس اللغوي الشامل لتبديل جميع نصوص التطبيق */
+/* القاموس اللغوي الدقيق والثنائي الشامل */
 const i18nDict = {
   ar: {
     logoTitle: "CREATIVE AI", navTemplates: "القوالب الجاهزة", navBrand: "الهوية التجارية", navCreate: "إنشاء تصاميم", btnStart: "يلا نبدأ التصميم ←",
@@ -692,11 +779,12 @@ const i18nDict = {
     chipPromo: "عرض ترويجي", chipNew: "منتج جديد", chipStory: "ستوري انستغرام", btnGenAi: "✦ توليد المفاهيم بالذكاء الاصطناعي ←",
     studioTitle: "استديو التصميم الذكي", btnReset: "↺ ضبط الأماكن", btnShare: "🔗 مشاركة", btnDlPng: "↓ تحميل (PNG)", btnDlPdf: "📄 PDF",
     mobileControlText: "تعديل التصميم ومساعد الـ AI", studioControlsTitle: "إعدادات التحكم ومساعد AI", btnClose: "▼ إغلاق",
-    aiAssistTitle: "🤖 مساعد الذكاء الاصطناعي السريع", aiSelectImg: "🖼️ اختر صورة AI مناسبة", aiPalette: "🎨 نسق سحري AI", aiLuxury: "✨ صياغة فاخرة", aiPromo: "🔥 صياغة عروض",
-    customColorHeader: "🎨 تخصيص الألوان والتنسيق حسب الرغبة", pickerAccent: "لون العروض والإشعاع (Accent)", pickerText: "لون النصوص الرئيسية (Text)", pickerOverlay: "عتمة الخلفية (Overlay)",
-    presetPalettesHeader: "پاليتات وتدرجات فاخرة جاهزة", imageGalleryHeader: "🖼️ مكتبة صور عالية الدقة حسب المجال", uploadImgLabel: "🖼️ رفع صورة أو شعار خاص من جهازك",
-    qrLabel: "📱 إنشاء رمز الـ QR (متجر / منيو)", btnAddQr: "📲 إضافة QR", badgesLabel: "🏷️ الشارات وملصقات التخفيضات", ratioLabel: "أبعاد البوستر",
-    textControlsLabel: "تعديل النصوص والخطوط", fontFamilyLabel: "نوع الخط العربي", brandLabel: "اسم العلامة", headingLabel: "العنوان الرئيسي", subtextLabel: "النص الفرعي",
+    aiCustomBgHeader: "🎨 توليد خلفية خاصة بالذكاء الاصطناعي", aiBgPromptPh: "اكتب وصف الخلفية المطلوبة… مثال: فنجان قهوة محاط بحبوب القهوة مع نيون دافئ",
+    btnGenBgAi: "✨ توليد خلفيات بالذكاء الاصطناعي", presetPalettesHeader: "🎨 پاليتات ألوان عصرية جاهزة", customColorHeader: "⚙️ منتقي الألوان الحر المباشر",
+    pickerAccent: "لون الإشعاع والعروض (Accent)", pickerText: "لون النصوص الرئيسية (Heading)", pickerOverlay: "عتمة الخلفية (Overlay)",
+    imageGalleryHeader: "🖼️ صور خلفية مصنفة حسب المجال", uploadImgLabel: "🖼️ رفع صورة أو شعار خاص من جهازك", qrLabel: "📱 إنشاء رمز الـ QR (متجر / منيو)", btnAddQr: "📲 إضافة QR",
+    badgesLabel: "🏷️ الشارات وملصقات التخفيضات", ratioLabel: "أبعاد البوستر", textControlsLabel: "تعديل النصوص والخطوط",
+    fontFamilyLabel: "نوع الخط العربي", brandLabel: "اسم العلامة", headingLabel: "العنوان الرئيسي", subtextLabel: "النص الفرعي",
     toolTexts: "النصوص", toolAi: "مساعد AI", toolColors: "الألوان المتقدمة", toolImages: "الصور والـ QR"
   },
   en: {
@@ -717,12 +805,13 @@ const i18nDict = {
     chipPromo: "Promo Offer", chipNew: "New Product", chipStory: "Instagram Story", btnGenAi: "✦ Generate AI Concepts ←",
     studioTitle: "AI Creative Studio", btnReset: "↺ Reset Positions", btnShare: "🔗 Share", btnDlPng: "↓ Download (PNG)", btnDlPdf: "📄 PDF",
     mobileControlText: "Design & AI Controls", studioControlsTitle: "Controls & AI Assistant", btnClose: "▼ Close",
-    aiAssistTitle: "🤖 AI Assistant Studio", aiSelectImg: "🖼️ AI Select Image", aiPalette: "🎨 AI Magic Palette", aiLuxury: "✨ Luxury Copy", aiPromo: "🔥 Promo Copy",
-    customColorHeader: "🎨 Custom Palette & Color Styling", pickerAccent: "Accent Color", pickerText: "Text Color", pickerOverlay: "Overlay Darkness",
-    presetPalettesHeader: "Preset Curated Palettes", imageGalleryHeader: "🖼️ Curated High-Res Photo Gallery", uploadImgLabel: "🖼️ Upload Custom Image/Logo",
-    qrLabel: "📱 Generate QR Code", btnAddQr: "📲 Add QR", badgesLabel: "🏷️ Promo Badges", ratioLabel: "Canvas Dimensions",
-    textControlsLabel: "Text & Font Settings", fontFamilyLabel: "Font Style", brandLabel: "Brand Name", headingLabel: "Main Title", subtextLabel: "Subtext",
-    toolTexts: "Text", toolAi: "AI Helper", toolColors: "Advanced Colors", toolImages: "Images & QR"
+    aiCustomBgHeader: "🎨 AI Custom Background Generator", aiBgPromptPh: "Describe background... e.g. Specialty coffee cup with warm neon lighting",
+    btnGenBgAi: "✨ Generate AI Backgrounds", presetPalettesHeader: "🎨 Modern Curated Palettes", customColorHeader: "⚙️ Custom Direct Color Picker",
+    pickerAccent: "Accent & Glow Color", pickerText: "Heading Text Color", pickerOverlay: "Background Overlay Tint",
+    imageGalleryHeader: "🖼️ Curated High-Res Photo Gallery", uploadImgLabel: "🖼️ Upload Custom Image/Logo", qrLabel: "📱 Generate QR Code", btnAddQr: "📲 Add QR",
+    badgesLabel: "🏷️ Promo Badges", ratioLabel: "Canvas Dimensions", textControlsLabel: "Text & Font Settings",
+    fontFamilyLabel: "Font Style", brandLabel: "Brand Name", headingLabel: "Main Title", subtextLabel: "Subtext",
+    toolTexts: "Text", toolAi: "AI Helper", toolColors: "Modern Colors", toolImages: "Images & QR"
   }
 };
 
@@ -742,7 +831,7 @@ function show(id){
   if(id==='templates') renderPresetTemplates('all');
 }
 
-/* تبديل اللغة وتطبيق القاموس */
+/* تبديل اللغة الشامل */
 function toggleLanguage(){
   lang = lang === 'ar' ? 'en' : 'ar';
   document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
@@ -768,55 +857,104 @@ function toggleTheme(){
   toast(theme === 'light' ? 'الوضع الفاتح ☀️' : 'الوضع الداكن 🌙');
 }
 
+/* 📲 4. التحكم بالسحب بالإصبع للوحة الجوال (Touch Swipe Sheet) */
+let touchStartY = 0;
+let isDraggingSheet = false;
+
+function initSwipeableSheet() {
+  const sheet = document.getElementById('mobileControlsPanel');
+  const handle = document.getElementById('sheetHandle');
+  if(!sheet || !handle) return;
+
+  handle.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+    isDraggingSheet = true;
+    sheet.style.transition = 'none';
+  }, {passive: true});
+
+  document.addEventListener('touchmove', (e) => {
+    if(!isDraggingSheet) return;
+    const currentY = e.touches[0].clientY;
+    const deltaY = currentY - touchStartY;
+
+    if (sheet.classList.contains('active')) {
+      if (deltaY > 0) sheet.style.transform = `translateY(${deltaY}px)`;
+    } else {
+      if (deltaY < 0) {
+        const fullHeight = sheet.offsetHeight;
+        sheet.style.transform = `translateY(${fullHeight + deltaY}px)`;
+      }
+    }
+  }, {passive: true});
+
+  document.addEventListener('touchend', (e) => {
+    if(!isDraggingSheet) return;
+    isDraggingSheet = false;
+    sheet.style.transition = 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)';
+
+    const endY = e.changedTouches[0].clientY;
+    const deltaY = endY - touchStartY;
+
+    if (sheet.classList.contains('active')) {
+      if (deltaY > 80) {
+        sheet.classList.remove('active');
+        sheet.style.transform = 'translateY(100%)';
+      } else {
+        sheet.style.transform = 'translateY(0)';
+      }
+    } else {
+      if (deltaY < -60) {
+        sheet.classList.add('active');
+        sheet.style.transform = 'translateY(0)';
+      } else {
+        sheet.style.transform = 'translateY(100%)';
+      }
+    }
+  });
+}
+
 function toggleMobileSheet() {
   const panel = document.getElementById('mobileControlsPanel');
-  const icon = document.getElementById('mobileBtnIcon');
-  
   panel.classList.toggle('active');
-  const isOpen = panel.classList.contains('active');
-  if (icon) icon.textContent = isOpen ? '▼' : '▲';
+  panel.style.transform = panel.classList.contains('active') ? 'translateY(0)' : 'translateY(100%)';
 }
 
-/* 🤖 AI Auto-Image Selection */
-function aiAutoSelectImage() {
-  toast('جاري اختيار أفضل صورة بالذكاء الاصطناعي... 🤖');
-  const randomImg = aiImageLibrary[Math.floor(Math.random() * aiImageLibrary.length)];
-  setBgImage(randomImg);
-}
-
-/* 🎨 AI Magic Palette Generator */
-function aiMagicPalette() {
-  const customPalettes = [
-    { bg: 'linear-gradient(135deg, #1e3c72, #2a5298)', accent: '#00f2fe', text: '#ffffff' },
-    { bg: 'linear-gradient(135deg, #8a2387, #e94057, #f27121)', accent: '#c2f83b', text: '#ffffff' },
-    { bg: 'linear-gradient(135deg, #0f2027, #203a43, #2c5364)', accent: '#38ef7d', text: '#ffffff' },
-    { bg: 'linear-gradient(135deg, #23074d, #cc5333)', accent: '#ffd700', text: '#f3f4f6' }
-  ];
-  const p = customPalettes[Math.floor(Math.random() * customPalettes.length)];
-  applyPresetPalette(p.bg, p.accent, p.text);
-  toast('تم تطبيق التناسق السحري للألوان! 🎨');
-}
-
-/* 🤖 AI Text Rewriter */
-function aiMagicRewrite(style) {
-  const brand = document.getElementById('inputBrand').value;
-  if (style === 'luxury') {
-    document.getElementById('inputHeading').value = "فخامة التذوق";
-    document.getElementById('inputSubtext').value = `تجربة استثنائية مصممة لعشاق الجودة في ${brand}`;
-  } else if (style === 'promo') {
-    document.getElementById('inputHeading').value = "🔥 خصم 30%";
-    document.getElementById('inputSubtext').value = "عرض حصري لفترة محدودة — اطلب الآن مباشرة!";
+/* 🎨 2. توليد خلفية AI بالوصف */
+function generateAiBackground() {
+  const promptInput = document.getElementById('aiBgPromptInput').value.trim();
+  if(!promptInput) {
+    toast(lang === 'ar' ? 'يرجى كتابة وصف الخلفية المطلوبة ✨' : 'Please describe the background ✨');
+    return;
   }
-  updateCanvas();
-  toast('قام الذكاء الاصطناعي بصياغة النص! ✨');
+
+  toast(lang === 'ar' ? 'جاري رسم وتجهيز الخلفيات بالـ AI... 🎨' : 'Generating AI backgrounds... 🎨');
+
+  const container = document.getElementById('aiBgResultsGrid');
+  container.style.display = 'grid';
+  container.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:12px;color:var(--text-muted);font-size:12px;">⏳ ${lang==='ar'?'جاري الابتكار والرسم...':'Generating graphics...'}</div>`;
+
+  const cleanPrompt = encodeURIComponent(promptInput + " commercial advertising background aesthetic photography 8k");
+  const url1 = `https://image.pollinations.ai/prompt/${cleanPrompt}%20vibrant?width=800&height=1000&nologo=true&seed=${Math.floor(Math.random()*10000)}`;
+  const url2 = `https://image.pollinations.ai/prompt/${cleanPrompt}%20luxury%20lighting?width=800&height=1000&nologo=true&seed=${Math.floor(Math.random()*10000)}`;
+  const url3 = `https://image.pollinations.ai/prompt/${cleanPrompt}%20minimalist?width=800&height=1000&nologo=true&seed=${Math.floor(Math.random()*10000)}`;
+
+  const images = [url1, url2, url3];
+
+  setTimeout(() => {
+    container.innerHTML = images.map((url, idx) => `
+      <div onclick="setBgImage('${url}')" style="background-image:url('${url}');background-size:cover;background-position:center;height:80px;border-radius:10px;border:1px solid var(--border);cursor:pointer;position:relative;overflow:hidden;">
+        <span style="position:absolute;bottom:4px;right:4px;background:rgba(0,0,0,0.6);color:var(--accent);font-size:9px;padding:2px 6px;border-radius:99px;font-weight:800;">AI #${idx+1}</span>
+      </div>
+    `).join('');
+    toast(lang === 'ar' ? 'تم توليد الخيارات! اضغط لتطبيق الخلفية 🎨' : 'AI backgrounds ready! Click to apply 🎨');
+  }, 1000);
 }
 
-/* 🎨 التحكم بالألوان المخصصة */
+/* 🎨 3. الألوان والپاليتات المتقدمة */
 function setCustomAccentColor(colorHex) {
   document.documentElement.style.setProperty('--accent', colorHex);
   document.getElementById('posterBrand').style.color = colorHex;
-  const badge = document.getElementById('posterBadge');
-  badge.style.background = colorHex;
+  document.getElementById('posterBadge').style.background = colorHex;
   toast('تم تحديث لون الإشعاع والعروض ✨');
 }
 
@@ -1059,7 +1197,7 @@ function toast(msg){
   setTimeout(()=>t.style.display='none',2200);
 }
 
-/* نظام السحب والإفلات */
+/* نظام السحب والإفلات للعناصر */
 function initDragAndDrop() {
   const draggables = document.querySelectorAll('.draggable-item');
   draggables.forEach(el => {
@@ -1107,6 +1245,7 @@ window.addEventListener('DOMContentLoaded', () => {
   renderSavedProjects();
   renderPresetTemplates('all');
   initDragAndDrop();
+  initSwipeableSheet();
 });
 </script>
 </body>
