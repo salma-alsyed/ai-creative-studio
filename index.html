@@ -508,34 +508,882 @@ body[dir="ltr"] .sidebar{border-left:none;border-right:1px solid var(--border)}
 </div>
 </section>
 
-<!-- 6️⃣ إنشاء بالأفكار -->
+<!-- 6️⃣ CREATE WITH AI — V4 -->
 <section id="create" class="screen">
+<style>
+.v4-create{
+  max-width:920px;
+  margin:0 auto;
+  padding:20px 0 60px;
+}
+
+.v4-create-hero{
+  text-align:center;
+  margin:15px auto 28px;
+  max-width:700px;
+}
+
+.v4-ai-mark{
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 14px;
+  background:rgba(200,240,74,.12);
+  color:var(--accent);
+  font-size:20px;
+}
+
+.v4-create-hero h1{
+  font-size:32px;
+  margin:0 0 8px;
+  letter-spacing:-.7px;
+}
+
+.v4-create-hero p{
+  color:var(--muted);
+  margin:0;
+  font-size:14px;
+}
+
+.v4-prompt-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 12px 35px rgba(0,0,0,.08);
+}
+
+.v4-prompt-card textarea{
+  width:100%;
+  min-height:145px;
+  resize:vertical;
+  border:0;
+  outline:none;
+  background:transparent;
+  color:var(--white);
+  font:inherit;
+  font-size:17px;
+  line-height:1.8;
+  padding:8px;
+}
+
+.v4-prompt-card textarea::placeholder{
+  color:var(--muted);
+}
+
+.v4-prompt-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:8px;
+  padding-top:12px;
+  border-top:1px solid var(--border);
+}
+
+.v4-chips{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.v4-chip{
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--muted);
+  border-radius:999px;
+  padding:8px 12px;
+  cursor:pointer;
+  font:inherit;
+  font-size:12px;
+}
+
+.v4-chip:hover{
+  color:var(--white);
+  border-color:var(--accent);
+}
+
+.v4-language{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.v4-language select{
+  background:var(--bg);
+  color:var(--white);
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:7px 9px;
+  outline:none;
+}
+
+.v4-understood{
+  display:none;
+  margin-top:22px;
+  animation:v4Fade .35s ease;
+}
+
+.v4-understood-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:20px;
+}
+
+.v4-section-title{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin-bottom:16px;
+}
+
+.v4-section-title .check{
+  width:28px;
+  height:28px;
+  border-radius:9px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(200,240,74,.12);
+  color:var(--accent);
+}
+
+.v4-intent-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:9px;
+}
+
+.v4-intent{
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  background:rgba(255,255,255,.025);
+}
+
+.v4-intent small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-bottom:5px;
+}
+
+.v4-intent strong{
+  font-size:12px;
+}
+
+.v4-direction{
+  margin-top:16px;
+  padding:14px;
+  border-radius:14px;
+  background:rgba(200,240,74,.06);
+  border:1px solid rgba(200,240,74,.18);
+}
+
+.v4-direction-label{
+  color:var(--accent);
+  font-size:11px;
+  font-weight:700;
+  margin-bottom:5px;
+}
+
+.v4-direction-text{
+  font-size:13px;
+  color:var(--white);
+}
+
+.v4-styles{
+  margin-top:22px;
+}
+
+.v4-styles h3{
+  margin:0 0 10px;
+  font-size:14px;
+}
+
+.v4-style-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.v4-style{
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--white);
+  border-radius:16px;
+  padding:16px;
+  text-align:start;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.v4-style:hover,
+.v4-style.active{
+  border-color:var(--accent);
+  transform:translateY(-2px);
+}
+
+.v4-style-icon{
+  font-size:20px;
+  margin-bottom:8px;
+}
+
+.v4-style strong{
+  display:block;
+  margin-bottom:4px;
+}
+
+.v4-style span{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.v4-concepts{
+  display:none;
+  margin-top:24px;
+  animation:v4Fade .35s ease;
+}
+
+.v4-concepts-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.v4-concepts-header h3{
+  margin:0;
+  font-size:16px;
+}
+
+.v4-concepts-header span{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.v4-concept-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.v4-concept{
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:var(--card);
+}
+
+.v4-concept-preview{
+  min-height:210px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  text-align:center;
+}
+
+.v4-concept-preview.minimal{
+  background:#f4f1ea;
+  color:#181818;
+}
+
+.v4-concept-preview.premium{
+  background:linear-gradient(145deg,#171717,#36302a);
+  color:#fff;
+}
+
+.v4-concept-preview.bold{
+  background:linear-gradient(145deg,#111,#252525);
+  color:#fff;
+}
+
+.v4-preview-content small{
+  display:block;
+  font-size:9px;
+  letter-spacing:1px;
+  margin-bottom:10px;
+  opacity:.7;
+}
+
+.v4-preview-content b{
+  display:block;
+  font-size:30px;
+  line-height:1;
+  margin-bottom:8px;
+}
+
+.v4-preview-content p{
+  margin:0;
+  font-size:11px;
+  opacity:.8;
+}
+
+.v4-concept-body{
+  padding:14px;
+}
+
+.v4-concept-body strong{
+  display:block;
+  margin-bottom:4px;
+}
+
+.v4-concept-body p{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.6;
+  margin:0 0 12px;
+}
+
+.v4-use{
+  width:100%;
+  justify-content:center;
+}
+
+.v4-loading{
+  display:none;
+  text-align:center;
+  padding:28px;
+  color:var(--muted);
+}
+
+.v4-loader-dots{
+  display:flex;
+  justify-content:center;
+  gap:5px;
+  margin-bottom:10px;
+}
+
+.v4-loader-dots i{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--accent);
+  animation:v4Pulse 1s infinite alternate;
+}
+
+.v4-loader-dots i:nth-child(2){animation-delay:.2s}
+.v4-loader-dots i:nth-child(3){animation-delay:.4s}
+
+@keyframes v4Pulse{
+  from{opacity:.25;transform:scale(.8)}
+  to{opacity:1;transform:scale(1.15)}
+}
+
+@keyframes v4Fade{
+  from{opacity:0;transform:translateY(7px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media(max-width:700px){
+  .v4-create{
+    padding:8px 0 40px;
+  }
+
+  .v4-create-hero h1{
+    font-size:25px;
+  }
+
+  .v4-prompt-bottom{
+    align-items:stretch;
+    flex-direction:column;
+  }
+
+  .v4-language{
+    justify-content:space-between;
+  }
+
+  .v4-intent-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .v4-style-grid,
+  .v4-concept-grid{
+    grid-template-columns:1fr;
+  }
+
+  .v4-concept-preview{
+    min-height:180px;
+  }
+}
+</style>
+
 <div class="app">
   <aside class="sidebar">
+
     <div class="side-logo logo" onclick="show('landing')">
-      <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L14.8 8.6L22 12L14.8 15.4L12 22L9.2 15.4L2 12L9.2 8.6L12 2Z" fill="url(#logo-grad)"/></svg></div>
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L14.8 8.6L22 12L14.8 15.4L12 22L9.2 15.4L2 12L9.2 8.6L12 2Z" fill="url(#logo-grad)"/>
+        </svg>
+      </div>
       <span data-i18n="logoTitle">CREATIVE AI</span>
     </div>
+
     <div class="side-item active" onclick="show('create')">
-      <svg viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>
+      <svg viewBox="0 0 24 24">
+        <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/>
+      </svg>
       <span data-i18n="sideCreate">إنشاء</span>
     </div>
+
   </aside>
+
   <main class="main">
-    <div class="toprow"><div><h2 data-i18n="createQuestion">ماذا نُنشئ اليوم؟</h2></div></div>
-    <div class="create-box">
-      <textarea id="prompt" data-i18n-ph="promptPh" placeholder="اكتب فكرتك هنا… مثال: أريد إعلان خصم 20٪ على جميع المشروبات الباردة بمناسبة الصيف."></textarea>
-      <div class="chips">
-        <button class="chip" onclick="fillPrompt('عرض ترويجي خصم 20%')" data-i18n="chipPromo">عرض ترويجي</button>
-        <button class="chip" onclick="fillPrompt('إعلان عن منتج جديد')" data-i18n="chipNew">منتج جديد</button>
-        <button class="chip" onclick="fillPrompt('ستوري انستغرام تفاعلي')" data-i18n="chipStory">ستوري انستغرام</button>
+
+    <div class="v4-create">
+
+      <!-- HERO -->
+      <div class="v4-create-hero">
+
+        <div class="v4-ai-mark">✦</div>
+
+        <h1>ماذا تريد أن تنشئ اليوم؟</h1>
+
+        <p>
+          لا تحتاج إلى معرفة التصميم أو كتابة Prompt مثالي.
+          فقط أخبرني بفكرتك بطريقتك.
+        </p>
+
       </div>
-      <button class="btn accent" style="margin-top:10px" onclick="generateAiConcepts()" data-i18n="btnGenAi">✦ توليد المفاهيم بالذكاء الاصطناعي ←</button>
+
+      <!-- PROMPT -->
+      <div class="v4-prompt-card">
+
+        <textarea
+          id="v4Prompt"
+          placeholder="مثال: أبغى إعلان افتتاح فرع جديد لمقهانا في جدة، يكون فخم وهادئ…"
+        ></textarea>
+
+        <div class="v4-prompt-bottom">
+
+          <div class="v4-chips">
+
+            <button class="v4-chip"
+              onclick="v4FillPrompt('أريد إعلان خصم 20٪ على المشروبات الباردة لمدة 3 أيام')">
+              عرض ترويجي
+            </button>
+
+            <button class="v4-chip"
+              onclick="v4FillPrompt('أريد إعلان عن منتج جديد')">
+              منتج جديد
+            </button>
+
+            <button class="v4-chip"
+              onclick="v4FillPrompt('أريد ستوري إنستغرام تفاعلي')">
+              ستوري
+            </button>
+
+          </div>
+
+          <div class="v4-language">
+            <span>لغة التصميم</span>
+
+            <select id="v4ContentLanguage">
+              <option value="ar">العربية</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+
+        </div>
+
+        <button
+          class="btn accent"
+          style="margin-top:14px;width:100%;justify-content:center"
+          onclick="v4UnderstandIdea()">
+          ✦ دعني أفهم فكرتك ←
+        </button>
+
+        <div id="v4Loading" class="v4-loading">
+
+          <div class="v4-loader-dots">
+            <i></i><i></i><i></i>
+          </div>
+
+          <div>أفكر في فكرتك وأرتبها لك…</div>
+
+        </div>
+
+      </div>
+
+      <!-- UNDERSTOOD -->
+      <div id="v4Understood" class="v4-understood">
+
+        <div class="v4-understood-card">
+
+          <div class="v4-section-title">
+
+            <div class="check">✓</div>
+
+            <div>
+              <strong>فهمت عليك ✦</strong>
+              <div style="color:var(--muted);font-size:11px;margin-top:2px">
+                هذه هي الطريقة التي فهمت بها فكرتك
+              </div>
+            </div>
+
+          </div>
+
+          <div class="v4-intent-grid">
+
+            <div class="v4-intent">
+              <small>الهدف</small>
+              <strong id="v4Goal">عرض ترويجي</strong>
+            </div>
+
+            <div class="v4-intent">
+              <small>نوع المحتوى</small>
+              <strong id="v4Content">إعلان</strong>
+            </div>
+
+            <div class="v4-intent">
+              <small>العرض</small>
+              <strong id="v4Offer">20% OFF</strong>
+            </div>
+
+            <div class="v4-intent">
+              <small>المنتج</small>
+              <strong id="v4Product">المشروبات الباردة</strong>
+            </div>
+
+            <div class="v4-intent">
+              <small>المدة</small>
+              <strong id="v4Duration">3 أيام</strong>
+            </div>
+
+          </div>
+
+          <div class="v4-direction">
+
+            <div class="v4-direction-label">
+              ✦ الاتجاه الإبداعي المقترح
+            </div>
+
+            <div class="v4-direction-text" id="v4Direction">
+              فاخر · هادئ · عصري — متناسق مع هوية علامتك
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- STYLE -->
+        <div class="v4-styles">
+
+          <h3>اختر الاتجاه الذي يعجبك</h3>
+
+          <div class="v4-style-grid">
+
+            <button class="v4-style"
+              onclick="v4ChooseStyle('Minimal',this)">
+
+              <div class="v4-style-icon">◌</div>
+
+              <strong>Minimal</strong>
+
+              <span>نظيف، هادئ، بسيط</span>
+
+            </button>
+
+            <button class="v4-style"
+              onclick="v4ChooseStyle('Premium',this)">
+
+              <div class="v4-style-icon">✦</div>
+
+              <strong>Premium</strong>
+
+              <span>فاخر، أنيق، راقٍ</span>
+
+            </button>
+
+            <button class="v4-style"
+              onclick="v4ChooseStyle('Bold',this)">
+
+              <div class="v4-style-icon">◆</div>
+
+              <strong>Bold</strong>
+
+              <span>جريء، واضح، لافت</span>
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- CONCEPTS -->
+      <div id="v4Concepts" class="v4-concepts">
+
+        <div class="v4-concepts-header">
+
+          <h3>3 أفكار جاهزة لك ✦</h3>
+
+          <span>اختر الأقرب لفكرتك وسنكمل من هناك</span>
+
+        </div>
+
+        <div class="v4-concept-grid">
+
+          <!-- CONCEPT 1 -->
+          <div class="v4-concept">
+
+            <div class="v4-concept-preview minimal">
+
+              <div class="v4-preview-content">
+
+                <small>LUNA CAFÉ</small>
+
+                <b>20% OFF</b>
+
+                <p>مشروبات باردة · 3 أيام</p>
+
+              </div>
+
+            </div>
+
+            <div class="v4-concept-body">
+
+              <strong>01 — Clean & Calm</strong>
+
+              <p>
+                تصميم بسيط يركز على العرض والمنتج بدون ازدحام بصري.
+              </p>
+
+              <button class="btn accent v4-use"
+                onclick="v4UseConcept()">
+                استخدم هذه الفكرة →
+              </button>
+
+            </div>
+
+          </div>
+
+          <!-- CONCEPT 2 -->
+          <div class="v4-concept">
+
+            <div class="v4-concept-preview premium">
+
+              <div class="v4-preview-content">
+
+                <small>LUNA CAFÉ</small>
+
+                <b>20% OFF</b>
+
+                <p>Summer Cold Drinks</p>
+
+              </div>
+
+            </div>
+
+            <div class="v4-concept-body">
+
+              <strong>02 — Premium Summer</strong>
+
+              <p>
+                إحساس فاخر وهادئ مع تركيز أكبر على العلامة التجارية.
+              </p>
+
+              <button class="btn accent v4-use"
+                onclick="v4UseConcept()">
+                استخدم هذه الفكرة →
+              </button>
+
+            </div>
+
+          </div>
+
+          <!-- CONCEPT 3 -->
+          <div class="v4-concept">
+
+            <div class="v4-concept-preview bold">
+
+              <div class="v4-preview-content">
+
+                <small>LIMITED OFFER</small>
+
+                <b>20% OFF</b>
+
+                <p>3 DAYS ONLY</p>
+
+              </div>
+
+            </div>
+
+            <div class="v4-concept-body">
+
+              <strong>03 — Bold Offer</strong>
+
+              <p>
+                تصميم جريء يجعل الخصم هو العنصر البصري الرئيسي.
+              </p>
+
+              <button class="btn accent v4-use"
+                onclick="v4UseConcept()">
+                استخدم هذه الفكرة →
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
-    <div id="aiConceptsContainer" class="cards" style="display:none;margin-top:20px"></div>
+
   </main>
 </div>
 </section>
+
+<script>
+function v4FillPrompt(text){
+  const box=document.getElementById('v4Prompt');
+  if(box){
+    box.value=text;
+    box.focus();
+  }
+}
+
+function v4UnderstandIdea(){
+
+  const prompt=document.getElementById('v4Prompt').value.trim();
+
+  if(!prompt){
+    if(typeof toast === 'function'){
+      toast('احكي لي فكرتك أولًا ✦');
+    }else{
+      alert('احكي لي فكرتك أولًا ✦');
+    }
+    return;
+  }
+
+  document.getElementById('v4Loading').style.display='block';
+  document.getElementById('v4Understood').style.display='none';
+  document.getElementById('v4Concepts').style.display='none';
+
+  setTimeout(function(){
+
+    const p=prompt.toLowerCase();
+
+    let offer=(prompt.match(/\d+\s*%/)||['20%'])[0];
+
+    let duration='3 أيام';
+
+    const durationMatch=prompt.match(
+      /(\d+)\s*(يوم|أيام|يومًا|اسبوع|أسابيع|أسبوع|أسابيع|day|days|week|weeks)/i
+    );
+
+    if(durationMatch){
+      duration=durationMatch[0];
+    }
+
+    let product='المشروبات الباردة';
+
+    if(
+      p.includes('قهوة') ||
+      p.includes('coffee')
+    ){
+      product='القهوة';
+    }
+
+    if(
+      p.includes('حلويات') ||
+      p.includes('dessert')
+    ){
+      product='الحلويات';
+    }
+
+    let goal='عرض ترويجي';
+
+    if(
+      p.includes('افتتاح') ||
+      p.includes('opening')
+    ){
+      goal='افتتاح / إطلاق';
+    }
+
+    if(
+      p.includes('منتج جديد') ||
+      p.includes('new product')
+    ){
+      goal='منتج جديد';
+    }
+
+    if(
+      p.includes('مطعم') ||
+      p.includes('مقهى') ||
+      p.includes('كافيه') ||
+      p.includes('coffee') ||
+      p.includes('restaurant')
+    ){
+      document.getElementById('v4Content').textContent='محتوى تجاري';
+    }else{
+      document.getElementById('v4Content').textContent='إعلان';
+    }
+
+    document.getElementById('v4Goal').textContent=goal;
+
+    document.getElementById('v4Offer').textContent=
+      offer.toUpperCase() + ' OFF';
+
+    document.getElementById('v4Product').textContent=product;
+
+    document.getElementById('v4Duration').textContent=duration;
+
+    document.getElementById('v4Direction').textContent=
+      'فاخر · هادئ · عصري — متناسق مع هوية علامتك';
+
+    document.getElementById('v4Loading').style.display='none';
+
+    document.getElementById('v4Understood').style.display='block';
+
+  },900);
+}
+
+function v4ChooseStyle(style,button){
+
+  document.querySelectorAll('.v4-style').forEach(function(item){
+    item.classList.remove('active');
+  });
+
+  if(button){
+    button.classList.add('active');
+  }
+
+  document.getElementById('v4Concepts').style.display='block';
+
+  document.getElementById('v4Concepts').scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+  });
+
+  if(typeof toast === 'function'){
+    toast(style + ' — 3 أفكار جاهزة ✦');
+  }
+}
+
+function v4UseConcept(){
+
+  if(typeof show === 'function'){
+    show('editor');
+  }
+
+  if(typeof toast === 'function'){
+    toast('تم اختيار الفكرة — لنبدأ التعديل ✦');
+  }
+}
+</script>
 
 <!-- 7️⃣ استديو التصميم المتطور بالألوان العصرية وتوليد الخلفيات بالـ AI -->
 <section id="editor" class="screen">
