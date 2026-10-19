@@ -81,19 +81,107 @@ body.light-mode .nav{background:rgba(255,255,255,0.85)}
 .btn:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2);transform:translateY(-1px)}
 .btn.accent{background:var(--accent);border-color:var(--accent);color:#000;box-shadow:0 0 20px var(--accent-glow);font-weight:800}.btn.accent:hover{background:#b1e62a}
 
-/* الواجهة الرئيسية */
-.dashboard-container { max-width: 900px; margin: 0 auto; padding: 30px 20px 80px; }
-.hero-prompt-card { background: linear-gradient(135deg, rgba(17, 21, 32, 0.9), rgba(24, 31, 46, 0.9)); border: 1px solid var(--border); border-radius: 24px; padding: 36px 28px; text-align: center; margin-bottom: 28px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); backdrop-filter: blur(20px); position: relative; overflow: hidden; }
-.hero-prompt-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
-.hero-prompt-card h1 { font-size: 28px; font-weight: 900; margin: 0 0 8px; color: var(--white); }
-.hero-prompt-card p { font-size: 14px; color: var(--text-muted); margin: 0 0 24px; }
-.hero-action-btn { background: var(--accent); color: #000; border: none; font-weight: 900; font-size: 15px; padding: 14px 36px; border-radius: 99px; box-shadow: 0 0 25px var(--accent-glow); cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 8px; }
-.hero-action-btn:hover { transform: translateY(-2px) scale(1.02); background: #b1e62a; }
+/* الواجهة الرئيسية البسيطة الفاخرة */
+.dashboard-container { max-width: 880px; margin: 0 auto; padding: 40px 20px 80px; }
+
+.magic-prompt-card {
+  background: linear-gradient(135deg, rgba(17, 21, 32, 0.95), rgba(24, 31, 46, 0.95));
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 40px 30px;
+  text-align: center;
+  margin-bottom: 30px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+}
+
+.magic-prompt-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(194, 248, 59, 0.1);
+  border: 1px solid rgba(194, 248, 59, 0.3);
+  color: var(--accent);
+  padding: 6px 16px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.magic-prompt-card h1 { font-size: clamp(24px, 4vw, 36px); font-weight: 900; margin: 0 0 10px; color: var(--white); }
+.magic-prompt-card p { font-size: 14px; color: var(--text-muted); margin: 0 0 28px; }
+
+.prompt-input-wrapper {
+  position: relative;
+  max-width: 680px;
+  margin: 0 auto 20px;
+}
+
+.prompt-textarea {
+  width: 100%;
+  min-height: 110px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  background: var(--input-bg);
+  color: var(--text-main);
+  outline: none;
+  resize: none;
+  transition: border-color 0.2s ease;
+}
+
+.prompt-textarea:focus { border-color: var(--accent); }
+
+.magic-btn {
+  background: var(--accent);
+  color: #000;
+  border: none;
+  font-weight: 900;
+  font-size: 15px;
+  padding: 14px 38px;
+  border-radius: 99px;
+  box-shadow: 0 0 30px var(--accent-glow);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.magic-btn:hover { transform: translateY(-2px) scale(1.02); background: #b1e62a; }
 
 .dash-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 22px; margin-bottom: 20px; backdrop-filter: blur(20px); }
 .dash-section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-.dash-section-title { font-size: 15px; font-weight: 800; color: var(--white); display: flex; align-items: center; gap: 8px; }
+.dash-section-title { font-size: 14px; font-weight: 800; color: var(--white); display: flex; align-items: center; gap: 8px; }
 .link-btn { background: none; border: none; color: var(--accent); font-size: 12px; font-weight: 700; cursor: pointer; }
+
+.ideas-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.idea-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.idea-card:hover {
+  background: rgba(194, 248, 59, 0.08);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.idea-icon { font-size: 20px; margin-bottom: 6px; display: block; }
+.idea-title { font-size: 12px; font-weight: 800; color: var(--white); }
 
 .recent-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .recent-card { background: rgba(0, 0, 0, 0.3); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; cursor: pointer; transition: all 0.2s ease; }
@@ -101,16 +189,6 @@ body.light-mode .nav{background:rgba(255,255,255,0.85)}
 .recent-thumb { height: 120px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 10px; position: relative; }
 .recent-thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.8), transparent); }
 .recent-info { position: relative; z-index: 2; font-size: 11px; font-weight: 800; color: #fff; }
-
-.brand-strip { display: flex; align-items: center; justify-content: space-between; background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border); border-radius: 14px; padding: 14px 18px; }
-.brand-details b { font-size: 14px; color: var(--white); display: block; }
-.brand-tags { display: flex; gap: 12px; margin-top: 6px; font-size: 11px; color: var(--text-muted); }
-.brand-tags span { display: flex; align-items: center; gap: 4px; }
-.brand-tags .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
-
-.ideas-chips { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-.idea-btn { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); border-radius: 12px; padding: 14px 10px; text-align: center; font-size: 12px; font-weight: 800; color: var(--text-main); cursor: pointer; transition: all 0.2s ease; }
-.idea-btn:hover { background: rgba(194, 248, 59, 0.1); border-color: var(--accent); color: var(--white); transform: translateY(-2px); }
 
 /* محرر الاستديو */
 .app { min-height: 100vh; display: flex; }
@@ -126,14 +204,9 @@ body[dir="ltr"] .sidebar { border-left: none; border-right: 1px solid var(--bord
 .toprow { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
 .toprow h2 { margin: 0; font-size: 22px; font-weight: 800; color: var(--white); }
 
-.editor { display: grid; grid-template-columns: 150px 1fr 350px; gap: 18px; align-items: start; }
-.tools { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 16px; position: sticky; top: 84px; }
-.controls { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 18px; }
-.tool { padding: 10px 12px; border-radius: 10px; font-size: 12px; font-weight: 700; color: var(--text-muted); cursor: pointer; margin-bottom: 6px; transition: all 0.15s; display: flex; align-items: center; gap: 8px; }
-.tool.active,.tool:hover { background: rgba(255,255,255,0.06); color: var(--white); }
-
-.canvas { background: var(--canvas-bg); border: 1px solid var(--border); border-radius: 18px; display: flex; align-items: center; justify-content: center; min-height: 520px; padding: 24px; position: sticky; top: 84px; z-index: 10; }
-.poster { width: min(330px,90%); aspect-ratio: 1/1.25; background: #111622; border-radius: 14px; color: white; padding: 24px; display: flex; flex-direction: column; justify-content: flex-end; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; background-size: cover; background-position: center; transition: all 0.3s ease; }
+.editor { display: grid; grid-template-columns: 1fr 380px; gap: 24px; align-items: start; }
+.canvas { background: var(--canvas-bg); border: 1px solid var(--border); border-radius: 20px; display: flex; align-items: center; justify-content: center; min-height: 520px; padding: 24px; position: sticky; top: 84px; z-index: 10; }
+.poster { width: min(330px,90%); aspect-ratio: 1/1.25; background: #111622; border-radius: 16px; color: white; padding: 24px; display: flex; flex-direction: column; justify-content: flex-end; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; background-size: cover; background-position: center; transition: all 0.3s ease; }
 .poster-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.45); pointer-events: none; z-index: 1; transition: background 0.2s ease; }
 
 .draggable-item { cursor: grab; user-select: none; touch-action: none; display: inline-block; position: relative; z-index: 2; transition: transform 0.05s ease-out; }
@@ -142,13 +215,23 @@ body[dir="ltr"] .sidebar { border-left: none; border-right: 1px solid var(--bord
 .poster h2 { font-size: 32px; line-height: 0.95; margin: 0 0 8px; font-weight: 900; }
 .poster p { margin: 0 0 8px; font-size: 12px; color: #cbd5e1; }
 
-.control { margin-bottom: 12px; }
+.controls { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 22px; }
+.control { margin-bottom: 14px; }
 .control label { font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 4px; font-weight: 700; }
-.field { width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--input-bg); color: var(--text-main); font-size: 12px; outline: none; }
+.field { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--input-bg); color: var(--text-main); font-size: 13px; outline: none; }
 .field:focus { border-color: var(--accent); }
 
-.create-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 24px; margin-bottom: 20px; backdrop-filter: blur(20px); }
-.create-box textarea { width: 100%; min-height: 95px; border: 1px solid var(--border); border-radius: 12px; padding: 14px; font-size: 14px; resize: vertical; background: var(--input-bg); color: var(--text-main); }
+.caption-box {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-main);
+  margin-top: 14px;
+  white-space: pre-wrap;
+}
 
 .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; width: 100vw; padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px)); background: rgba(7, 9, 14, 0.95); backdrop-filter: blur(20px); border-top: 1px solid var(--border); z-index: 9999; justify-content: space-around; align-items: center; }
 .mobile-nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; font-weight: 800; color: var(--text-muted); cursor: pointer; background: none; border: none; padding: 6px 12px; }
@@ -161,11 +244,10 @@ body[dir="ltr"] .sidebar { border-left: none; border-right: 1px solid var(--bord
   .mobile-nav{display:flex}
   .main{padding:16px 16px 90px}
   .editor{grid-template-columns:1fr}
+  .ideas-grid{grid-template-columns:repeat(2,1fr)}
   .recent-grid{grid-template-columns:1fr}
-  .ideas-chips{grid-template-columns:repeat(2,1fr)}
   .canvas{ order: -1; position: sticky; top: 60px; z-index: 90; padding: 12px; background: var(--bg-dark); border-bottom: 1px solid var(--border); }
   .controls { position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000; max-height: 85vh; overflow-y: auto; border-radius: 24px 24px 0 0; background: var(--bg-card); backdrop-filter: blur(25px); transform: translateY(0); padding: 20px 20px 80px; }
-  .tools{display:none}
 }
 
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--white);color:var(--bg-dark);padding:10px 22px;border-radius:99px;display:none;font-size:12px;font-weight:800;z-index:20000;box-shadow:0 10px 30px rgba(0,0,0,0.5)}
@@ -193,8 +275,7 @@ body[dir="ltr"] .sidebar { border-left: none; border-right: 1px solid var(--bord
   </div>
   <div class="navlinks">
     <span onclick="showScreen('dashboard')" data-i18n="sideHome">الرئيسية</span>
-    <span onclick="showScreen('create')" data-i18n="sideCreate">إنشاء جديد</span>
-    <span onclick="showScreen('templates')" data-i18n="navTemplates">القوالب</span>
+    <span onclick="showScreen('templates')" data-i18n="navTemplates">الأعمال والقوالب</span>
     <span onclick="showScreen('brand')" data-i18n="navBrand">الهوية التجارية</span>
   </div>
   <div class="nav-actions">
@@ -204,106 +285,81 @@ body[dir="ltr"] .sidebar { border-left: none; border-right: 1px solid var(--bord
     <button class="icon-btn" title="Language" onclick="toggleLanguage()">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
     </button>
-    <button class="btn accent" onclick="showScreen('create')" data-i18n="btnStart">✦ ابدأ إنشاء جديد</button>
   </div>
 </nav>
 
-<!-- 1️⃣ الواجهة الرئيسية (Dashboard) -->
+<!-- 1️⃣ الواجهة الرئيسية (Magic Prompt Engine) -->
 <section id="dashboard" class="screen active">
 <div class="dashboard-container">
-  <div class="hero-prompt-card">
-    <h1 data-i18n="heroGreeting">صباح الخير 👋</h1>
-    <p data-i18n="heroSubtext">ماذا تريد أن نصنع اليوم؟ أخبر الذكاء الاصطناعي بفكرتك واتركه يبدع.</p>
-    <button class="hero-action-btn" onclick="showScreen('create')">
-      <span>✦</span> <span data-i18n="heroStartBtn">ابدأ إنشاء جديد</span>
+  <div class="magic-prompt-card">
+    <div class="brand-badge">
+      <span>✨</span> <span data-i18n="brandBadge">هويتك المعتمدة: Luna Café</span>
+    </div>
+    <h1 data-i18n="heroGreeting">ماذا تريد أن نصنع اليوم؟ 👋</h1>
+    <p data-i18n="heroSubtext">أخبر الذكاء الاصطناعي بفكرتك أو عرضك بكلام عادي، وسيتكفل بالتصميم والنص التسويقي كاملاً.</p>
+    
+    <div class="prompt-input-wrapper">
+      <textarea id="promptInput" class="prompt-textarea" data-i18n-ph="promptPh" placeholder="أدخل فكرتك هنا… مثال: أريد إعلان خصم 20٪ على القهوة الباردة لعطلة نهاية الأسبوع"></textarea>
+    </div>
+
+    <button class="magic-btn" onclick="processMagicPrompt()">
+      <span>✦</span> <span data-i18n="heroStartBtn">دع Creative AI يصممها فوراً</span>
     </button>
   </div>
 
+  <!-- أفكار سريعة بنقرة واحدة -->
   <div class="dash-section">
     <div class="dash-section-header">
-      <div class="dash-section-title" data-i18n="recentTitle">🕒 آخر أعمالك</div>
+      <div class="dash-section-title" data-i18n="ideasTitle">💡 سيناريوهات سريعة بضغطة زر واحدة</div>
+    </div>
+    <div class="ideas-grid">
+      <div class="idea-card" onclick="quickScenario('🔥 خصم 25% عاجل على جميع المشروبات الباردة')">
+        <span class="idea-icon">🔥</span>
+        <div class="idea-title" data-i18n="ideaPromo">عرض خصم عاجل</div>
+      </div>
+      <div class="idea-card" onclick="quickScenario('✨ إعلان إطلاق مشروب الماتشا البارد الجديد')">
+        <span class="idea-icon">✨</span>
+        <div class="idea-title" data-i18n="ideaProduct">إعلان منتج جديد</div>
+      </div>
+      <div class="idea-card" onclick="quickScenario('📱 أجواء القهوة والويكند في Luna Café')">
+        <span class="idea-icon">📱</span>
+        <div class="idea-title" data-i18n="ideaStory">ستوري تفاعلي</div>
+      </div>
+      <div class="idea-card" onclick="quickScenario('🎉 دعوة لاقتتاح فرعنا الجديد في جدة')">
+        <span class="idea-icon">🎉</span>
+        <div class="idea-title" data-i18n="ideaLaunch">افتتاح أو حدث خاص</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- آخر الأعمال -->
+  <div class="dash-section">
+    <div class="dash-section-header">
+      <div class="dash-section-title" data-i18n="recentTitle">🕒 أحدث تصاميمك الجاهزة</div>
       <button class="link-btn" onclick="showScreen('templates')" data-i18n="viewAll">عرض الكل ←</button>
     </div>
     <div class="recent-grid">
       <div class="recent-card" onclick="showScreen('editor')">
         <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb')">
-          <div class="recent-info">عرض الصيف — Luna Café</div>
+          <div class="recent-info">عرض الويكند — Luna Café</div>
         </div>
       </div>
       <div class="recent-card" onclick="showScreen('editor')">
         <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1551024709-8f23befc6f87')">
-          <div class="recent-info">مشروب ماتشا جديد</div>
+          <div class="recent-info">مشروب الماتشا الفاخر</div>
         </div>
       </div>
       <div class="recent-card" onclick="showScreen('editor')">
         <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5')">
-          <div class="recent-info">ستوري افتتاحي</div>
+          <div class="recent-info">ستوري الافتتاح</div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="dash-section">
-    <div class="dash-section-header">
-      <div class="dash-section-title" data-i18n="brandTitle">✦ هوية علامتك التجارية</div>
-      <button class="link-btn" onclick="showScreen('brand')" data-i18n="editBrand">تعديل الهوية ←</button>
-    </div>
-    <div class="brand-strip">
-      <div class="brand-details">
-        <b>Luna Café</b>
-        <div class="brand-tags">
-          <span><i class="dot"></i> <span data-i18n="tagLogo">الشعار مثبت</span></span>
-          <span><i class="dot"></i> <span data-i18n="tagColors">الألوان المعتمدة</span></span>
-          <span><i class="dot"></i> <span data-i18n="tagFonts">الخطوط المحفوظة</span></span>
-        </div>
-      </div>
-      <button class="btn" onclick="showScreen('brand')" data-i18n="manageBrand">إدارة</button>
-    </div>
-  </div>
-
-  <div class="dash-section">
-    <div class="dash-section-header">
-      <div class="dash-section-title" data-i18n="ideasTitle">💡 أفكار يمكنك إنشاؤها بضغطة زر</div>
-    </div>
-    <div class="ideas-chips">
-      <div class="idea-btn" onclick="quickCreate('عرض خصم 25% بمناسبة نهاية الأسبوع')" data-i18n="ideaPromo">🔥 [عرض ترويجي]</div>
-      <div class="idea-btn" onclick="quickCreate('إعلان عن منتج جديد ومميز')" data-i18n="ideaProduct">✨ [منتج جديد]</div>
-      <div class="idea-btn" onclick="quickCreate('ستوري تفاعلي للعملاء')" data-i18n="ideaStory">📱 [Story انستغرام]</div>
-      <div class="idea-btn" onclick="quickCreate('دعوة لاقتتاح الفرع الجديد')" data-i18n="ideaLaunch">🎉 [افتتاح فرع]</div>
     </div>
   </div>
 </div>
 </section>
 
-<!-- 2️⃣ صفحة إنشاء جديد -->
-<section id="create" class="screen">
-<div class="app">
-  <aside class="sidebar">
-    <div class="side-logo logo" onclick="showScreen('dashboard')">
-      <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L14.8 8.6L22 12L14.8 15.4L12 22L9.2 15.4L2 12L9.2 8.6L12 2Z" fill="url(#logo-grad)"/></svg></div>
-      <span data-i18n="logoTitle">Creative AI</span>
-    </div>
-    <div class="side-item" onclick="showScreen('dashboard')">
-      <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span data-i18n="sideHome">الرئيسية</span>
-    </div>
-    <div class="side-item active" onclick="showScreen('create')">
-      <svg viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>
-      <span data-i18n="sideCreate">إنشاء</span>
-    </div>
-  </aside>
-  <main class="main">
-    <div class="toprow"><div><h2 data-i18n="createQuestion">ماذا تريد أن نصنع اليوم؟</h2></div></div>
-    <div class="create-box">
-      <textarea id="prompt" data-i18n-ph="promptPh" placeholder="أخبر Creative AI بما تفكر به… مثال: أريد إعلان خصم 20٪ على القهوة الباردة للويكند مع شعار Luna Café"></textarea>
-      <button class="btn accent" style="margin-top:12px;width:100%;justify-content:center" onclick="generateAiConcepts()" data-i18n="btnGenAi">✦ دع Creative AI يصممها لك ←</button>
-    </div>
-    <div id="aiConceptsContainer" class="recent-grid" style="display:none;margin-top:20px"></div>
-  </main>
-</div>
-</section>
-
-<!-- 3️⃣ استديو التصميم (Editor) -->
+<!-- 2️⃣ استديو النتائج المباشرة المكتملة (Result Studio) -->
 <section id="editor" class="screen">
 <div class="app">
   <aside class="sidebar">
@@ -318,21 +374,15 @@ body[dir="ltr"] .sidebar { border-left: none; border-right: 1px solid var(--bord
   </aside>
   <main class="main">
     <div class="toprow">
-      <div><h2 data-i18n="studioTitle">استديو التصميم الذكي</h2></div>
+      <div><h2 data-i18n="studioTitle">تصميمك جاهز للنشر! ✨</h2></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button class="btn" onclick="sharePost()" data-i18n="btnShare">🔗 مشاركة</button>
-        <button class="btn accent" onclick="downloadPNG()" data-i18n="btnDlPng">↓ تحميل (PNG)</button>
+        <button class="btn accent" onclick="downloadPNG()" data-i18n="btnDlPng">↓ تحميل البوستر (PNG)</button>
         <button class="btn dark" onclick="downloadPDF()" data-i18n="btnDlPdf">📄 PDF</button>
       </div>
     </div>
 
     <div class="editor">
-      <div class="tools">
-        <div class="tool active"><span>✍️</span><span data-i18n="toolTexts">النصوص</span></div>
-        <div class="tool"><span>🤖</span><span data-i18n="toolAi">مساعد AI</span></div>
-        <div class="tool"><span>🎨</span><span data-i18n="toolColors">الألوان</span></div>
-      </div>
-
       <div class="canvas">
         <div class="poster" id="posterCanvas" style="background-image:url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb')">
           <div class="poster-overlay" id="posterOverlay"></div>
@@ -343,22 +393,38 @@ body[dir="ltr"] .sidebar { border-left: none; border-right: 1px solid var(--bord
       </div>
 
       <div class="controls">
-        <div style="margin-bottom:12px;"><b style="color:var(--white);font-size:13px;" data-i18n="aiHelpHeader">🤖 تعديل النصوص والمساعد</b></div>
+        <b style="color:var(--white);font-size:13px;display:block;margin-bottom:12px;" data-i18n="directorHeader">🤖 المخرج الإبداعي الذكي</b>
+        
         <div class="control">
-          <input class="field" id="inputHeading" value="20% OFF" oninput="updateCanvas()" placeholder="العنوان الرئيسي">
+          <label data-i18n="labelTitle">العنوان في البوستر</label>
+          <input class="field" id="inputHeading" value="20% OFF" oninput="updateCanvas()">
         </div>
         <div class="control">
-          <input class="field" id="inputSubtext" value="على جميع المشروبات الباردة" oninput="updateCanvas()" placeholder="النص الفرعي">
+          <label data-i18n="labelSubtext">النص الفرعي</label>
+          <input class="field" id="inputSubtext" value="على جميع المشروبات الباردة" oninput="updateCanvas()">
         </div>
-        <button class="btn accent" style="width:100%;justify-content:center;margin-bottom:12px;" onclick="aiMagicRewrite()">✨ صياغة تسويقية بالـ AI</button>
-        <button class="btn" style="width:100%;justify-content:center;" onclick="aiAutoSelectImage()">🖼️ تغيير الخلفية بالـ AI</button>
+
+        <button class="btn accent" style="width:100%;justify-content:center;margin-bottom:10px;" onclick="aiRegenerateStyle()">✨ إعادة الابتكار بأسلوب جديد</button>
+
+        <hr style="border:0;border-top:1px solid var(--border);margin:16px 0">
+
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <b style="color:var(--white);font-size:12px;" data-i18n="captionHeader">📝 منشور انستغرام الجاهز (Caption)</b>
+          <button class="link-btn" onclick="copyCaption()" data-i18n="btnCopy">نسخ النص 📋</button>
+        </div>
+
+        <div class="caption-box" id="aiCaptionText">لأن أجواء الصيف تحتاج إنتعاش.. 🧊✨
+استمتعوا بخصم 20% على جميع مشروباتنا الباردة في Luna Café طوال نهاية الأسبوع!
+
+📍 ننتظركم في الفرع أو عبر تطبيقات التوصيل.
+#Luna_Cafe #قهوة_مختصة #عرض_الويكند</div>
       </div>
     </div>
   </main>
 </div>
 </section>
 
-<!-- 4️⃣ الهوية التجارية -->
+<!-- 3️⃣ الهوية التجارية -->
 <section id="brand" class="screen">
 <div class="app">
   <aside class="sidebar">
@@ -372,16 +438,16 @@ body[dir="ltr"] .sidebar { border-left: none; border-right: 1px solid var(--bord
     </div>
   </aside>
   <main class="main">
-    <div class="toprow"><div><h2>هوية علامتك التجارية (Luna Café)</h2></div></div>
+    <div class="toprow"><div><h2 data-i18n="brandPageTitle">هوية علامتك التجارية (Luna Café)</h2></div></div>
     <div class="dash-section">
-      <p style="color:var(--text-muted);font-size:13px;">تم حفظ الشارات والألوان تلقائياً ليستخدمها Creative AI في كل التصاميم الجديدة.</p>
-      <button class="btn accent" onclick="showScreen('create')">✦ إنشاء بوستر بناءً على الهوية ←</button>
+      <p style="color:var(--text-muted);font-size:13px;" data-i18n="brandPageDesc">تم حفظ الشعار والألوان تلقائياً في حسابك ليستخدمها الذكاء الاصطناعي كقاعدة أساسية في كل التصاميم القادمة.</p>
+      <button class="btn accent" onclick="showScreen('dashboard')" data-i18n="btnGoDashboard">✦ الذهاب لإنشاء تصميم جديد ←</button>
     </div>
   </main>
 </div>
 </section>
 
-<!-- 5️⃣ القوالب -->
+<!-- 4️⃣ القوالب والأعمال -->
 <section id="templates" class="screen">
 <div class="app">
   <aside class="sidebar">
@@ -395,32 +461,32 @@ body[dir="ltr"] .sidebar { border-left: none; border-right: 1px solid var(--bord
     </div>
   </aside>
   <main class="main">
-    <div class="toprow"><div><h2 data-i18n="tplTitle">مكتبة الأعمال والقوالب</h2></div></div>
+    <div class="toprow"><div><h2 data-i18n="tplTitle">مكتبة الأعمال والقوالب الجاهزة</h2></div></div>
     <div class="recent-grid">
       <div class="recent-card" onclick="showScreen('editor')">
-        <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb')"><div class="recent-info">عرض 1+1 مجاناً</div></div>
+        <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb')"><div class="recent-info">عرض الويكند</div></div>
       </div>
       <div class="recent-card" onclick="showScreen('editor')">
-        <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5')"><div class="recent-info">خصم وجبات البرجر</div></div>
+        <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5')"><div class="recent-info">وجبات البرجر</div></div>
       </div>
     </div>
   </main>
 </div>
 </section>
 
-<!-- شريط التنقل للجوال -->
+<!-- شريط السفلي للجوال -->
 <div class="mobile-nav">
   <button class="mobile-nav-item active" onclick="showScreen('dashboard')">
     <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     <span data-i18n="sideHome">الرئيسية</span>
   </button>
-  <button class="mobile-nav-item" onclick="showScreen('create')">
-    <svg viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>
-    <span data-i18n="sideCreate">إنشاء</span>
+  <button class="mobile-nav-item" onclick="showScreen('templates')">
+    <svg viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+    <span data-i18n="navTemplates">الأعمال</span>
   </button>
   <button class="mobile-nav-item" onclick="showScreen('brand')">
     <svg viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.75 1.7-1.67 0-.41-.15-.79-.42-1.08-.27-.28-.44-.68-.44-1.12 0-.92.75-1.67 1.67-1.67H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"/></svg>
-    <span data-i18n="sideBrand">الهوية</span>
+    <span data-i18n="navBrand">الهوية</span>
   </button>
 </div>
 
@@ -430,77 +496,71 @@ body[dir="ltr"] .sidebar { border-left: none; border-right: 1px solid var(--bord
 let theme = 'dark';
 let lang = 'ar';
 
+/* القاموس اللغوي الشامل لضمان التحويل الكامل بدون أخطاء */
 const i18nDict = {
   ar: {
-    logoTitle: "Creative AI", navTemplates: "القوالب", navBrand: "الهوية التجارية", btnStart: "✦ ابدأ إنشاء جديد",
-    heroGreeting: "صباح الخير 👋", heroSubtext: "ماذا تريد أن نصنع اليوم؟ أخبر الذكاء الاصطناعي بفكرتك واتركه يبدع.", heroStartBtn: "ابدأ إنشاء جديد",
-    recentTitle: "🕒 آخر أعمالك", viewAll: "عرض الكل ←", brandTitle: "✦ هوية علامتك التجارية", editBrand: "تعديل الهوية ←",
-    tagLogo: "الشعار مثبت", tagColors: "الألوان المعتمدة", tagFonts: "الخطوط المحفوظة", manageBrand: "إدارة",
-    ideasTitle: "💡 أفكار يمكنك إنشاؤها بضغطة زر", ideaPromo: "🔥 [عرض ترويجي]", ideaProduct: "✨ [منتج جديد]", ideaStory: "📱 [Story انستغرام]", ideaLaunch: "🎉 [افتتاح فرع]",
-    sideHome: "الرئيسية", sideCreate: "إنشاء جديد", createQuestion: "ماذا تريد أن نصنع اليوم؟", promptPh: "أخبر Creative AI بما تفكر به… مثال: أريد إعلان خصم 20٪ على القهوة الباردة للويكند مع شعار Luna Café",
-    btnGenAi: "✦ دع Creative AI يصممها لك ←", studioTitle: "استديو التصميم الذكي", btnShare: "🔗 مشاركة", btnDlPng: "↓ تحميل (PNG)", btnDlPdf: "📄 PDF",
-    toolTexts: "النصوص", toolAi: "مساعد AI", toolColors: "الألوان", tplTitle: "مكتبة الأعمال والقوالب", aiHelpHeader: "🤖 تعديل النصوص والمساعد"
+    logoTitle: "Creative AI", navTemplates: "الأعمال والقوالب", navBrand: "الهوية التجارية",
+    brandBadge: "هويتك المعتمدة: Luna Café", heroGreeting: "ماذا تريد أن نصنع اليوم؟ 👋",
+    heroSubtext: "أخبر الذكاء الاصطناعي بفكرتك أو عرضك بكلام عادي، وسيتكفل بالتصميم والنص التسويقي كاملاً.",
+    promptPh: "أدخل فكرتك هنا… مثال: أريد إعلان خصم 20٪ على القهوة الباردة لعطلة نهاية الأسبوع",
+    heroStartBtn: "دع Creative AI يصممها فوراً",
+    ideasTitle: "💡 سيناريوهات سريعة بضغطة زر واحدة", ideaPromo: "عرض خصم عاجل", ideaProduct: "إعلان منتج جديد", ideaStory: "ستوري تفاعلي", ideaLaunch: "افتتاح أو حدث خاص",
+    recentTitle: "🕒 أحدث تصاميمك الجاهزة", viewAll: "عرض الكل ←", sideHome: "الرئيسية",
+    studioTitle: "تصميمك جاهز للنشر! ✨", btnShare: "🔗 مشاركة", btnDlPng: "↓ تحميل البوستر (PNG)", btnDlPdf: "📄 PDF",
+    directorHeader: "🤖 المخرج الإبداعي الذكي", labelTitle: "العنوان في البوستر", labelSubtext: "النص الفرعي",
+    captionHeader: "📝 منشور انستغرام الجاهز (Caption)", btnCopy: "نسخ النص 📋",
+    brandPageTitle: "هوية علامتك التجارية (Luna Café)", brandPageDesc: "تم حفظ الشعار والألوان تلقائياً في حسابك ليستخدمها الذكاء الاصطناعي كقاعدة أساسية في كل التصاميم القادمة.",
+    btnGoDashboard: "✦ الذهاب لإنشاء تصميم جديد ←", tplTitle: "مكتبة الأعمال والقوالب الجاهزة"
   },
   en: {
-    logoTitle: "Creative AI", navTemplates: "Templates", navBrand: "Brand Kit", btnStart: "✦ Start New Design",
-    heroGreeting: "Good Morning 👋", heroSubtext: "What do you want to create today? Tell Creative AI your idea.", heroStartBtn: "Start New Design",
-    recentTitle: "🕒 Recent Works", viewAll: "View All ←", brandTitle: "✦ Brand Identity", editBrand: "Edit Brand ←",
-    tagLogo: "Logo Active", tagColors: "Colors Preset", tagFonts: "Fonts Saved", manageBrand: "Manage",
-    ideasTitle: "💡 Quick Ideas to Generate", ideaPromo: "🔥 [Promo Offer]", ideaProduct: "✨ [New Product]", ideaStory: "📱 [Instagram Story]", ideaLaunch: "🎉 [Grand Opening]",
-    sideHome: "Home", sideCreate: "Create New", createQuestion: "What are we making today?", promptPh: "Tell Creative AI what's on your mind... e.g., 20% OFF Iced Coffee promo for Luna Café",
-    btnGenAi: "✦ Let Creative AI Design It ←", studioTitle: "AI Creative Studio", btnShare: "🔗 Share", btnDlPng: "↓ Download (PNG)", btnDlPdf: "📄 PDF",
-    toolTexts: "Text", toolAi: "AI Helper", toolColors: "Colors", tplTitle: "Templates Library", aiHelpHeader: "🤖 Edit Text & AI Assistant"
+    logoTitle: "Creative AI", navTemplates: "Saved & Templates", navBrand: "Brand Kit",
+    brandBadge: "Active Brand: Luna Café", heroGreeting: "What are we creating today? 👋",
+    heroSubtext: "Tell Creative AI your idea in plain text. AI will handle the visual design and caption instantly.",
+    promptPh: "Describe your idea... e.g., 20% OFF Iced Coffee promo for the weekend",
+    heroStartBtn: "Let Creative AI Design It Instantly",
+    ideasTitle: "💡 1-Tap Quick Scenarios", ideaPromo: "Urgent Promo Discount", ideaProduct: "New Product Launch", ideaStory: "Interactive Story", ideaLaunch: "Grand Opening Event",
+    recentTitle: "🕒 Recent Ready Designs", viewAll: "View All ←", sideHome: "Home",
+    studioTitle: "Your Design is Ready to Post! ✨", btnShare: "🔗 Share", btnDlPng: "↓ Download Poster (PNG)", btnDlPdf: "📄 PDF",
+    directorHeader: "🤖 AI Creative Director", labelTitle: "Poster Heading", labelSubtext: "Subtext",
+    captionHeader: "📝 Ready Instagram Post (Caption)", btnCopy: "Copy Text 📋",
+    brandPageTitle: "Your Brand Identity (Luna Café)", brandPageDesc: "Your logo and brand colors are saved automatically to power every AI generation.",
+    btnGoDashboard: "✦ Create New Design ←", tplTitle: "Templates & Previous Works"
   }
 };
 
 function showScreen(id){
-  const screens = document.querySelectorAll('.screen');
-  screens.forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const target = document.getElementById(id);
   if(target) target.classList.add('active');
   window.scrollTo(0,0);
 }
 
-function quickCreate(ideaText) {
-  const p = document.getElementById('prompt');
-  if(p) p.value = ideaText;
-  showScreen('create');
-  generateAiConcepts();
-}
-
-function generateAiConcepts(){
-  const promptInput = document.getElementById('prompt');
+function processMagicPrompt(){
+  const promptInput = document.getElementById('promptInput');
   const prompt = promptInput ? promptInput.value.trim() : '';
-  if(!prompt){ toast('أدخل فكرتك أولاً ✨'); return; }
+  if(!prompt){ toast(lang === 'ar' ? 'أدخل فكرتك أولاً ✨' : 'Please enter your idea first ✨'); return; }
 
-  toast('جاري تحويل أفكارك إلى تصاميم مذهلة بالـ AI... 🎨');
+  toast(lang === 'ar' ? 'جاري تحويل أفكارك لبوستر ونص تسويقي... 🎨' : 'Generating poster and caption with AI... 🎨');
+  
   setTimeout(() => {
-    const container = document.getElementById('aiConceptsContainer');
-    if(container) {
-      container.style.display = 'grid';
-      container.innerHTML = `
-        <div class="recent-card" onclick="loadConcept('${prompt}', 'LUNA CAFÉ', 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb')">
-          <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb')">
-            <div class="recent-info">طراز عصري ودافئ</div>
-          </div>
-        </div>
-        <div class="recent-card" onclick="loadConcept('${prompt}', 'LUNA CAFÉ', 'https://images.unsplash.com/photo-1551024709-8f23befc6f87')">
-          <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1551024709-8f23befc6f87')">
-            <div class="recent-info">طراز حيوي وجذاب</div>
-          </div>
-        </div>
-      `;
+    document.getElementById('inputHeading').value = "🔥 " + prompt.substring(0, 20);
+    document.getElementById('inputSubtext').value = prompt;
+    updateCanvas();
+    
+    if(lang === 'en'){
+      document.getElementById('aiCaptionText').textContent = `Because summer needs refresh.. 🧊✨\nEnjoy exclusive promo: ${prompt} at Luna Café this weekend!\n\n📍 Visit us or order via delivery apps.\n#Luna_Cafe #SpecialtyCoffee #Promo`;
+    } else {
+      document.getElementById('aiCaptionText').textContent = `لأن الصيف يحتاج إنتعاش.. 🧊✨\nاستمتعوا بـ ${prompt} في Luna Café طوال نهاية الأسبوع!\n\n📍 ننتظركم في الفرع أو عبر تطبيقات التوصيل.\n#Luna_Cafe #قهوة_مختصة #عروض`;
     }
-  }, 500);
+    
+    showScreen('editor');
+    confetti({ particleCount: 70, spread: 60 });
+  }, 600);
 }
 
-function loadConcept(heading, brand, bgUrl){
-  document.getElementById('inputHeading').value = heading;
-  document.getElementById('posterHeading').textContent = heading;
-  document.getElementById('posterBrand').textContent = brand;
-  document.getElementById('posterCanvas').style.backgroundImage = `url('${bgUrl}')`;
-  showScreen('editor');
-  toast('تصميمك جاهز للنشر أو التعديل الفوري! ✨');
+function quickScenario(text){
+  document.getElementById('promptInput').value = text;
+  processMagicPrompt();
 }
 
 function toggleLanguage(){
@@ -529,18 +589,17 @@ function updateCanvas(){
   document.getElementById('posterSubtext').textContent = document.getElementById('inputSubtext').value;
 }
 
-function aiAutoSelectImage() {
+function aiRegenerateStyle() {
   const imgs = ['https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb', 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5', 'https://images.unsplash.com/photo-1551024709-8f23befc6f87'];
   const randomImg = imgs[Math.floor(Math.random() * imgs.length)];
   document.getElementById('posterCanvas').style.backgroundImage = `url('${randomImg}')`;
-  toast('تم اختيار خلفية جديدة تناسب الفكرة! 🖼️');
+  toast(lang === 'ar' ? 'تم اختيار أسلوب بصري جديد ✨' : 'New visual style applied ✨');
 }
 
-function aiMagicRewrite() {
-  document.getElementById('inputHeading').value = "🔥 عرض خاص للويكند";
-  document.getElementById('inputSubtext').value = "استمتع بأفضل مشروبات Luna Café بتخفيض حصري";
-  updateCanvas();
-  toast('قام الذكاء الاصطناعي بصياغة النص بشكل تسويقي! ✨');
+function copyCaption() {
+  const text = document.getElementById('aiCaptionText').textContent;
+  navigator.clipboard.writeText(text);
+  toast(lang === 'ar' ? 'تم نسخ النص التسويقي للحافظة 📋' : 'Caption copied to clipboard 📋');
 }
 
 function downloadPNG(){
@@ -550,8 +609,7 @@ function downloadPNG(){
     link.download = 'design.png';
     link.href = canvas.toDataURL('image/png');
     link.click();
-    if(window.confetti) confetti({ particleCount: 70, spread: 60 });
-    toast('تم تنزيل تصميمك بنجاح! 🎉');
+    toast('تم تنزيل التصميم بنجاح! 🎉');
   });
 }
 
@@ -567,14 +625,14 @@ function downloadPDF(){
   });
 }
 
-function sharePost() { toast('جاري فتح خيارات المشاركة المباشرة... 🔗'); }
+function sharePost() { toast('جاري فتح خيارات المشاركة... 🔗'); }
 
 function toast(msg){
-  let t=document.getElementById('toast');
+  let t = document.getElementById('toast');
   if(t) {
-    t.textContent=msg;
-    t.style.display='block';
-    setTimeout(()=>t.style.display='none',2200);
+    t.textContent = msg;
+    t.style.display = 'block';
+    setTimeout(() => t.style.display = 'none', 2200);
   }
 }
 </script>
