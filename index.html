@@ -138,3 +138,445 @@ body[dir="ltr"] .sidebar { border-left: none; border-right: 1px solid var(--bord
 
 .draggable-item { cursor: grab; user-select: none; touch-action: none; display: inline-block; position: relative; z-index: 2; transition: transform 0.05s ease-out; }
 .draggable-item:hover { outline: 1px dashed rgba(194, 248, 59, 0.8); border-radius: 4px; }
+
+.poster h2 { font-size: 32px; line-height: 0.95; margin: 0 0 8px; font-weight: 900; }
+.poster p { margin: 0 0 8px; font-size: 12px; color: #cbd5e1; }
+
+.control { margin-bottom: 12px; }
+.control label { font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 4px; font-weight: 700; }
+.field { width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--input-bg); color: var(--text-main); font-size: 12px; outline: none; }
+.field:focus { border-color: var(--accent); }
+
+.create-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 24px; margin-bottom: 20px; backdrop-filter: blur(20px); }
+.create-box textarea { width: 100%; min-height: 95px; border: 1px solid var(--border); border-radius: 12px; padding: 14px; font-size: 14px; resize: vertical; background: var(--input-bg); color: var(--text-main); }
+
+.mobile-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; width: 100vw; padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px)); background: rgba(7, 9, 14, 0.95); backdrop-filter: blur(20px); border-top: 1px solid var(--border); z-index: 9999; justify-content: space-around; align-items: center; }
+.mobile-nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; font-weight: 800; color: var(--text-muted); cursor: pointer; background: none; border: none; padding: 6px 12px; }
+.mobile-nav-item svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
+.mobile-nav-item.active { color: var(--accent); }
+
+@media(max-width:850px){
+  .navlinks{display:none}
+  .sidebar{display:none}
+  .mobile-nav{display:flex}
+  .main{padding:16px 16px 90px}
+  .editor{grid-template-columns:1fr}
+  .recent-grid{grid-template-columns:1fr}
+  .ideas-chips{grid-template-columns:repeat(2,1fr)}
+  .canvas{ order: -1; position: sticky; top: 60px; z-index: 90; padding: 12px; background: var(--bg-dark); border-bottom: 1px solid var(--border); }
+  .controls { position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000; max-height: 85vh; overflow-y: auto; border-radius: 24px 24px 0 0; background: var(--bg-card); backdrop-filter: blur(25px); transform: translateY(0); padding: 20px 20px 80px; }
+  .tools{display:none}
+}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--white);color:var(--bg-dark);padding:10px 22px;border-radius:99px;display:none;font-size:12px;font-weight:800;z-index:20000;box-shadow:0 10px 30px rgba(0,0,0,0.5)}
+</style>
+</head>
+<body>
+
+<div class="ambient-glow"></div>
+
+<!-- الشريط العلوي -->
+<nav class="nav">
+  <div class="logo" onclick="showScreen('dashboard')">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M12 2L14.8 8.6L22 12L14.8 15.4L12 22L9.2 15.4L2 12L9.2 8.6L12 2Z" fill="url(#logo-grad)"/>
+        <defs>
+          <linearGradient id="logo-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#C2F83B"/>
+            <stop offset="1" stop-color="#38EF7D"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <span data-i18n="logoTitle">Creative AI</span>
+  </div>
+  <div class="navlinks">
+    <span onclick="showScreen('dashboard')" data-i18n="sideHome">الرئيسية</span>
+    <span onclick="showScreen('create')" data-i18n="sideCreate">إنشاء جديد</span>
+    <span onclick="showScreen('templates')" data-i18n="navTemplates">القوالب</span>
+    <span onclick="showScreen('brand')" data-i18n="navBrand">الهوية التجارية</span>
+  </div>
+  <div class="nav-actions">
+    <button class="icon-btn" title="تغيير المظهر" onclick="toggleTheme()">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <button class="icon-btn" title="Language" onclick="toggleLanguage()">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    </button>
+    <button class="btn accent" onclick="showScreen('create')" data-i18n="btnStart">✦ ابدأ إنشاء جديد</button>
+  </div>
+</nav>
+
+<!-- 1️⃣ الواجهة الرئيسية (Dashboard) -->
+<section id="dashboard" class="screen active">
+<div class="dashboard-container">
+  <div class="hero-prompt-card">
+    <h1 data-i18n="heroGreeting">صباح الخير 👋</h1>
+    <p data-i18n="heroSubtext">ماذا تريد أن نصنع اليوم؟ أخبر الذكاء الاصطناعي بفكرتك واتركه يبدع.</p>
+    <button class="hero-action-btn" onclick="showScreen('create')">
+      <span>✦</span> <span data-i18n="heroStartBtn">ابدأ إنشاء جديد</span>
+    </button>
+  </div>
+
+  <div class="dash-section">
+    <div class="dash-section-header">
+      <div class="dash-section-title" data-i18n="recentTitle">🕒 آخر أعمالك</div>
+      <button class="link-btn" onclick="showScreen('templates')" data-i18n="viewAll">عرض الكل ←</button>
+    </div>
+    <div class="recent-grid">
+      <div class="recent-card" onclick="showScreen('editor')">
+        <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb')">
+          <div class="recent-info">عرض الصيف — Luna Café</div>
+        </div>
+      </div>
+      <div class="recent-card" onclick="showScreen('editor')">
+        <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1551024709-8f23befc6f87')">
+          <div class="recent-info">مشروب ماتشا جديد</div>
+        </div>
+      </div>
+      <div class="recent-card" onclick="showScreen('editor')">
+        <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5')">
+          <div class="recent-info">ستوري افتتاحي</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash-section">
+    <div class="dash-section-header">
+      <div class="dash-section-title" data-i18n="brandTitle">✦ هوية علامتك التجارية</div>
+      <button class="link-btn" onclick="showScreen('brand')" data-i18n="editBrand">تعديل الهوية ←</button>
+    </div>
+    <div class="brand-strip">
+      <div class="brand-details">
+        <b>Luna Café</b>
+        <div class="brand-tags">
+          <span><i class="dot"></i> <span data-i18n="tagLogo">الشعار مثبت</span></span>
+          <span><i class="dot"></i> <span data-i18n="tagColors">الألوان المعتمدة</span></span>
+          <span><i class="dot"></i> <span data-i18n="tagFonts">الخطوط المحفوظة</span></span>
+        </div>
+      </div>
+      <button class="btn" onclick="showScreen('brand')" data-i18n="manageBrand">إدارة</button>
+    </div>
+  </div>
+
+  <div class="dash-section">
+    <div class="dash-section-header">
+      <div class="dash-section-title" data-i18n="ideasTitle">💡 أفكار يمكنك إنشاؤها بضغطة زر</div>
+    </div>
+    <div class="ideas-chips">
+      <div class="idea-btn" onclick="quickCreate('عرض خصم 25% بمناسبة نهاية الأسبوع')" data-i18n="ideaPromo">🔥 [عرض ترويجي]</div>
+      <div class="idea-btn" onclick="quickCreate('إعلان عن منتج جديد ومميز')" data-i18n="ideaProduct">✨ [منتج جديد]</div>
+      <div class="idea-btn" onclick="quickCreate('ستوري تفاعلي للعملاء')" data-i18n="ideaStory">📱 [Story انستغرام]</div>
+      <div class="idea-btn" onclick="quickCreate('دعوة لاقتتاح الفرع الجديد')" data-i18n="ideaLaunch">🎉 [افتتاح فرع]</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 2️⃣ صفحة إنشاء جديد -->
+<section id="create" class="screen">
+<div class="app">
+  <aside class="sidebar">
+    <div class="side-logo logo" onclick="showScreen('dashboard')">
+      <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L14.8 8.6L22 12L14.8 15.4L12 22L9.2 15.4L2 12L9.2 8.6L12 2Z" fill="url(#logo-grad)"/></svg></div>
+      <span data-i18n="logoTitle">Creative AI</span>
+    </div>
+    <div class="side-item" onclick="showScreen('dashboard')">
+      <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span data-i18n="sideHome">الرئيسية</span>
+    </div>
+    <div class="side-item active" onclick="showScreen('create')">
+      <svg viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>
+      <span data-i18n="sideCreate">إنشاء</span>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="toprow"><div><h2 data-i18n="createQuestion">ماذا تريد أن نصنع اليوم؟</h2></div></div>
+    <div class="create-box">
+      <textarea id="prompt" data-i18n-ph="promptPh" placeholder="أخبر Creative AI بما تفكر به… مثال: أريد إعلان خصم 20٪ على القهوة الباردة للويكند مع شعار Luna Café"></textarea>
+      <button class="btn accent" style="margin-top:12px;width:100%;justify-content:center" onclick="generateAiConcepts()" data-i18n="btnGenAi">✦ دع Creative AI يصممها لك ←</button>
+    </div>
+    <div id="aiConceptsContainer" class="recent-grid" style="display:none;margin-top:20px"></div>
+  </main>
+</div>
+</section>
+
+<!-- 3️⃣ استديو التصميم (Editor) -->
+<section id="editor" class="screen">
+<div class="app">
+  <aside class="sidebar">
+    <div class="side-logo logo" onclick="showScreen('dashboard')">
+      <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L14.8 8.6L22 12L14.8 15.4L12 22L9.2 15.4L2 12L9.2 8.6L12 2Z" fill="url(#logo-grad)"/></svg></div>
+      <span data-i18n="logoTitle">Creative AI</span>
+    </div>
+    <div class="side-item" onclick="showScreen('dashboard')">
+      <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span data-i18n="sideHome">الرئيسية</span>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="toprow">
+      <div><h2 data-i18n="studioTitle">استديو التصميم الذكي</h2></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn" onclick="sharePost()" data-i18n="btnShare">🔗 مشاركة</button>
+        <button class="btn accent" onclick="downloadPNG()" data-i18n="btnDlPng">↓ تحميل (PNG)</button>
+        <button class="btn dark" onclick="downloadPDF()" data-i18n="btnDlPdf">📄 PDF</button>
+      </div>
+    </div>
+
+    <div class="editor">
+      <div class="tools">
+        <div class="tool active"><span>✍️</span><span data-i18n="toolTexts">النصوص</span></div>
+        <div class="tool"><span>🤖</span><span data-i18n="toolAi">مساعد AI</span></div>
+        <div class="tool"><span>🎨</span><span data-i18n="toolColors">الألوان</span></div>
+      </div>
+
+      <div class="canvas">
+        <div class="poster" id="posterCanvas" style="background-image:url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb')">
+          <div class="poster-overlay" id="posterOverlay"></div>
+          <div class="draggable-item"><small id="posterBrand" style="color:var(--accent);font-weight:800;font-size:10px">LUNA CAFÉ</small></div>
+          <div class="draggable-item"><h2 id="posterHeading">20% OFF</h2></div>
+          <div class="draggable-item"><p id="posterSubtext">على جميع المشروبات الباردة</p></div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div style="margin-bottom:12px;"><b style="color:var(--white);font-size:13px;" data-i18n="aiHelpHeader">🤖 تعديل النصوص والمساعد</b></div>
+        <div class="control">
+          <input class="field" id="inputHeading" value="20% OFF" oninput="updateCanvas()" placeholder="العنوان الرئيسي">
+        </div>
+        <div class="control">
+          <input class="field" id="inputSubtext" value="على جميع المشروبات الباردة" oninput="updateCanvas()" placeholder="النص الفرعي">
+        </div>
+        <button class="btn accent" style="width:100%;justify-content:center;margin-bottom:12px;" onclick="aiMagicRewrite()">✨ صياغة تسويقية بالـ AI</button>
+        <button class="btn" style="width:100%;justify-content:center;" onclick="aiAutoSelectImage()">🖼️ تغيير الخلفية بالـ AI</button>
+      </div>
+    </div>
+  </main>
+</div>
+</section>
+
+<!-- 4️⃣ الهوية التجارية -->
+<section id="brand" class="screen">
+<div class="app">
+  <aside class="sidebar">
+    <div class="side-logo logo" onclick="showScreen('dashboard')">
+      <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L14.8 8.6L22 12L14.8 15.4L12 22L9.2 15.4L2 12L9.2 8.6L12 2Z" fill="url(#logo-grad)"/></svg></div>
+      <span data-i18n="logoTitle">Creative AI</span>
+    </div>
+    <div class="side-item" onclick="showScreen('dashboard')">
+      <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span data-i18n="sideHome">الرئيسية</span>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="toprow"><div><h2>هوية علامتك التجارية (Luna Café)</h2></div></div>
+    <div class="dash-section">
+      <p style="color:var(--text-muted);font-size:13px;">تم حفظ الشارات والألوان تلقائياً ليستخدمها Creative AI في كل التصاميم الجديدة.</p>
+      <button class="btn accent" onclick="showScreen('create')">✦ إنشاء بوستر بناءً على الهوية ←</button>
+    </div>
+  </main>
+</div>
+</section>
+
+<!-- 5️⃣ القوالب -->
+<section id="templates" class="screen">
+<div class="app">
+  <aside class="sidebar">
+    <div class="side-logo logo" onclick="showScreen('dashboard')">
+      <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L14.8 8.6L22 12L14.8 15.4L12 22L9.2 15.4L2 12L9.2 8.6L12 2Z" fill="url(#logo-grad)"/></svg></div>
+      <span data-i18n="logoTitle">Creative AI</span>
+    </div>
+    <div class="side-item" onclick="showScreen('dashboard')">
+      <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span data-i18n="sideHome">الرئيسية</span>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="toprow"><div><h2 data-i18n="tplTitle">مكتبة الأعمال والقوالب</h2></div></div>
+    <div class="recent-grid">
+      <div class="recent-card" onclick="showScreen('editor')">
+        <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb')"><div class="recent-info">عرض 1+1 مجاناً</div></div>
+      </div>
+      <div class="recent-card" onclick="showScreen('editor')">
+        <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5')"><div class="recent-info">خصم وجبات البرجر</div></div>
+      </div>
+    </div>
+  </main>
+</div>
+</section>
+
+<!-- شريط التنقل للجوال -->
+<div class="mobile-nav">
+  <button class="mobile-nav-item active" onclick="showScreen('dashboard')">
+    <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span data-i18n="sideHome">الرئيسية</span>
+  </button>
+  <button class="mobile-nav-item" onclick="showScreen('create')">
+    <svg viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>
+    <span data-i18n="sideCreate">إنشاء</span>
+  </button>
+  <button class="mobile-nav-item" onclick="showScreen('brand')">
+    <svg viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.75 1.7-1.67 0-.41-.15-.79-.42-1.08-.27-.28-.44-.68-.44-1.12 0-.92.75-1.67 1.67-1.67H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"/></svg>
+    <span data-i18n="sideBrand">الهوية</span>
+  </button>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+let theme = 'dark';
+let lang = 'ar';
+
+const i18nDict = {
+  ar: {
+    logoTitle: "Creative AI", navTemplates: "القوالب", navBrand: "الهوية التجارية", btnStart: "✦ ابدأ إنشاء جديد",
+    heroGreeting: "صباح الخير 👋", heroSubtext: "ماذا تريد أن نصنع اليوم؟ أخبر الذكاء الاصطناعي بفكرتك واتركه يبدع.", heroStartBtn: "ابدأ إنشاء جديد",
+    recentTitle: "🕒 آخر أعمالك", viewAll: "عرض الكل ←", brandTitle: "✦ هوية علامتك التجارية", editBrand: "تعديل الهوية ←",
+    tagLogo: "الشعار مثبت", tagColors: "الألوان المعتمدة", tagFonts: "الخطوط المحفوظة", manageBrand: "إدارة",
+    ideasTitle: "💡 أفكار يمكنك إنشاؤها بضغطة زر", ideaPromo: "🔥 [عرض ترويجي]", ideaProduct: "✨ [منتج جديد]", ideaStory: "📱 [Story انستغرام]", ideaLaunch: "🎉 [افتتاح فرع]",
+    sideHome: "الرئيسية", sideCreate: "إنشاء جديد", createQuestion: "ماذا تريد أن نصنع اليوم؟", promptPh: "أخبر Creative AI بما تفكر به… مثال: أريد إعلان خصم 20٪ على القهوة الباردة للويكند مع شعار Luna Café",
+    btnGenAi: "✦ دع Creative AI يصممها لك ←", studioTitle: "استديو التصميم الذكي", btnShare: "🔗 مشاركة", btnDlPng: "↓ تحميل (PNG)", btnDlPdf: "📄 PDF",
+    toolTexts: "النصوص", toolAi: "مساعد AI", toolColors: "الألوان", tplTitle: "مكتبة الأعمال والقوالب", aiHelpHeader: "🤖 تعديل النصوص والمساعد"
+  },
+  en: {
+    logoTitle: "Creative AI", navTemplates: "Templates", navBrand: "Brand Kit", btnStart: "✦ Start New Design",
+    heroGreeting: "Good Morning 👋", heroSubtext: "What do you want to create today? Tell Creative AI your idea.", heroStartBtn: "Start New Design",
+    recentTitle: "🕒 Recent Works", viewAll: "View All ←", brandTitle: "✦ Brand Identity", editBrand: "Edit Brand ←",
+    tagLogo: "Logo Active", tagColors: "Colors Preset", tagFonts: "Fonts Saved", manageBrand: "Manage",
+    ideasTitle: "💡 Quick Ideas to Generate", ideaPromo: "🔥 [Promo Offer]", ideaProduct: "✨ [New Product]", ideaStory: "📱 [Instagram Story]", ideaLaunch: "🎉 [Grand Opening]",
+    sideHome: "Home", sideCreate: "Create New", createQuestion: "What are we making today?", promptPh: "Tell Creative AI what's on your mind... e.g., 20% OFF Iced Coffee promo for Luna Café",
+    btnGenAi: "✦ Let Creative AI Design It ←", studioTitle: "AI Creative Studio", btnShare: "🔗 Share", btnDlPng: "↓ Download (PNG)", btnDlPdf: "📄 PDF",
+    toolTexts: "Text", toolAi: "AI Helper", toolColors: "Colors", tplTitle: "Templates Library", aiHelpHeader: "🤖 Edit Text & AI Assistant"
+  }
+};
+
+function showScreen(id){
+  const screens = document.querySelectorAll('.screen');
+  screens.forEach(s => s.classList.remove('active'));
+  const target = document.getElementById(id);
+  if(target) target.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function quickCreate(ideaText) {
+  const p = document.getElementById('prompt');
+  if(p) p.value = ideaText;
+  showScreen('create');
+  generateAiConcepts();
+}
+
+function generateAiConcepts(){
+  const promptInput = document.getElementById('prompt');
+  const prompt = promptInput ? promptInput.value.trim() : '';
+  if(!prompt){ toast('أدخل فكرتك أولاً ✨'); return; }
+
+  toast('جاري تحويل أفكارك إلى تصاميم مذهلة بالـ AI... 🎨');
+  setTimeout(() => {
+    const container = document.getElementById('aiConceptsContainer');
+    if(container) {
+      container.style.display = 'grid';
+      container.innerHTML = `
+        <div class="recent-card" onclick="loadConcept('${prompt}', 'LUNA CAFÉ', 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb')">
+          <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb')">
+            <div class="recent-info">طراز عصري ودافئ</div>
+          </div>
+        </div>
+        <div class="recent-card" onclick="loadConcept('${prompt}', 'LUNA CAFÉ', 'https://images.unsplash.com/photo-1551024709-8f23befc6f87')">
+          <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1551024709-8f23befc6f87')">
+            <div class="recent-info">طراز حيوي وجذاب</div>
+          </div>
+        </div>
+      `;
+    }
+  }, 500);
+}
+
+function loadConcept(heading, brand, bgUrl){
+  document.getElementById('inputHeading').value = heading;
+  document.getElementById('posterHeading').textContent = heading;
+  document.getElementById('posterBrand').textContent = brand;
+  document.getElementById('posterCanvas').style.backgroundImage = `url('${bgUrl}')`;
+  showScreen('editor');
+  toast('تصميمك جاهز للنشر أو التعديل الفوري! ✨');
+}
+
+function toggleLanguage(){
+  lang = lang === 'ar' ? 'en' : 'ar';
+  document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  const dict = i18nDict[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if(dict[key]) el.innerHTML = dict[key];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if(dict[key]) el.placeholder = dict[key];
+  });
+  toast(lang === 'en' ? 'Switched to English 🌐' : 'تم التغيير للغة العربية 🌐');
+}
+
+function toggleTheme(){
+  theme = theme === 'dark' ? 'light' : 'dark';
+  document.body.classList.toggle('light-mode', theme === 'light');
+  toast(theme === 'light' ? 'الوضع الفاتح ☀️' : 'الوضع الداكن 🌙');
+}
+
+function updateCanvas(){
+  document.getElementById('posterHeading').textContent = document.getElementById('inputHeading').value;
+  document.getElementById('posterSubtext').textContent = document.getElementById('inputSubtext').value;
+}
+
+function aiAutoSelectImage() {
+  const imgs = ['https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb', 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5', 'https://images.unsplash.com/photo-1551024709-8f23befc6f87'];
+  const randomImg = imgs[Math.floor(Math.random() * imgs.length)];
+  document.getElementById('posterCanvas').style.backgroundImage = `url('${randomImg}')`;
+  toast('تم اختيار خلفية جديدة تناسب الفكرة! 🖼️');
+}
+
+function aiMagicRewrite() {
+  document.getElementById('inputHeading').value = "🔥 عرض خاص للويكند";
+  document.getElementById('inputSubtext').value = "استمتع بأفضل مشروبات Luna Café بتخفيض حصري";
+  updateCanvas();
+  toast('قام الذكاء الاصطناعي بصياغة النص بشكل تسويقي! ✨');
+}
+
+function downloadPNG(){
+  const poster = document.getElementById('posterCanvas');
+  html2canvas(poster, { scale: 2, useCORS: true }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'design.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    if(window.confetti) confetti({ particleCount: 70, spread: 60 });
+    toast('تم تنزيل تصميمك بنجاح! 🎉');
+  });
+}
+
+function downloadPDF(){
+  const poster = document.getElementById('posterCanvas');
+  html2canvas(poster, { scale: 2, useCORS: true }).then(canvas => {
+    const imgData = canvas.toDataURL('image/png');
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    pdf.addImage(imgData, 'PNG', 0, 10, 210, 260);
+    pdf.save('design.pdf');
+    toast('تم تنزيل ملف PDF! 📄');
+  });
+}
+
+function sharePost() { toast('جاري فتح خيارات المشاركة المباشرة... 🔗'); }
+
+function toast(msg){
+  let t=document.getElementById('toast');
+  if(t) {
+    t.textContent=msg;
+    t.style.display='block';
+    setTimeout(()=>t.style.display='none',2200);
+  }
+}
+</script>
+</body>
+</html>
