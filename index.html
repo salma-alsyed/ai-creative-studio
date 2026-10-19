@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Creative AI — صمم أفكارك بالذكاء الاصطناعي</title>
+<title>Creative AI — استديو التصميم الذكي</title>
 
 <!-- مكتبات التصدير وتأثيرات الاحتفال -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -11,15 +11,14 @@
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Cairo:wght@500;600;700;800;900&family=Tajawal:wght@500;700;800&family=Readex+Pro:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Cairo:wght@500;600;700;800;900&display=swap');
 
 :root {
   --bg-dark: #07090e;
-  --bg-card: rgba(17, 21, 32, 0.85);
-  --bg-card-hover: rgba(24, 31, 46, 0.95);
-  --border: rgba(255, 255, 255, 0.08);
+  --bg-card: rgba(17, 21, 32, 0.9);
+  --border: rgba(255, 255, 255, 0.1);
   --accent: #c2f83b;
-  --accent-glow: rgba(194, 248, 59, 0.22);
+  --accent-glow: rgba(194, 248, 59, 0.25);
   --text-main: #f3f4f6;
   --text-muted: #9ca3af;
   --white: #ffffff;
@@ -29,9 +28,8 @@
 
 body.light-mode {
   --bg-dark: #f8fafc;
-  --bg-card: rgba(255, 255, 255, 0.92);
-  --bg-card-hover: #f1f5f9;
-  --border: rgba(0, 0, 0, 0.08);
+  --bg-card: rgba(255, 255, 255, 0.95);
+  --border: rgba(0, 0, 0, 0.1);
   --accent: #65a30d;
   --accent-glow: rgba(101, 163, 13, 0.2);
   --text-main: #0f172a;
@@ -45,212 +43,109 @@ html, body {
   margin: 0; padding: 0; width: 100%; max-width: 100%;
   overflow-x: hidden; background: var(--bg-dark); color: var(--text-main);
   font-family: 'Cairo', 'IBM Plex Sans Arabic', sans-serif;
-  -webkit-font-smoothing: antialiased; transition: background 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
 }
 
 *{box-sizing:border-box}
 button,input,textarea,select{font:inherit;outline:none}button{cursor:pointer}
 
-.screen{min-height:100vh;display:none;position:relative;animation:fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1)}
-.screen.active{display:block}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+/* نظام إدارة الشاشات بصرامة لمنع تداخل شاشتين فوق بعضهما */
+.screen { display: none !important; width: 100%; min-height: 100vh; position: relative; }
+.screen.active { display: block !important; }
 
 .ambient-glow{position:fixed;top:-100px;left:50%;transform:translateX(-50%);width:750px;height:450px;background:radial-gradient(circle, rgba(194,248,59,0.08) 0%, rgba(0,0,0,0) 70%);pointer-events:none;z-index:0}
 
 /* الشريط العلوي */
-.nav{height:65px;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(7, 9, 14, 0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);position:sticky;top:0;z-index:100}
-body.light-mode .nav{background:rgba(255,255,255,0.85)}
+.nav{height:65px;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(7, 9, 14, 0.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);position:sticky;top:0;z-index:100}
+body.light-mode .nav{background:rgba(255,255,255,0.9)}
 
-.logo{font-size:16px;font-weight:900;color:var(--white);display:flex;align-items:center;gap:10px;cursor:pointer;letter-spacing:0.5px}
-.logo-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:rgba(194, 248, 59, 0.12);border-radius:10px;border:1px solid rgba(194, 248, 59, 0.3);box-shadow:0 0 15px var(--accent-glow)}
+.logo{font-size:16px;font-weight:900;color:var(--white);display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:rgba(194, 248, 59, 0.12);border-radius:10px;border:1px solid rgba(194, 248, 59, 0.3)}
 .logo-icon svg{width:16px;height:16px}
 
 .navlinks{display:flex;gap:28px;font-size:13px;font-weight:700;color:var(--text-muted)}
 .navlinks span{cursor:pointer;transition:color 0.2s}.navlinks span:hover{color:var(--white)}
 
 .nav-actions{display:flex;gap:10px;align-items:center}
-.icon-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text-main);display:inline-flex;align-items:center;justify-content:center;transition:all 0.2s ease}
-.icon-btn:hover{background:rgba(255,255,255,0.1);color:var(--white);transform:translateY(-1px)}
-.icon-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.icon-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text-main);display:inline-flex;align-items:center;justify-content:center}
+.btn{border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text-main);border-radius:99px;padding:8px 18px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px}
+.btn.accent{background:var(--accent);border-color:var(--accent);color:#000;font-weight:800}
 
-.btn{border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text-main);border-radius:99px;padding:8px 18px;font-size:12px;font-weight:700;transition:all 0.2s ease;display:inline-flex;align-items:center;gap:6px}
-.btn:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2);transform:translateY(-1px)}
-.btn.accent{background:var(--accent);border-color:var(--accent);color:#000;box-shadow:0 0 20px var(--accent-glow);font-weight:800}.btn.accent:hover{background:#b1e62a}
+/* الواجهة الرئيسية */
+.dashboard-container { max-width: 880px; margin: 0 auto; padding: 30px 20px 80px; }
+.magic-prompt-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 28px; padding: 36px 24px; text-align: center; margin-bottom: 24px; }
+.brand-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(194, 248, 59, 0.1); border: 1px solid rgba(194, 248, 59, 0.3); color: var(--accent); padding: 6px 16px; border-radius: 99px; font-size: 12px; font-weight: 800; margin-bottom: 16px; }
+.magic-prompt-card h1 { font-size: clamp(22px, 4vw, 32px); font-weight: 900; margin: 0 0 10px; color: var(--white); }
+.magic-prompt-card p { font-size: 13px; color: var(--text-muted); margin: 0 0 20px; }
+.prompt-textarea { width: 100%; min-height: 100px; border: 1px solid var(--border); border-radius: 16px; padding: 14px; font-size: 14px; background: var(--input-bg); color: var(--text-main); margin-bottom: 16px; resize: none; }
+.magic-btn { background: var(--accent); color: #000; border: none; font-weight: 900; font-size: 14px; padding: 12px 32px; border-radius: 99px; cursor: pointer; }
 
-/* الواجهة الرئيسية البسيطة الفاخرة */
-.dashboard-container { max-width: 880px; margin: 0 auto; padding: 40px 20px 80px; }
+.dash-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 20px; margin-bottom: 20px; }
+.dash-section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.dash-section-title { font-size: 14px; font-weight: 800; color: var(--white); }
+.ideas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+.idea-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 14px 10px; text-align: center; cursor: pointer; }
 
-.magic-prompt-card {
-  background: linear-gradient(135deg, rgba(17, 21, 32, 0.95), rgba(24, 31, 46, 0.95));
-  border: 1px solid var(--border);
-  border-radius: 28px;
-  padding: 40px 30px;
-  text-align: center;
-  margin-bottom: 30px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-  backdrop-filter: blur(20px);
+/* استديو التصميم */
+.app-editor { display: flex; flex-direction: column; gap: 20px; padding: 20px 5vw 80px; max-width: 1200px; margin: 0 auto; }
+@media(min-width: 850px){
+  .app-editor { display: grid; grid-template-columns: 1fr 380px; align-items: start; }
+}
+
+.canvas-area { background: var(--canvas-bg); border: 1px solid var(--border); border-radius: 20px; padding: 20px; display: flex; align-items: center; justify-content: center; min-height: 480px; }
+.poster {
+  width: min(340px, 100%);
+  aspect-ratio: 1/1.25;
+  border-radius: 20px;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   position: relative;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.8);
   overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  touch-action: none;
 }
+.poster-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%); pointer-events: none; z-index: 1; }
 
-.magic-prompt-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-}
-
-.brand-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(194, 248, 59, 0.1);
-  border: 1px solid rgba(194, 248, 59, 0.3);
-  color: var(--accent);
-  padding: 6px 16px;
-  border-radius: 99px;
-  font-size: 12px;
-  font-weight: 800;
-  margin-bottom: 20px;
-}
-
-.magic-prompt-card h1 { font-size: clamp(24px, 4vw, 36px); font-weight: 900; margin: 0 0 10px; color: var(--white); }
-.magic-prompt-card p { font-size: 14px; color: var(--text-muted); margin: 0 0 28px; }
-
-.prompt-input-wrapper {
+.poster-glass-card {
   position: relative;
-  max-width: 680px;
-  margin: 0 auto 20px;
-}
-
-.prompt-textarea {
-  width: 100%;
-  min-height: 110px;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 18px 20px;
-  font-size: 15px;
-  line-height: 1.6;
-  background: var(--input-bg);
-  color: var(--text-main);
-  outline: none;
-  resize: none;
-  transition: border-color 0.2s ease;
-}
-
-.prompt-textarea:focus { border-color: var(--accent); }
-
-.magic-btn {
-  background: var(--accent);
-  color: #000;
-  border: none;
-  font-weight: 900;
-  font-size: 15px;
-  padding: 14px 38px;
-  border-radius: 99px;
-  box-shadow: 0 0 30px var(--accent-glow);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.magic-btn:hover { transform: translateY(-2px) scale(1.02); background: #b1e62a; }
-
-.dash-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 22px; margin-bottom: 20px; backdrop-filter: blur(20px); }
-.dash-section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-.dash-section-title { font-size: 14px; font-weight: 800; color: var(--white); display: flex; align-items: center; gap: 8px; }
-.link-btn { background: none; border: none; color: var(--accent); font-size: 12px; font-weight: 700; cursor: pointer; }
-
-.ideas-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.idea-card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border);
+  z-index: 2;
+  background: rgba(10, 14, 22, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 14px;
-  padding: 16px 12px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  padding: 16px;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
 }
-.idea-card:hover {
-  background: rgba(194, 248, 59, 0.08);
-  border-color: var(--accent);
-  transform: translateY(-2px);
-}
-.idea-icon { font-size: 20px; margin-bottom: 6px; display: block; }
-.idea-title { font-size: 12px; font-weight: 800; color: var(--white); }
+.poster-glass-card:active { cursor: grabbing; }
 
-.recent-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.recent-card { background: rgba(0, 0, 0, 0.3); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; cursor: pointer; transition: all 0.2s ease; }
-.recent-card:hover { border-color: rgba(255, 255, 255, 0.2); transform: translateY(-2px); }
-.recent-thumb { height: 120px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 10px; position: relative; }
-.recent-thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.8), transparent); }
-.recent-info { position: relative; z-index: 2; font-size: 11px; font-weight: 800; color: #fff; }
+.poster-brand-tag { display: inline-block; background: rgba(194, 248, 59, 0.15); border: 1px solid rgba(194, 248, 59, 0.4); color: var(--accent); font-weight: 800; font-size: 10px; padding: 3px 8px; border-radius: 99px; margin-bottom: 6px; }
+.poster h2 { font-size: 26px; line-height: 1.1; margin: 0 0 6px; font-weight: 900; color: #fff; }
+.poster p { margin: 0; font-size: 12px; color: #cbd5e1; }
 
-/* محرر الاستديو */
-.app { min-height: 100vh; display: flex; }
-.sidebar { width: 230px; background: rgba(17, 21, 32, 0.6); backdrop-filter: blur(20px); border-left: 1px solid var(--border); padding: 24px 16px; flex-shrink: 0; display: flex; flex-direction: column; }
-body[dir="ltr"] .sidebar { border-left: none; border-right: 1px solid var(--border); }
-.side-logo { padding: 0 8px 24px; }
-.side-item { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 12px; margin: 3px 0; font-size: 13px; font-weight: 700; color: var(--text-muted); cursor: pointer; transition: all 0.15s ease; }
-.side-item:hover { background: rgba(255,255,255,0.05); color: var(--white); }
-.side-item.active { background: rgba(194, 248, 59, 0.1); color: var(--accent); border: 1px solid rgba(194, 248, 59, 0.25); }
-.side-item svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2; fill: none; }
-
-.main { flex: 1; padding: 30px 40px; max-width: 1200px; }
-.toprow { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-.toprow h2 { margin: 0; font-size: 22px; font-weight: 800; color: var(--white); }
-
-.editor { display: grid; grid-template-columns: 1fr 380px; gap: 24px; align-items: start; }
-.canvas { background: var(--canvas-bg); border: 1px solid var(--border); border-radius: 20px; display: flex; align-items: center; justify-content: center; min-height: 520px; padding: 24px; position: sticky; top: 84px; z-index: 10; }
-.poster { width: min(330px,90%); aspect-ratio: 1/1.25; background: #111622; border-radius: 16px; color: white; padding: 24px; display: flex; flex-direction: column; justify-content: flex-end; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; background-size: cover; background-position: center; transition: all 0.3s ease; }
-.poster-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.45); pointer-events: none; z-index: 1; transition: background 0.2s ease; }
-
-.draggable-item { cursor: grab; user-select: none; touch-action: none; display: inline-block; position: relative; z-index: 2; transition: transform 0.05s ease-out; }
-.draggable-item:hover { outline: 1px dashed rgba(194, 248, 59, 0.8); border-radius: 4px; }
-
-.poster h2 { font-size: 32px; line-height: 0.95; margin: 0 0 8px; font-weight: 900; }
-.poster p { margin: 0 0 8px; font-size: 12px; color: #cbd5e1; }
-
-.controls { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 22px; }
+/* لوحة التعديل والتحكم */
+.controls-panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 20px; z-index: 10; }
 .control { margin-bottom: 14px; }
 .control label { font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 4px; font-weight: 700; }
 .field { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--input-bg); color: var(--text-main); font-size: 13px; outline: none; }
 .field:focus { border-color: var(--accent); }
 
-.caption-box {
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 14px;
-  font-size: 12px;
-  line-height: 1.6;
-  color: var(--text-main);
-  margin-top: 14px;
-  white-space: pre-wrap;
-}
+.caption-box { background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border); border-radius: 12px; padding: 12px; font-size: 12px; line-height: 1.6; color: var(--text-main); margin-top: 10px; white-space: pre-wrap; }
 
-.mobile-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; width: 100vw; padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px)); background: rgba(7, 9, 14, 0.95); backdrop-filter: blur(20px); border-top: 1px solid var(--border); z-index: 9999; justify-content: space-around; align-items: center; }
-.mobile-nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; font-weight: 800; color: var(--text-muted); cursor: pointer; background: none; border: none; padding: 6px 12px; }
-.mobile-nav-item svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
-.mobile-nav-item.active { color: var(--accent); }
+/* شريط التنقل للجوال */
+.mobile-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; padding: 10px; background: rgba(7, 9, 14, 0.95); backdrop-filter: blur(20px); border-top: 1px solid var(--border); z-index: 999; justify-content: space-around; }
+@media(max-width:849px){ .mobile-nav{display:flex;} .navlinks{display:none;} }
+.mobile-nav-btn { background: none; border: none; color: var(--text-muted); font-size: 11px; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.mobile-nav-btn.active { color: var(--accent); }
 
-@media(max-width:850px){
-  .navlinks{display:none}
-  .sidebar{display:none}
-  .mobile-nav{display:flex}
-  .main{padding:16px 16px 90px}
-  .editor{grid-template-columns:1fr}
-  .ideas-grid{grid-template-columns:repeat(2,1fr)}
-  .recent-grid{grid-template-columns:1fr}
-  .canvas{ order: -1; position: sticky; top: 60px; z-index: 90; padding: 12px; background: var(--bg-dark); border-bottom: 1px solid var(--border); }
-  .controls { position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000; max-height: 85vh; overflow-y: auto; border-radius: 24px 24px 0 0; background: var(--bg-card); backdrop-filter: blur(25px); transform: translateY(0); padding: 20px 20px 80px; }
-}
-
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--white);color:var(--bg-dark);padding:10px 22px;border-radius:99px;display:none;font-size:12px;font-weight:800;z-index:20000;box-shadow:0 10px 30px rgba(0,0,0,0.5)}
+.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--white); color: var(--bg-dark); padding: 10px 22px; border-radius: 99px; display: none; font-size: 12px; font-weight: 800; z-index: 20000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 </style>
 </head>
 <body>
@@ -260,234 +155,112 @@ body[dir="ltr"] .sidebar { border-left: none; border-right: 1px solid var(--bord
 <!-- الشريط العلوي -->
 <nav class="nav">
   <div class="logo" onclick="showScreen('dashboard')">
-    <div class="logo-icon">
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M12 2L14.8 8.6L22 12L14.8 15.4L12 22L9.2 15.4L2 12L9.2 8.6L12 2Z" fill="url(#logo-grad)"/>
-        <defs>
-          <linearGradient id="logo-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#C2F83B"/>
-            <stop offset="1" stop-color="#38EF7D"/>
-          </linearGradient>
-        </defs>
-      </svg>
-    </div>
+    <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L14.8 8.6L22 12L14.8 15.4L12 22L9.2 15.4L2 12L9.2 8.6L12 2Z" fill="#C2F83B"/></svg></div>
     <span data-i18n="logoTitle">Creative AI</span>
   </div>
   <div class="navlinks">
     <span onclick="showScreen('dashboard')" data-i18n="sideHome">الرئيسية</span>
-    <span onclick="showScreen('templates')" data-i18n="navTemplates">الأعمال والقوالب</span>
     <span onclick="showScreen('brand')" data-i18n="navBrand">الهوية التجارية</span>
   </div>
   <div class="nav-actions">
-    <button class="icon-btn" title="تغيير المظهر" onclick="toggleTheme()">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-    </button>
-    <button class="icon-btn" title="Language" onclick="toggleLanguage()">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-    </button>
+    <button class="icon-btn" onclick="toggleTheme()">☀️/🌙</button>
+    <button class="icon-btn" onclick="toggleLanguage()">🌐</button>
   </div>
 </nav>
 
-<!-- 1️⃣ الواجهة الرئيسية (Magic Prompt Engine) -->
+<!-- 1️⃣ الشاشة الرئيسية (تختفي بصرامة عند فتح الاستديو) -->
 <section id="dashboard" class="screen active">
 <div class="dashboard-container">
   <div class="magic-prompt-card">
-    <div class="brand-badge">
-      <span>✨</span> <span data-i18n="brandBadge">هويتك المعتمدة: Luna Café</span>
-    </div>
+    <div class="brand-badge"><span>✨</span> <span data-i18n="brandBadge">هويتك المعتمدة: Luna Café</span></div>
     <h1 data-i18n="heroGreeting">ماذا تريد أن نصنع اليوم؟ 👋</h1>
-    <p data-i18n="heroSubtext">أخبر الذكاء الاصطناعي بفكرتك أو عرضك بكلام عادي، وسيتكفل بالتصميم والنص التسويقي كاملاً.</p>
+    <p data-i18n="heroSubtext">أخبر الذكاء الاصطناعي بفكرتك، وسيتكفل بالتصميم الفاخر والنص التسويقي.</p>
     
-    <div class="prompt-input-wrapper">
-      <textarea id="promptInput" class="prompt-textarea" data-i18n-ph="promptPh" placeholder="أدخل فكرتك هنا… مثال: أريد إعلان خصم 20٪ على القهوة الباردة لعطلة نهاية الأسبوع"></textarea>
-    </div>
+    <textarea id="promptInput" class="prompt-textarea" data-i18n-ph="promptPh" placeholder="أدخل فكرتك هنا… مثال: أريد إعلان خصم 20٪ على القهوة الباردة لعطلة نهاية الأسبوع"></textarea>
 
-    <button class="magic-btn" onclick="processMagicPrompt()">
-      <span>✦</span> <span data-i18n="heroStartBtn">دع Creative AI يصممها فوراً</span>
-    </button>
+    <button class="magic-btn" onclick="processMagicPrompt()">✦ <span data-i18n="heroStartBtn">صممها فوراً</span></button>
   </div>
 
-  <!-- أفكار سريعة بنقرة واحدة -->
   <div class="dash-section">
-    <div class="dash-section-header">
-      <div class="dash-section-title" data-i18n="ideasTitle">💡 سيناريوهات سريعة بضغطة زر واحدة</div>
-    </div>
+    <div class="dash-section-header"><div class="dash-section-title" data-i18n="ideasTitle">💡 سيناريوهات سريعة بضغطة زر</div></div>
     <div class="ideas-grid">
-      <div class="idea-card" onclick="quickScenario('🔥 خصم 25% عاجل على جميع المشروبات الباردة')">
-        <span class="idea-icon">🔥</span>
-        <div class="idea-title" data-i18n="ideaPromo">عرض خصم عاجل</div>
-      </div>
-      <div class="idea-card" onclick="quickScenario('✨ إعلان إطلاق مشروب الماتشا البارد الجديد')">
-        <span class="idea-icon">✨</span>
-        <div class="idea-title" data-i18n="ideaProduct">إعلان منتج جديد</div>
-      </div>
-      <div class="idea-card" onclick="quickScenario('📱 أجواء القهوة والويكند في Luna Café')">
-        <span class="idea-icon">📱</span>
-        <div class="idea-title" data-i18n="ideaStory">ستوري تفاعلي</div>
-      </div>
-      <div class="idea-card" onclick="quickScenario('🎉 دعوة لاقتتاح فرعنا الجديد في جدة')">
-        <span class="idea-icon">🎉</span>
-        <div class="idea-title" data-i18n="ideaLaunch">افتتاح أو حدث خاص</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- آخر الأعمال -->
-  <div class="dash-section">
-    <div class="dash-section-header">
-      <div class="dash-section-title" data-i18n="recentTitle">🕒 أحدث تصاميمك الجاهزة</div>
-      <button class="link-btn" onclick="showScreen('templates')" data-i18n="viewAll">عرض الكل ←</button>
-    </div>
-    <div class="recent-grid">
-      <div class="recent-card" onclick="showScreen('editor')">
-        <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb')">
-          <div class="recent-info">عرض الويكند — Luna Café</div>
-        </div>
-      </div>
-      <div class="recent-card" onclick="showScreen('editor')">
-        <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1551024709-8f23befc6f87')">
-          <div class="recent-info">مشروب الماتشا الفاخر</div>
-        </div>
-      </div>
-      <div class="recent-card" onclick="showScreen('editor')">
-        <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5')">
-          <div class="recent-info">ستوري الافتتاح</div>
-        </div>
-      </div>
+      <div class="idea-card" onclick="quickScenario('🔥 خصم 25% عاجل على جميع المشروبات الباردة')">🔥 <b data-i18n="ideaPromo">عرض خصم</b></div>
+      <div class="idea-card" onclick="quickScenario('✨ إعلان إطلاق مشروب الماتشا البارد الجديد')">✨ <b data-i18n="ideaProduct">منتج جديد</b></div>
+      <div class="idea-card" onclick="quickScenario('📱 أجواء القهوة والويكند في Luna Café')">📱 <b data-i18n="ideaStory">ستوري تفاعلي</b></div>
+      <div class="idea-card" onclick="quickScenario('🎉 دعوة لاقتتاح فرعنا الجديد في جدة')">🎉 <b data-i18n="ideaLaunch">افتتاح فرع</b></div>
     </div>
   </div>
 </div>
 </section>
 
-<!-- 2️⃣ استديو النتائج المباشرة المكتملة (Result Studio) -->
+<!-- 2️⃣ استديو التصميم والتعديل الفاخر -->
 <section id="editor" class="screen">
-<div class="app">
-  <aside class="sidebar">
-    <div class="side-logo logo" onclick="showScreen('dashboard')">
-      <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L14.8 8.6L22 12L14.8 15.4L12 22L9.2 15.4L2 12L9.2 8.6L12 2Z" fill="url(#logo-grad)"/></svg></div>
-      <span data-i18n="logoTitle">Creative AI</span>
-    </div>
-    <div class="side-item" onclick="showScreen('dashboard')">
-      <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span data-i18n="sideHome">الرئيسية</span>
-    </div>
-  </aside>
-  <main class="main">
-    <div class="toprow">
-      <div><h2 data-i18n="studioTitle">تصميمك جاهز للنشر! ✨</h2></div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn" onclick="sharePost()" data-i18n="btnShare">🔗 مشاركة</button>
-        <button class="btn accent" onclick="downloadPNG()" data-i18n="btnDlPng">↓ تحميل البوستر (PNG)</button>
-        <button class="btn dark" onclick="downloadPDF()" data-i18n="btnDlPdf">📄 PDF</button>
+<div style="padding: 20px 5vw 0; max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+  <h2 style="margin:0; font-size:20px; font-weight:800; color:var(--white)" data-i18n="studioTitle">تصميمك جاهز للتعديل والنشر! ✨</h2>
+  <div style="display:flex; gap:8px;">
+    <button class="btn accent" onclick="downloadPNG()" data-i18n="btnDlPng">↓ تحميل (PNG)</button>
+    <button class="btn" onclick="showScreen('dashboard')" data-i18n="btnBack">← عودة</button>
+  </div>
+</div>
+
+<div class="app-editor">
+  <!-- منطقة العرض والتصميم (مع إمكانية السحب والتعديل) -->
+  <div class="canvas-area">
+    <div class="poster" id="posterCanvas" style="background-image:url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb')">
+      <div class="poster-overlay"></div>
+      
+      <!-- العنصر قابل للسحب والإزاحة بالأصبع أو الماوس -->
+      <div class="poster-glass-card" id="draggableGlassCard">
+        <div class="poster-brand-tag" id="posterBrand">LUNA CAFÉ</div>
+        <h2 id="posterHeading">20% OFF</h2>
+        <p id="posterSubtext">على جميع المشروبات الباردة طوال عطلة نهاية الأسبوع</p>
       </div>
     </div>
+  </div>
 
-    <div class="editor">
-      <div class="canvas">
-        <div class="poster" id="posterCanvas" style="background-image:url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb')">
-          <div class="poster-overlay" id="posterOverlay"></div>
-          <div class="draggable-item"><small id="posterBrand" style="color:var(--accent);font-weight:800;font-size:10px">LUNA CAFÉ</small></div>
-          <div class="draggable-item"><h2 id="posterHeading">20% OFF</h2></div>
-          <div class="draggable-item"><p id="posterSubtext">على جميع المشروبات الباردة</p></div>
-        </div>
-      </div>
-
-      <div class="controls">
-        <b style="color:var(--white);font-size:13px;display:block;margin-bottom:12px;" data-i18n="directorHeader">🤖 المخرج الإبداعي الذكي</b>
-        
-        <div class="control">
-          <label data-i18n="labelTitle">العنوان في البوستر</label>
-          <input class="field" id="inputHeading" value="20% OFF" oninput="updateCanvas()">
-        </div>
-        <div class="control">
-          <label data-i18n="labelSubtext">النص الفرعي</label>
-          <input class="field" id="inputSubtext" value="على جميع المشروبات الباردة" oninput="updateCanvas()">
-        </div>
-
-        <button class="btn accent" style="width:100%;justify-content:center;margin-bottom:10px;" onclick="aiRegenerateStyle()">✨ إعادة الابتكار بأسلوب جديد</button>
-
-        <hr style="border:0;border-top:1px solid var(--border);margin:16px 0">
-
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <b style="color:var(--white);font-size:12px;" data-i18n="captionHeader">📝 منشور انستغرام الجاهز (Caption)</b>
-          <button class="link-btn" onclick="copyCaption()" data-i18n="btnCopy">نسخ النص 📋</button>
-        </div>
-
-        <div class="caption-box" id="aiCaptionText">لأن أجواء الصيف تحتاج إنتعاش.. 🧊✨
-استمتعوا بخصم 20% على جميع مشروباتنا الباردة في Luna Café طوال نهاية الأسبوع!
-
-📍 ننتظركم في الفرع أو عبر تطبيقات التوصيل.
-#Luna_Cafe #قهوة_مختصة #عرض_الويكند</div>
-      </div>
+  <!-- لوحة التعديل السلسة -->
+  <div class="controls-panel">
+    <b style="color:var(--white);font-size:13px;display:block;margin-bottom:12px;" data-i18n="directorHeader">🤖 تعديل تفاصيل البوستر</b>
+    
+    <div class="control">
+      <label data-i18n="labelTitle">العنوان الرئيسي</label>
+      <input class="field" id="inputHeading" value="20% OFF" oninput="updateCanvas()">
     </div>
-  </main>
+    <div class="control">
+      <label data-i18n="labelSubtext">النص الفرعي</label>
+      <input class="field" id="inputSubtext" value="على جميع المشروبات الباردة طوال عطلة نهاية الأسبوع" oninput="updateCanvas()">
+    </div>
+
+    <button class="btn accent" style="width:100%;justify-content:center;margin-bottom:10px;" onclick="aiRegenerateStyle()">✨ تغيير خلفية التصميم</button>
+
+    <hr style="border:0;border-top:1px solid var(--border);margin:14px 0">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <b style="color:var(--white);font-size:12px;" data-i18n="captionHeader">📝 منشور انستغرام (Caption)</b>
+      <button class="btn" onclick="copyCaption()" style="padding:4px 10px;font-size:11px;" data-i18n="btnCopy">نسخ 📋</button>
+    </div>
+
+    <div class="caption-box" id="aiCaptionText">لأن أجواء الصيف تحتاج إنتعاش.. 🧊✨
+استمتعوا بخصم 20% على جميع مشروباتنا الباردة في Luna Café!
+
+#Luna_Cafe #قهوة_مختصة</div>
+  </div>
 </div>
 </section>
 
 <!-- 3️⃣ الهوية التجارية -->
 <section id="brand" class="screen">
-<div class="app">
-  <aside class="sidebar">
-    <div class="side-logo logo" onclick="showScreen('dashboard')">
-      <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L14.8 8.6L22 12L14.8 15.4L12 22L9.2 15.4L2 12L9.2 8.6L12 2Z" fill="url(#logo-grad)"/></svg></div>
-      <span data-i18n="logoTitle">Creative AI</span>
-    </div>
-    <div class="side-item" onclick="showScreen('dashboard')">
-      <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span data-i18n="sideHome">الرئيسية</span>
-    </div>
-  </aside>
-  <main class="main">
-    <div class="toprow"><div><h2 data-i18n="brandPageTitle">هوية علامتك التجارية (Luna Café)</h2></div></div>
-    <div class="dash-section">
-      <p style="color:var(--text-muted);font-size:13px;" data-i18n="brandPageDesc">تم حفظ الشعار والألوان تلقائياً في حسابك ليستخدمها الذكاء الاصطناعي كقاعدة أساسية في كل التصاميم القادمة.</p>
-      <button class="btn accent" onclick="showScreen('dashboard')" data-i18n="btnGoDashboard">✦ الذهاب لإنشاء تصميم جديد ←</button>
-    </div>
-  </main>
-</div>
-</section>
-
-<!-- 4️⃣ القوالب والأعمال -->
-<section id="templates" class="screen">
-<div class="app">
-  <aside class="sidebar">
-    <div class="side-logo logo" onclick="showScreen('dashboard')">
-      <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L14.8 8.6L22 12L14.8 15.4L12 22L9.2 15.4L2 12L9.2 8.6L12 2Z" fill="url(#logo-grad)"/></svg></div>
-      <span data-i18n="logoTitle">Creative AI</span>
-    </div>
-    <div class="side-item" onclick="showScreen('dashboard')">
-      <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span data-i18n="sideHome">الرئيسية</span>
-    </div>
-  </aside>
-  <main class="main">
-    <div class="toprow"><div><h2 data-i18n="tplTitle">مكتبة الأعمال والقوالب الجاهزة</h2></div></div>
-    <div class="recent-grid">
-      <div class="recent-card" onclick="showScreen('editor')">
-        <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb')"><div class="recent-info">عرض الويكند</div></div>
-      </div>
-      <div class="recent-card" onclick="showScreen('editor')">
-        <div class="recent-thumb" style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5')"><div class="recent-info">وجبات البرجر</div></div>
-      </div>
-    </div>
-  </main>
+<div style="padding: 40px 20px; text-align:center;">
+  <h2>هوية علامتك التجارية (Luna Café)</h2>
+  <p style="color:var(--text-muted)">تم حفظ الشعار والألوان للاستخدام التلقائي.</p>
+  <button class="btn accent" onclick="showScreen('dashboard')">العودة للرئيسية</button>
 </div>
 </section>
 
 <!-- شريط السفلي للجوال -->
 <div class="mobile-nav">
-  <button class="mobile-nav-item active" onclick="showScreen('dashboard')">
-    <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    <span data-i18n="sideHome">الرئيسية</span>
-  </button>
-  <button class="mobile-nav-item" onclick="showScreen('templates')">
-    <svg viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-    <span data-i18n="navTemplates">الأعمال</span>
-  </button>
-  <button class="mobile-nav-item" onclick="showScreen('brand')">
-    <svg viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.75 1.7-1.67 0-.41-.15-.79-.42-1.08-.27-.28-.44-.68-.44-1.12 0-.92.75-1.67 1.67-1.67H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"/></svg>
-    <span data-i18n="navBrand">الهوية</span>
-  </button>
+  <button class="mobile-nav-btn active" onclick="showScreen('dashboard')">🏠 <span data-i18n="sideHome">الرئيسية</span></button>
+  <button class="mobile-nav-btn" onclick="showScreen('editor')">🎨 <span data-i18n="navStudio">الاستديو</span></button>
 </div>
 
 <div id="toast" class="toast"></div>
@@ -496,40 +269,33 @@ body[dir="ltr"] .sidebar { border-left: none; border-right: 1px solid var(--bord
 let theme = 'dark';
 let lang = 'ar';
 
-/* القاموس اللغوي الشامل لضمان التحويل الكامل بدون أخطاء */
 const i18nDict = {
   ar: {
-    logoTitle: "Creative AI", navTemplates: "الأعمال والقوالب", navBrand: "الهوية التجارية",
-    brandBadge: "هويتك المعتمدة: Luna Café", heroGreeting: "ماذا تريد أن نصنع اليوم؟ 👋",
-    heroSubtext: "أخبر الذكاء الاصطناعي بفكرتك أو عرضك بكلام عادي، وسيتكفل بالتصميم والنص التسويقي كاملاً.",
+    logoTitle: "Creative AI", navBrand: "الهوية التجارية", brandBadge: "هويتك المعتمدة: Luna Café",
+    heroGreeting: "ماذا تريد أن نصنع اليوم؟ 👋", heroSubtext: "أخبر الذكاء الاصطناعي بفكرتك، وسيتكفل بالتصميم الفاخر والنص التسويقي.",
     promptPh: "أدخل فكرتك هنا… مثال: أريد إعلان خصم 20٪ على القهوة الباردة لعطلة نهاية الأسبوع",
-    heroStartBtn: "دع Creative AI يصممها فوراً",
-    ideasTitle: "💡 سيناريوهات سريعة بضغطة زر واحدة", ideaPromo: "عرض خصم عاجل", ideaProduct: "إعلان منتج جديد", ideaStory: "ستوري تفاعلي", ideaLaunch: "افتتاح أو حدث خاص",
-    recentTitle: "🕒 أحدث تصاميمك الجاهزة", viewAll: "عرض الكل ←", sideHome: "الرئيسية",
-    studioTitle: "تصميمك جاهز للنشر! ✨", btnShare: "🔗 مشاركة", btnDlPng: "↓ تحميل البوستر (PNG)", btnDlPdf: "📄 PDF",
-    directorHeader: "🤖 المخرج الإبداعي الذكي", labelTitle: "العنوان في البوستر", labelSubtext: "النص الفرعي",
-    captionHeader: "📝 منشور انستغرام الجاهز (Caption)", btnCopy: "نسخ النص 📋",
-    brandPageTitle: "هوية علامتك التجارية (Luna Café)", brandPageDesc: "تم حفظ الشعار والألوان تلقائياً في حسابك ليستخدمها الذكاء الاصطناعي كقاعدة أساسية في كل التصاميم القادمة.",
-    btnGoDashboard: "✦ الذهاب لإنشاء تصميم جديد ←", tplTitle: "مكتبة الأعمال والقوالب الجاهزة"
+    heroStartBtn: "صممها فوراً", ideasTitle: "💡 سيناريوهات سريعة بضغطة زر", ideaPromo: "عرض خصم", ideaProduct: "منتج جديد",
+    ideaStory: "ستوري تفاعلي", ideaLaunch: "افتتاح فرع", sideHome: "الرئيسية", navStudio: "الاستديو",
+    studioTitle: "تصميمك جاهز للتعديل والنشر! ✨", btnDlPng: "↓ تحميل (PNG)", btnBack: "← عودة",
+    directorHeader: "🤖 تعديل تفاصيل البوستر", labelTitle: "العنوان الرئيسي", labelSubtext: "النص الفرعي",
+    captionHeader: "📝 منشور انستغرام (Caption)", btnCopy: "نسخ 📋"
   },
   en: {
-    logoTitle: "Creative AI", navTemplates: "Saved & Templates", navBrand: "Brand Kit",
-    brandBadge: "Active Brand: Luna Café", heroGreeting: "What are we creating today? 👋",
-    heroSubtext: "Tell Creative AI your idea in plain text. AI will handle the visual design and caption instantly.",
+    logoTitle: "Creative AI", navBrand: "Brand Kit", brandBadge: "Active Brand: Luna Café",
+    heroGreeting: "What are we creating today? 👋", heroSubtext: "Tell Creative AI your idea, and AI will generate luxury visual & text.",
     promptPh: "Describe your idea... e.g., 20% OFF Iced Coffee promo for the weekend",
-    heroStartBtn: "Let Creative AI Design It Instantly",
-    ideasTitle: "💡 1-Tap Quick Scenarios", ideaPromo: "Urgent Promo Discount", ideaProduct: "New Product Launch", ideaStory: "Interactive Story", ideaLaunch: "Grand Opening Event",
-    recentTitle: "🕒 Recent Ready Designs", viewAll: "View All ←", sideHome: "Home",
-    studioTitle: "Your Design is Ready to Post! ✨", btnShare: "🔗 Share", btnDlPng: "↓ Download Poster (PNG)", btnDlPdf: "📄 PDF",
-    directorHeader: "🤖 AI Creative Director", labelTitle: "Poster Heading", labelSubtext: "Subtext",
-    captionHeader: "📝 Ready Instagram Post (Caption)", btnCopy: "Copy Text 📋",
-    brandPageTitle: "Your Brand Identity (Luna Café)", brandPageDesc: "Your logo and brand colors are saved automatically to power every AI generation.",
-    btnGoDashboard: "✦ Create New Design ←", tplTitle: "Templates & Previous Works"
+    heroStartBtn: "Design Instantly", ideasTitle: "💡 1-Tap Quick Scenarios", ideaPromo: "Discount Offer", ideaProduct: "New Product",
+    ideaStory: "Interactive Story", ideaLaunch: "Branch Launch", sideHome: "Home", navStudio: "Studio",
+    studioTitle: "Your Design is Ready! ✨", btnDlPng: "↓ Download (PNG)", btnBack: "← Back",
+    directorHeader: "🤖 Edit Poster Details", labelTitle: "Main Heading", labelSubtext: "Subtext",
+    captionHeader: "📝 Instagram Post Caption", btnCopy: "Copy 📋"
   }
 };
 
+/* التنقل السليم بين الشاشات وإخفاء بقية الصفحات فوراً */
 function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const screens = document.querySelectorAll('.screen');
+  screens.forEach(s => s.classList.remove('active'));
   const target = document.getElementById(id);
   if(target) target.classList.add('active');
   window.scrollTo(0,0);
@@ -540,22 +306,20 @@ function processMagicPrompt(){
   const prompt = promptInput ? promptInput.value.trim() : '';
   if(!prompt){ toast(lang === 'ar' ? 'أدخل فكرتك أولاً ✨' : 'Please enter your idea first ✨'); return; }
 
-  toast(lang === 'ar' ? 'جاري تحويل أفكارك لبوستر ونص تسويقي... 🎨' : 'Generating poster and caption with AI... 🎨');
+  toast(lang === 'ar' ? 'جاري تجهيز التصميم والنص... 🎨' : 'Preparing design & caption... 🎨');
   
   setTimeout(() => {
-    document.getElementById('inputHeading').value = "🔥 " + prompt.substring(0, 20);
+    document.getElementById('inputHeading').value = prompt.substring(0, 22);
     document.getElementById('inputSubtext').value = prompt;
     updateCanvas();
     
-    if(lang === 'en'){
-      document.getElementById('aiCaptionText').textContent = `Because summer needs refresh.. 🧊✨\nEnjoy exclusive promo: ${prompt} at Luna Café this weekend!\n\n📍 Visit us or order via delivery apps.\n#Luna_Cafe #SpecialtyCoffee #Promo`;
-    } else {
-      document.getElementById('aiCaptionText').textContent = `لأن الصيف يحتاج إنتعاش.. 🧊✨\nاستمتعوا بـ ${prompt} في Luna Café طوال نهاية الأسبوع!\n\n📍 ننتظركم في الفرع أو عبر تطبيقات التوصيل.\n#Luna_Cafe #قهوة_مختصة #عروض`;
-    }
+    document.getElementById('aiCaptionText').textContent = lang === 'en' 
+      ? `Enjoy special offer: ${prompt} at Luna Café this weekend! 🧊✨\n\n#Luna_Cafe #SpecialtyCoffee`
+      : `استمتعوا بـ ${prompt} في Luna Café طوال نهاية الأسبوع! 🧊✨\n\n#Luna_Cafe #قهوة_مختصة`;
     
     showScreen('editor');
-    confetti({ particleCount: 70, spread: 60 });
-  }, 600);
+    if(window.confetti) confetti({ particleCount: 60, spread: 50 });
+  }, 400);
 }
 
 function quickScenario(text){
@@ -575,13 +339,11 @@ function toggleLanguage(){
     const key = el.getAttribute('data-i18n-ph');
     if(dict[key]) el.placeholder = dict[key];
   });
-  toast(lang === 'en' ? 'Switched to English 🌐' : 'تم التغيير للغة العربية 🌐');
 }
 
 function toggleTheme(){
   theme = theme === 'dark' ? 'light' : 'dark';
   document.body.classList.toggle('light-mode', theme === 'light');
-  toast(theme === 'light' ? 'الوضع الفاتح ☀️' : 'الوضع الداكن 🌙');
 }
 
 function updateCanvas(){
@@ -593,13 +355,13 @@ function aiRegenerateStyle() {
   const imgs = ['https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb', 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5', 'https://images.unsplash.com/photo-1551024709-8f23befc6f87'];
   const randomImg = imgs[Math.floor(Math.random() * imgs.length)];
   document.getElementById('posterCanvas').style.backgroundImage = `url('${randomImg}')`;
-  toast(lang === 'ar' ? 'تم اختيار أسلوب بصري جديد ✨' : 'New visual style applied ✨');
+  toast(lang === 'ar' ? 'تم تغيير خلفية التصميم ✨' : 'Background changed ✨');
 }
 
 function copyCaption() {
   const text = document.getElementById('aiCaptionText').textContent;
   navigator.clipboard.writeText(text);
-  toast(lang === 'ar' ? 'تم نسخ النص التسويقي للحافظة 📋' : 'Caption copied to clipboard 📋');
+  toast(lang === 'ar' ? 'تم نسخ النص 📋' : 'Caption copied 📋');
 }
 
 function downloadPNG(){
@@ -609,32 +371,62 @@ function downloadPNG(){
     link.download = 'design.png';
     link.href = canvas.toDataURL('image/png');
     link.click();
-    toast('تم تنزيل التصميم بنجاح! 🎉');
+    toast('تم تنزيل التصميم! 🎉');
   });
 }
-
-function downloadPDF(){
-  const poster = document.getElementById('posterCanvas');
-  html2canvas(poster, { scale: 2, useCORS: true }).then(canvas => {
-    const imgData = canvas.toDataURL('image/png');
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    pdf.addImage(imgData, 'PNG', 0, 10, 210, 260);
-    pdf.save('design.pdf');
-    toast('تم تنزيل ملف PDF! 📄');
-  });
-}
-
-function sharePost() { toast('جاري فتح خيارات المشاركة... 🔗'); }
 
 function toast(msg){
   let t = document.getElementById('toast');
   if(t) {
     t.textContent = msg;
     t.style.display = 'block';
-    setTimeout(() => t.style.display = 'none', 2200);
+    setTimeout(() => t.style.display = 'none', 2000);
   }
 }
+
+/* 📱 إمكانية السحب والإزاحة بالأصبع أو الماوس لعنصر التصميم الزجاجي */
+function initDragAndDrop() {
+  const card = document.getElementById('draggableGlassCard');
+  if (!card) return;
+
+  let isDragging = false;
+  let startX, startY, currentX = 0, currentY = 0;
+
+  card.addEventListener('mousedown', startDrag);
+  card.addEventListener('touchstart', startDrag, { passive: false });
+
+  function startDrag(e) {
+    isDragging = true;
+    const event = e.type === 'touchstart' ? e.touches[0] : e;
+    startX = event.clientX - currentX;
+    startY = event.clientY - currentY;
+
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('touchmove', drag, { passive: false });
+    document.addEventListener('mouseup', stopDrag);
+    document.addEventListener('touchend', stopDrag);
+  }
+
+  function drag(e) {
+    if (!isDragging) return;
+    if (e.cancelable) e.preventDefault();
+    const event = e.type === 'touchmove' ? e.touches[0] : e;
+    currentX = event.clientX - startX;
+    currentY = event.clientY - startY;
+
+    card.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  }
+
+  function stopDrag() {
+    isDragging = false;
+    document.removeEventListener('mousemove', drag);
+    document.removeEventListener('touchmove', drag);
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  initDragAndDrop();
+});
 </script>
 </body>
 </html>
